@@ -1,0 +1,24 @@
+<head>
+
+
+</head>
+
+<body>
+    <div style="margin-left: 38%; margin-top: 18%; margin-right: 33%;">
+        <div style="background-color:bisque;padding: 20px; border-radius: 8px;">
+        <mat-form-field appearance="fill" style="width: 400px;">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [(ngModel)]="email" placeholder="Placeholder">
+          <mat-hint>Enter you Email</mat-hint>
+        </mat-form-field>
+        <br/>
+
+        <mat-form-field appearance="fill" style="padding-top: 2%; width: 400px;">
+            <mat-label>Password</mat-label>
+            <input type="password" [(ngModel)]="password" matInput placeholder="Placeholder">
+            <mat-hint>Enter you password</mat-hint>
+          </mat-form-field>
+          <button (click)="createAccount()" style="margin-top: 5%;width: 100%;" mat-raised-button color="primary">Login</button>
+        </div>
+    </div>
+</body>
