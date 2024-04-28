@@ -11,13 +11,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { SignupComponent } from './signup/signup.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CompanySpecificQuestionsComponent } from './company-specific-questions/company-specific-questions.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { CodeEditorComponent } from './code-editor/code-editor.component';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    DashboardComponent,
+    CompanySpecificQuestionsComponent,
+    CodeEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +39,10 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

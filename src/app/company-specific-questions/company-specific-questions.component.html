@@ -1,0 +1,21 @@
+
+<body>
+    <div *ngIf = "response.length == 0" style="margin-left: 38%; margin-top: 18%; margin-right: 33%;">
+        <mat-spinner style="margin-left: 35%;"></mat-spinner>
+        <div style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
+    </div>
+
+    <div *ngIf = "response.length != 0">
+        <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2; margin-top: 5%;">
+            <mat-card>
+                <mat-card-header  style="background-color: #F5DAD2; padding: 5px">
+                    <mat-card-title>{{item}}</mat-card-title>
+                  </mat-card-header>
+                <mat-card-content style="margin-top: 20px;">{{contents[i]}}</mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div style="height: 200px;">
+        <app-code-editor></app-code-editor>
+    </div>
+</body>  
