@@ -30,14 +30,18 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   }
 
   async generateQuestion(){
-    var result = await model.generateContent("Programming question from Google for a software engineer position in valid parseable JSON format"+
-    " and follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup.");
+    var result = await model.generateContent("Generate a Programming question from Google for a software engineer position in valid parseable JSON format in a single line"+
+    " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
+    var extractedResponse = "";
     console.log(JSON.stringify(geminiResponse))
     var response = await result.response;
     console.log(response.candidates[0].content.parts[0]);
-    response.candidates[0].content.parts[0].text.replace("```json","").replace("```","");
-    console.log(response.candidates[0].content.parts[0].text)
-    this.response = JSON.parse(response.candidates[0].content.parts[0].text)
+    extractedResponse = response.candidates[0].content.parts[0].text.replace("```json","");
+    extractedResponse = extractedResponse.replace(",}","}");
+    extractedResponse = extractedResponse.replace("```","");
+    extractedResponse = extractedResponse.replace("/\n","");
+    console.log(extractedResponse)
+    this.response = JSON.parse(extractedResponse)
     this.populateContent();
   }
 
@@ -52,6 +56,12 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     this.contents.push(this.response["timeComplexity"]);
   }
 
+  async resetQuestion(){
+    this.response = "";
+    this.contents = [];
+    await this.generateQuestion();
+  }
+
   isJSONObject(obj: any) {
     return obj !== null
         &&
@@ -59,4 +69,5 @@ export class CompanySpecificQuestionsComponent implements OnInit {
         &&
         obj.constructor === Object;
 }
+
 }

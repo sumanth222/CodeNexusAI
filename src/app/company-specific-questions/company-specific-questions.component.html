@@ -6,16 +6,17 @@
     </div>
 
     <div *ngIf = "response.length != 0">
+        <button (click)="resetQuestion()" style="margin-left: 90%;" mat-raised-button color="primary">Next question</button>
         <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2; margin-top: 5%;">
             <mat-card>
-                <mat-card-header  style="background-color: #F5DAD2; padding: 5px">
+                <mat-card-header style="background-color: #F5DAD2;" [ngStyle]="{'padding': i==0?'0px':'5px'}">
                     <mat-card-title>{{item}}</mat-card-title>
                   </mat-card-header>
                 <mat-card-content style="margin-top: 20px;">{{contents[i]}}</mat-card-content>
             </mat-card>
         </div>
-    </div>
-    <div style="height: 200px;">
-        <app-code-editor></app-code-editor>
+        <div style="height: 200px;">
+            <app-code-editor></app-code-editor>
+        </div>
     </div>
 </body>  
