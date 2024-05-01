@@ -1,12 +1,12 @@
 
 <body>
-    <div *ngIf = "response.length == 0" style="margin-left: 38%; margin-top: 18%; margin-right: 33%;">
+    <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
         <mat-spinner style="margin-left: 35%;"></mat-spinner>
-        <div style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
+        <div *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
     </div>
 
     <div *ngIf = "response.length != 0">
-        <button (click)="resetQuestion()" style="margin-left: 90%;" mat-raised-button color="primary">Next question</button>
+        <button (click)="resetQuestion()" style="margin-left: 90%;" mat-raised-button color="primary">Skip question</button>
         <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2; margin-top: 5%;">
             <mat-card>
                 <mat-card-header style="background-color: #F5DAD2;" [ngStyle]="{'padding': i==0?'0px':'5px'}">
@@ -16,7 +16,7 @@
             </mat-card>
         </div>
         <div style="height: 200px;">
-            <app-code-editor></app-code-editor>
+            <app-code-editor (finalCode)="submitCode($event)"></app-code-editor>
         </div>
     </div>
 </body>  

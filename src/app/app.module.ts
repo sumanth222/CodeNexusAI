@@ -18,6 +18,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
+import { VerdictResponseDialogExampleComponent } from './verdict-response-dialog-example/verdict-response-dialog-example.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -29,7 +31,8 @@ import { CodeEditorComponent } from './code-editor/code-editor.component';
     SignupComponent,
     DashboardComponent,
     CompanySpecificQuestionsComponent,
-    CodeEditorComponent
+    CodeEditorComponent,
+    VerdictResponseDialogExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { CodeEditorComponent } from './code-editor/code-editor.component';
     FormsModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    MatDialogModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

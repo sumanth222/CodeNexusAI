@@ -5,4 +5,8 @@
     <mat-card-content style="margin-top: 20px;">
         <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
     </mat-card-content>
+    <div class="footer-actions" style="display: flex;">
+        <button mat-raised-button color="primary" (click)="askForHint()" style="width: 50%; margin: 10px;">Give me a hint</button>
+        <button mat-raised-button color="accent" (click)="submitCode()" style="width: 50%; margin: 10px; display: inline-block;">Submit Code</button>
+    </div>    
 </mat-card>

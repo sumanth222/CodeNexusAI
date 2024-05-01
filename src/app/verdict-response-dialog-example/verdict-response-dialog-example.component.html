@@ -1,0 +1,10 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+<h2 *ngIf = "data.status === 'Y' || data.status === 'N'" mat-dialog-title>Verdict</h2>
+<h2 *ngIf = "data.status === 'H'" mat-dialog-title>Hint</h2>
+<mat-dialog-content [ngClass] = "{'success' : data.status === 'Y', 'failure' : data.status === 'N'}">
+    <p class="ai-text">{{data.response}}</p>
+</mat-dialog-content>
+<button [mat-dialog-close]="true" *ngIf = "data.status === 'Y'" (click) = "nextQuestion()" style="margin-top: 10px; width: 100%; background-color: #508D69;" mat-button>Next question</button>
