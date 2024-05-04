@@ -15,10 +15,10 @@ export interface Tile {
 export class DSSelectionComponent implements OnInit {
 
   tiles: Tile[] = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
+    {text: 'Strings', cols: 3, rows: 1, color: 'lightblue'},
+    {text: 'Arrays', cols: 1, rows: 2, color: 'lightgreen'},
+    {text: 'Stacks', cols: 1, rows: 1, color: 'lightpink'},
+    {text: 'Queues', cols: 2, rows: 1, color: '#DDBDF1'},
   ];
 
   constructor() { }

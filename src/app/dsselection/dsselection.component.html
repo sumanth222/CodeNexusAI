@@ -1,11 +1,13 @@
 <head>
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div style="margin-left: 38%; margin-top: 18%; margin-right: 33%;">
-        <mat-grid-list cols="4" rowHeight="100px">
+    <h2 class="mat-tile-header">What do you want to practise on today?</h2>
+    <div style="margin-left: 20%; margin-top: 8%; margin-right: 33%;">
+        <mat-grid-list class="mat-tile" cols="4" rowHeight="40vh" style="width: 60vw">
             @for(tile of tiles; track tile){
                 <mat-grid-tile
                 [colspan]="tile.cols"

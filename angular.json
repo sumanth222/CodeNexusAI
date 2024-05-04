@@ -27,8 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco-editor" }
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -72,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "CodeNexusAI:build:production"
+              "buildTarget": "CodeNexusAI:build:production"
             },
             "development": {
-              "browserTarget": "CodeNexusAI:build:development"
+              "buildTarget": "CodeNexusAI:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CodeNexusAI:build"
+            "buildTarget": "CodeNexusAI:build"
           }
         },
         "test": {
@@ -105,6 +104,5 @@
         }
       }
     }
-  },
-  "defaultProject": "CodeNexusAI"
+  }
 }

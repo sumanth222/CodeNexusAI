@@ -1,6 +1,18 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
+export interface CodeModel {
+  language: string;
+  value: string;
+  uri: string;
+
+  dependencies?: Array<string>;
+  schemas?: Array<{
+    uri: string;
+    schema: Object;
+  }>;
+}
+
 @Component({
   selector: 'app-code-editor',
   templateUrl: './code-editor.component.html',
@@ -11,6 +23,21 @@ export class CodeEditorComponent implements OnInit {
   editorOptions: any;
   code: string = "";
   @Output() finalCode = new EventEmitter();
+
+  theme = 'vs-dark';
+
+  model: CodeModel = {
+    language: 'json',
+    uri: 'main.json',
+    value: '{}'
+  };
+
+  options = {
+    contextmenu: true,
+    minimap: {
+      enabled: true
+    }
+  };
   constructor() { }
 
   ngOnInit(): void {

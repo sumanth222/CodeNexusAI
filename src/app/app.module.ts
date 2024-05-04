@@ -16,12 +16,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CompanySpecificQuestionsComponent } from './company-specific-questions/company-specific-questions.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { VerdictResponseDialogExampleComponent } from './verdict-response-dialog-example/verdict-response-dialog-example.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DSSelectionComponent } from './dsselection/dsselection.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { CodeEditorModule } from '@ngstack/code-editor';
 
 
 
@@ -48,9 +48,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     FormsModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MonacoEditorModule.forRoot(),
+    CodeEditorModule.forRoot(),
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule 
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
