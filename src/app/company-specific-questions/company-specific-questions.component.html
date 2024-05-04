@@ -8,7 +8,7 @@
     <div *ngIf = "response.length != 0">
         <button (click)="resetQuestion()" style="margin-left: 90%;" mat-raised-button color="primary">Skip question</button>
         <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2; margin-top: 5%;">
-            <mat-card>
+            <mat-card *ngIf = "i < 3">
                 <mat-card-header style="background-color: #F5DAD2;" [ngStyle]="{'padding': i==0?'0px':'5px'}">
                     <mat-card-title>{{item}}</mat-card-title>
                   </mat-card-header>

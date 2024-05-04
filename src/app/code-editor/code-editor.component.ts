@@ -15,7 +15,7 @@ export class CodeEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.editorOptions = {theme: 'vs-dark', language: 'java'};
-    this.code = 'function x() {\nconsole.log("Hello world!");\n}';
+    this.code = 'public <returnType> func(<params if any>) {\nSystem.out.println("Hello world!");\n}';
   }
 
   submitCode(){
@@ -24,5 +24,13 @@ export class CodeEditorComponent implements OnInit {
 
   askForHint(){
     this.finalCode.emit("hint");
+  }
+
+  showSolution(){
+    this.finalCode.emit("solution");
+  }  
+
+  optimizeCode(){
+    this.finalCode.emit("op6"+this.code);
   }
 }

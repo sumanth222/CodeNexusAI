@@ -29,6 +29,8 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   contents: string[] = [];
   headingsIndex : number = 0;
   askedForHint : boolean = false;
+  askedForSolution : boolean = false;
+  askedToOptimize : boolean = false;
   showLoaderWheel : boolean = false;
 
   constructor(public dialog: MatDialog) {
@@ -63,6 +65,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       this.contents.push(this.response["exampleTestcase"]);
     }
     this.contents.push(this.response["timeComplexity"]);
+    this.contents.push(this.response["solution"]);
   }
 
   async resetQuestion(){
@@ -84,55 +87,98 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       this.askedForHint = true;
       this.askForHint();
     }
+    else if("solution" == code){
+      this.askForSolution();
+    }
+    else if("op6" == code.substring(0,3)){
+      this.optimizeCode(code.substring(3, code.length-1));
+    }
     else{
       this.showLoaderWheel = true;
       this.askedForHint = false;
       console.log("The code is"+code)
       var verdictResponse = "";
       var result = await model.generateContent("Will the code " +code+" work for the question "+this.response['question']+
-      "? answer me by saying Yes/No as the first word followed by comma then the explanation"
+      "? answer me by saying Yes/No as the first word then the explanation"
       );
       var response = await result.response;
       console.log(response.candidates[0].content.parts[0]);
       verdictResponse = response.candidates[0].content.parts[0]
-      this.openDialog(verdictResponse);
+      this.openDialog(verdictResponse, true);
       this.showLoaderWheel = false;
     }
   }
 
-  openDialog(text: any){
+  openDialog(text: any, isAIResponse: boolean){
     console.log("Opening dialog with string "+text)
     var valid : String = 'N';
-    var verdictResponse =  JSON.stringify(text.text)
+    var verdictResponse : string =  (isAIResponse ? JSON.stringify(text.text) : text)
 
     if(new String(verdictResponse).charAt(1) == 'Y'){
       valid = 'Y';
     }
-    if(this.askedForHint){
+    else if(new String(verdictResponse).charAt(1) == 'N'){
+      valid = 'N';
+    }
+    else if(this.askedForHint){
       valid = 'H' //Hint usecase
     }
+    else if(this.askedForSolution){
+      valid = 'S';
+    }
+    else if(this.askedToOptimize){
+      valid = 'O';
+    }
+    verdictResponse = (isAIResponse ? verdictResponse.substring(1, verdictResponse.length - 1) : verdictResponse)
+    verdictResponse = verdictResponse.replace("```", "");
+    verdictResponse = verdictResponse.replace("\\n","  ");
+    var arrs : any[]= verdictResponse.split("\\n");
+    console.log(arrs.length);
+    verdictResponse = arrs.join("<br />")
+    verdictResponse = verdictResponse.replace("**:", "</b>:");
+    verdictResponse = verdictResponse.replace("**",",<b>");
     var dialogHandle = this.dialog.open(VerdictResponseDialogExampleComponent,{
       data: {
-        response: new String(verdictResponse).substring(1, verdictResponse.length - 1),
+        response: new String(verdictResponse),
         status: valid
       }
     })
     dialogHandle.afterClosed().subscribe(result => {
       console.log("Dialog closed");
-      if(!this.askedForHint){
-        this.resetQuestion();
-      }
+      // if(!this.askedForHint && !this.askedForSolution && !this.askedToOptimize && valid ){
+      //   this.resetQuestion();
+      // }
     });
   }
 
   async askForHint(){
-    this.showLoaderWheel = true;
+   this.showLoaderWheel = true;
    var result = await model.generateContent("Can you give me a hint on how to approach the following programming question "+this.response['question']+"?");
    var response = await result.response;
    console.log(response.candidates[0].content.parts[0]);
    var verdictResponse = response.candidates[0].content.parts[0]
-   this.openDialog(verdictResponse);
+   this.openDialog(verdictResponse, true);
    this.showLoaderWheel = false
+  }
+
+  askForSolution(){
+   this.showLoaderWheel = true;
+   this.askedForSolution = true;
+   console.log(this.response["solution"]);
+   var verdictResponse = this.response["solution"];
+   this.openDialog(verdictResponse, false);
+   this.showLoaderWheel = false
+  }
+
+  async optimizeCode(code : string){
+    this.askedToOptimize = true;
+    this.showLoaderWheel = true;
+    var result = await model.generateContent("Can you optimize my code "+code+" for following programming question "+this.response['question']+"?");
+    var response = await result.response;
+    console.log(response.candidates[0].content.parts[0]);
+    var verdictResponse = response.candidates[0].content.parts[0]
+    this.openDialog(verdictResponse, true);
+    this.showLoaderWheel = false
   }
 }
 

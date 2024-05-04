@@ -4,7 +4,11 @@
 
 <h2 *ngIf = "data.status === 'Y' || data.status === 'N'" mat-dialog-title>Verdict</h2>
 <h2 *ngIf = "data.status === 'H'" mat-dialog-title>Hint</h2>
+<h2 *ngIf = "data.status === 'S'" mat-dialog-title>Solution</h2>
+<h2 *ngIf = "data.status === 'O'" mat-dialog-title>Optimized Approach</h2>
+
+
 <mat-dialog-content [ngClass] = "{'success' : data.status === 'Y', 'failure' : data.status === 'N'}">
-    <p class="ai-text">{{data.response}}</p>
+    <p class ="ai-text" [innerHTML] = "data.response"></p>
 </mat-dialog-content>
 <button [mat-dialog-close]="true" *ngIf = "data.status === 'Y'" (click) = "nextQuestion()" style="margin-top: 10px; width: 100%; background-color: #508D69;" mat-button>Next question</button>

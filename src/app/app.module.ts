@@ -20,6 +20,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { VerdictResponseDialogExampleComponent } from './verdict-response-dialog-example/verdict-response-dialog-example.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { DSSelectionComponent } from './dsselection/dsselection.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -32,7 +34,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     DashboardComponent,
     CompanySpecificQuestionsComponent,
     CodeEditorComponent,
-    VerdictResponseDialogExampleComponent
+    VerdictResponseDialogExampleComponent,
+    DSSelectionComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatProgressSpinnerModule,
     MonacoEditorModule.forRoot(),
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
