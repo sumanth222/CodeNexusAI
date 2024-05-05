@@ -11,6 +11,7 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -32,16 +33,20 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   askedForSolution : boolean = false;
   askedToOptimize : boolean = false;
   showLoaderWheel : boolean = false;
+  dsTopic: any = "";
+  diffLevel : any = "";
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router) {
    }
 
   ngOnInit(): void {
+    this.dsTopic = this.route.snapshot.paramMap.get('title');
+    this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
     this.generateQuestion();
   }
 
   async generateQuestion(){
-    var result = await model.generateContent("Generate a easy Programming question from Google for a software engineer position in valid parseable JSON format in a single line"+
+    var result = await model.generateContent("Generate a "+this.diffLevel+" programming question on "+this.dsTopic+" topic for a software engineer position at Google in valid parseable JSON format in a single line"+
     " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
     var extractedResponse = "";
     console.log(JSON.stringify(geminiResponse))
@@ -83,14 +88,17 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   }
 
   async submitCode(code: string){
+    console.log("Received code is:"+code)
     if("hint" == code){
       this.askedForHint = true;
       this.askForHint();
     }
     else if("solution" == code){
+      this.askedForSolution = true;
       this.askForSolution();
-    }
+    } 
     else if("op6" == code.substring(0,3)){
+      this.askedToOptimize = true;
       this.optimizeCode(code.substring(3, code.length-1));
     }
     else{
@@ -179,6 +187,10 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     var verdictResponse = response.candidates[0].content.parts[0]
     this.openDialog(verdictResponse, true);
     this.showLoaderWheel = false
+  }
+
+  goBackToSelection(){
+    this.router.navigate(["/dsselection"])
   }
 }
 

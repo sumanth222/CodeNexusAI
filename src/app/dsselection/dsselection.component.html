@@ -6,14 +6,24 @@
 
 <body>
     <h2 class="mat-tile-header">What do you want to practise on today?</h2>
-    <div style="margin-left: 20%; margin-top: 8%; margin-right: 33%;">
+    <div style="margin-left: 20%; margin-top: 4%; margin-right: 33%;">
         <mat-grid-list class="mat-tile" cols="4" rowHeight="40vh" style="width: 60vw">
             @for(tile of tiles; track tile){
                 <mat-grid-tile
                 [colspan]="tile.cols"
                 [rowspan]="tile.rows"
-                [style.background]="tile.color">{{tile.text}}</mat-grid-tile>
+                [style.background]="tile.color"
+                (click)="onTileSelect(tile.text)">{{tile.text}}</mat-grid-tile>
             }
         </mat-grid-list>
+        <label class="mat-tile-header-2">Choose your difficulty level: </label>
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="diffLevel" style="margin-left: 10%;">
+            @for (difficulty of difficulties; track difficulty) {
+                <mat-radio-button class="radio-button" [value]="difficulty">{{difficulty}}</mat-radio-button>
+            }
+        </mat-radio-group>
     </div>
 </body>

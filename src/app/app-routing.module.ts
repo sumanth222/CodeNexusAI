@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'' ,component: SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'companySpecificQuestion', component: CompanySpecificQuestionsComponent},
+  {path: 'companySpecificQuestion/:title/:diffLevel', component: CompanySpecificQuestionsComponent},
   {path: 'dsselection', component: DSSelectionComponent}
 ];
 

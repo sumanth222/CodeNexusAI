@@ -3,7 +3,7 @@
         <mat-card-title>Write your logic below</mat-card-title>
       </mat-card-header>
     <mat-card-content style="margin-top: 20px;">
-        <ngs-code-editor [theme]="theme" [codeModel]="model" [options]="options"></ngs-code-editor>
+        <ngs-code-editor [theme]="theme" (valueChanged)="onCodeChanged($event)" [codeModel]="model" [options]="options"></ngs-code-editor>
     </mat-card-content>
     <div class="footer-actions">
         <div class="sub-footer-actions" style="display: flex;">

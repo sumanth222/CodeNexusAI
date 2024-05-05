@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DSSelectionComponent } from './dsselection/dsselection.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CodeEditorModule } from '@ngstack/code-editor';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -50,7 +51,8 @@ import { CodeEditorModule } from '@ngstack/code-editor';
     MatProgressSpinnerModule,
     CodeEditorModule.forRoot(),
     MatDialogModule,
-    MatGridListModule 
+    MatGridListModule,
+    MatRadioModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

@@ -27,9 +27,9 @@ export class CodeEditorComponent implements OnInit {
   theme = 'vs-dark';
 
   model: CodeModel = {
-    language: 'json',
+    language: 'java',
     uri: 'main.json',
-    value: '{}'
+    value: 'public <Return Type> func(<Arguments if any>){\n\tSystem.out.println("Hello World");\n}'
   };
 
   options = {
@@ -59,5 +59,10 @@ export class CodeEditorComponent implements OnInit {
 
   optimizeCode(){
     this.finalCode.emit("op6"+this.code);
+  }
+
+  onCodeChanged(code: any){
+    console.log("Updated code: "+code)
+    this.code = code;
   }
 }

@@ -1,18 +1,27 @@
 
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
 <body>
     <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
         <mat-spinner style="margin-left: 35%;"></mat-spinner>
-        <div *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
+        <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
     </div>
 
     <div *ngIf = "response.length != 0">
-        <button (click)="resetQuestion()" style="margin-left: 90%;" mat-raised-button color="primary">Skip question</button>
+        <h2 class="cs-text" style="text-align: center;">Try this! if you feel like you have seen this question already, you can skip it</h2>
+        <div>
+            <button (click)="goBackToSelection()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
+            <button (click)="resetQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
+        </div>
         <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2; margin-top: 5%;">
             <mat-card *ngIf = "i < 3">
                 <mat-card-header style="background-color: #F5DAD2;" [ngStyle]="{'padding': i==0?'0px':'5px'}">
-                    <mat-card-title>{{item}}</mat-card-title>
+                    <mat-card-title class="cs-text">{{item}}</mat-card-title>
                   </mat-card-header>
-                <mat-card-content style="margin-top: 20px;">{{contents[i]}}</mat-card-content>
+                <mat-card-content class="cs-text" style="margin-top: 20px;">{{contents[i]}}</mat-card-content>
             </mat-card>
         </div>
         <div style="height: 200px;">
