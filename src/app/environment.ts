@@ -8,5 +8,6 @@ export const firebaseConfig = {
     appId: "1:559985915089:web:8f8a1258380b3adc8381f0",
     measurementId: "G-9D8ZWFYWTL"
   }
+  
 
   export const geminiApiKey = 'AIzaSyDRkcBUewpy-AiIsVJMq-mvb08aWNj5Pe8';

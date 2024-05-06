@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  MatDialog
+} from '@angular/material/dialog';
+import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
+import { AuthServiceService } from '../services/auth-service.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 export interface Tile {
   color: string;
@@ -27,14 +34,25 @@ export class DSSelectionComponent implements OnInit {
     "Medium",
     "Hard",
     "Auto Adapt"
-  ]
+  ];
 
-  constructor(private router : Router) { }
 
   diffLevel: string = "";
+  user!: firebase.User | null;
+
+  constructor(private router : Router, private dialog : MatDialog, private authService : AuthServiceService,
+    private afAuth: AngularFireAuth
+  ) { 
+    this.afAuth.onAuthStateChanged((user) =>{
+      console.log("User is "+user?.email);
+      this.user = user;
+    })
+  }
+
+
 
   ngOnInit(): void {
-    
+    console.log("Logged in user is "+this.afAuth);
   }
 
   onTileSelect(title: string){
@@ -43,6 +61,22 @@ export class DSSelectionComponent implements OnInit {
     if(this.diffLevel != ""){
       this.router.navigate(['/companySpecificQuestion', title, this.diffLevel])
     }
+    else{
+      this.openDialog("Please choose a difficulty level and then select a topic")
+    }
   }
 
+  openDialog(text: any){
+    console.log("Opening dialog with string "+text)
+
+    var dialogHandle = this.dialog.open(VerdictResponseDialogExampleComponent,{
+      data: {
+        response: new String(text),
+        status: 'G'
+      }
+    })
+    dialogHandle.afterClosed().subscribe(result => {
+      console.log("Dialog closed");
+    });
+  }
 }

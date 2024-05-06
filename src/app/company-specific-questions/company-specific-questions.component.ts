@@ -12,6 +12,8 @@ import {
 } from '@angular/material/dialog';
 import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 
 @Component({
@@ -35,11 +37,18 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   showLoaderWheel : boolean = false;
   dsTopic: any = "";
   diffLevel : any = "";
+  user : any;
 
-  constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router) {
+  constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
+    private afAuth : AngularFireAuth) {
+      this.afAuth.onAuthStateChanged((user) => {
+        this.user = user?.email;
+        console.log("Logged inuser is "+this.user)
+      })
    }
 
   ngOnInit(): void {
+    console.log("Logged inuser is "+this.user)
     this.dsTopic = this.route.snapshot.paramMap.get('title');
     this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
     this.generateQuestion();

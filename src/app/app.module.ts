@@ -23,7 +23,9 @@ import { DSSelectionComponent } from './dsselection/dsselection.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CodeEditorModule } from '@ngstack/code-editor';
 import {MatRadioModule} from '@angular/material/radio';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { firebaseConfig } from './environment';
 
 
 
@@ -52,7 +54,8 @@ import {MatRadioModule} from '@angular/material/radio';
     CodeEditorModule.forRoot(),
     MatDialogModule,
     MatGridListModule,
-    MatRadioModule
+    MatRadioModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
