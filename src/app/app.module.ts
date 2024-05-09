@@ -26,6 +26,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { firebaseConfig } from './environment';
+import { UserContextService } from './userContext/user-context.service';
 
 
 
@@ -57,7 +58,7 @@ import { firebaseConfig } from './environment';
     MatRadioModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

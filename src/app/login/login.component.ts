@@ -4,6 +4,8 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../services/auth-service.service';
+import { UserDetails } from 'src/objects/user-details';
+import { UserContextService } from '../userContext/user-context.service';
 
 
 @Component({
@@ -22,9 +24,11 @@ export class LoginComponent implements OnInit {
   password: any = "";
   user: any;
   auth: any;
-  
+  userDetails: UserDetails = new UserDetails;
 
-  constructor(private router: Router, private authService: AuthServiceService, private afAuth : AngularFireAuth) { }
+  constructor(private router: Router, private authService: AuthServiceService, private afAuth : AngularFireAuth,
+   private userContextService: UserContextService ) {
+    }
 
   ngOnInit(): void {
     this.auth = getAuth(this.app);
@@ -32,19 +36,16 @@ export class LoginComponent implements OnInit {
 
   login(){
     console.log(this.email+ " " +this.password);
-    
-    this.afAuth.signInWithEmailAndPassword(this.email, this.password)
-    .then((userCredential: any) => {
-      this.user = userCredential;
-      this.authService.setAuthenticatedUser(this.user.user);
-      this.router.navigate(['/dsselection'])
-    })
-    .catch((error: string) => window.alert("Invalid Credentials")
-    )
-
-    this.auth.onAuthStateChanged((user: string) => {
-      console.log("Auth changed "+user)
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then(()=> {
+        this.afAuth.signInWithEmailAndPassword(this.email, this.password)
+        .then((userCredential: any) => {
+          this.userDetails.email = this.email;
+          this.userContextService.setUserDetails(this.userDetails);
+          this.router.navigate(['/dsselection'])
+        })
+        .catch((error: string) => window.alert("Invalid Credentials")
+        )
     })
   }
-
 }

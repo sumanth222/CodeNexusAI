@@ -7,6 +7,7 @@ import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialo
 import { AuthServiceService } from '../services/auth-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import { UserContextService } from '../userContext/user-context.service';
 
 export interface Tile {
   color: string;
@@ -41,8 +42,9 @@ export class DSSelectionComponent implements OnInit {
   user!: firebase.User | null;
 
   constructor(private router : Router, private dialog : MatDialog, private authService : AuthServiceService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth, private userContextService: UserContextService
   ) { 
+  
     this.afAuth.onAuthStateChanged((user) =>{
       console.log("User is "+user?.email);
       this.user = user;
@@ -53,6 +55,7 @@ export class DSSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Logged in user is "+this.afAuth);
+    console.log("Useremail"+this.userContextService.getUserDetails().email)
   }
 
   onTileSelect(title: string){
