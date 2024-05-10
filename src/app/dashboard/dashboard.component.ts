@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -9,12 +9,19 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  companiesList : String[] = ['Google', 'Meta', 'Adobe', 'Apple', 'Netflix']
+
+  constructor(private router: Router, private activatedRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
-  navigate(){
-    this.router.navigate(['/companySpecificQuestion'])
+  navigate(index: number){
+    if(index != -1){
+      this.router.navigate(['/dsselection/companiesList[index]'])
+    }
+    else{
+      this.router.navigate(['/dsselection/na'])
+    }
   }
 }

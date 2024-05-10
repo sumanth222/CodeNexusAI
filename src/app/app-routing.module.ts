@@ -11,8 +11,8 @@ const routes: Routes = [
   {path:'' ,component: SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate : [AuthServiceService]},
-  {path: 'companySpecificQuestion/:title/:diffLevel', component: CompanySpecificQuestionsComponent, canActivate : [AuthServiceService]},
-  {path: 'dsselection', component: DSSelectionComponent}
+  {path: 'companySpecificQuestion/:title/:diffLevel/:company', component: CompanySpecificQuestionsComponent, canActivate : [AuthServiceService]},
+  {path: 'dsselection/:company', component: DSSelectionComponent, canActivate : [AuthServiceService]}
 ];
 
 @NgModule({

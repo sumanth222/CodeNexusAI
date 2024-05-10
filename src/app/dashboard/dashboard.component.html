@@ -1,10 +1,16 @@
-
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
 <body>
-    <div style="margin-left: 38%; margin-top: 18%; margin-right: 33%;background-color: 75A47F; padding: 20px; border-radius: 10px;">
-        <button (click)="navigate()" style="margin-top: 5%;width: 100%; background-color: #BACD92;" mat-raised-button>Google</button>
-        <button (click)="navigate()" style="margin-top: 5%;width: 100%; background-color: #FCFFE0;" mat-raised-button>Meta</button>
-        <button (click)="navigate()" style="margin-top: 5%;width: 100%; background-color: #BACD92;" mat-raised-button>Adobe</button>
-        <button (click)="navigate()" style="margin-top: 5%;width: 100%;  background-color: #FCFFE0;" mat-raised-button>Netflix</button>
+    <h2 class="dash-header" style="text-align: center;margin-top: 10%;">Pick your Poison!</h2>
+    <div style="margin-left: 35%; margin-top: 8%; margin-right: 33%;background-color: #F1F1F1; padding: 20px; border-radius: 10px;">
+        <div *ngFor = "let company of companiesList; let i = index">
+            <button (click)="navigate(i)" style="margin-top: 5%;width: 100%;"
+            [ngStyle] = "{'background-color' : i % 2 == 0 ? '#C7B7A3' : '#EADBC8'}" mat-raised-button>{{company}}</button>
+        </div>
+        <button (click)="navigate(-1)" style="margin-top: 5%;width: 100%;background-color: #B5C18E;" mat-raised-button>Anything goes</button>
     </div>
    
 </body>

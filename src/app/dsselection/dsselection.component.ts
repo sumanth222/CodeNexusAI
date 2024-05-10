@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   MatDialog
 } from '@angular/material/dialog';
@@ -40,9 +40,12 @@ export class DSSelectionComponent implements OnInit {
 
   diffLevel: string = "";
   user!: firebase.User | null;
+  company: any = "";
 
-  constructor(private router : Router, private dialog : MatDialog, private authService : AuthServiceService,
-    private afAuth: AngularFireAuth, private userContextService: UserContextService
+
+  constructor(private router : Router, private dialog : MatDialog, 
+    private afAuth: AngularFireAuth, private userContextService: UserContextService,
+    private activatedRoute : ActivatedRoute
   ) { 
   
     this.afAuth.onAuthStateChanged((user) =>{
@@ -54,15 +57,14 @@ export class DSSelectionComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("Logged in user is "+this.afAuth);
-    console.log("Useremail"+this.userContextService.getUserDetails().email)
+    this.company = this.activatedRoute.snapshot.paramMap.get('company');
   }
 
   onTileSelect(title: string){
     console.log("Clicked on: "+title)
     console.log("Diff level selected: "+this.diffLevel);
     if(this.diffLevel != ""){
-      this.router.navigate(['/companySpecificQuestion', title, this.diffLevel])
+      this.router.navigate(['/companySpecificQuestion', title, this.diffLevel, this.company])
     }
     else{
       this.openDialog("Please choose a difficulty level and then select a topic")
@@ -81,5 +83,9 @@ export class DSSelectionComponent implements OnInit {
     dialogHandle.afterClosed().subscribe(result => {
       console.log("Dialog closed");
     });
+  }
+
+  goBackToCompSelection(){
+    this.router.navigate(['dashboard']);
   }
 }

@@ -38,6 +38,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   dsTopic: any = "";
   diffLevel : any = "";
   user : any;
+  company: any = "";
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
     private afAuth : AngularFireAuth) {
@@ -51,11 +52,16 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     console.log("Logged inuser is "+this.user)
     this.dsTopic = this.route.snapshot.paramMap.get('title');
     this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
+    this.company = this.route.snapshot.paramMap.get("company");
     this.generateQuestion();
   }
 
   async generateQuestion(){
-    var result = await model.generateContent("Generate a "+this.diffLevel+" programming question on "+this.dsTopic+" topic for a software engineer position at Google in valid parseable JSON format in a single line"+
+    var companySuffix = "";
+    if(this.company != "na"){
+      companySuffix = " at "+this.company;
+    }
+    var result = await model.generateContent("Generate a "+this.diffLevel+" programming question on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
     " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
     var extractedResponse = "";
     console.log(JSON.stringify(geminiResponse))
@@ -199,7 +205,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   }
 
   goBackToSelection(){
-    this.router.navigate(["/dsselection"])
+    this.router.navigate(["/dsselection", this.company])
   }
 }
 

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         .then((userCredential: any) => {
           this.userDetails.email = this.email;
           this.userContextService.setUserDetails(this.userDetails);
-          this.router.navigate(['/dsselection'])
+          this.router.navigate(['/dashboard'])
         })
         .catch((error: string) => window.alert("Invalid Credentials")
         )
