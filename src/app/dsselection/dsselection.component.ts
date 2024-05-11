@@ -49,7 +49,7 @@ export class DSSelectionComponent implements OnInit {
   ) { 
   
     this.afAuth.onAuthStateChanged((user) =>{
-      console.log("User is "+user?.email);
+      console.log("User is "+user?.displayName);
       this.user = user;
     })
   }

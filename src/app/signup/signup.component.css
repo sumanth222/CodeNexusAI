@@ -1,0 +1,15 @@
+.carousel-text{
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+    margin-top: 65%;
+    text-align: center;
+}
+
+#recaptcha-container{
+    height: 0px;
+    width: 0px;
+}

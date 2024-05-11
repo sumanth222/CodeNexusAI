@@ -1,2 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.left-pane{
+    width: 45%;
+    height: 100%;
+    display: inline;
+    float: left;
+    background-image: url("./assets/logo-color.png");
+    background-size: contain;
+}
+
+.right-pane{
+    display: inline-block;
+    width: 55%;
+    height: 100%;
+}

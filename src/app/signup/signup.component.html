@@ -1,26 +1,38 @@
 <head>
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div style="margin-left: 38%; margin-top: 18%; margin-right: 33%;">
-        <div style="background-color:bisque;padding: 20px; border-radius: 8px;">
-        <mat-form-field appearance="fill" style="width: 400px;">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput [(ngModel)]="email" placeholder="Placeholder">
-          <mat-hint>Enter you Email</mat-hint>
-        </mat-form-field>
-        <br/>
-
-        <mat-form-field appearance="fill" style="padding-top: 2%; width: 400px;">
-            <mat-label>Password</mat-label>
-            <input type="password" [(ngModel)]="password" matInput placeholder="Placeholder">
-            <mat-hint>Enter you password</mat-hint>
+  <div class="left-pane">
+    <p class="carousel-text">Revolutionizing coding through AI brilliance.</p>
+  </div>
+    <div class="right-pane">
+        <div id="recaptcha-container"></div>
+        <div style="background-color:bisque; border-radius: 8px;height: 100%;">
+          <mat-form-field appearance="fill" style="width: 50%;margin-top: 35%;margin-left: 20%;">
+            <mat-label>Username</mat-label>
+            <input id="phone-input" type="text" matInput [(ngModel)]="username" placeholder="Placeholder" [disabled]="disabled">
+            <mat-hint>Enter your Username</mat-hint>
           </mat-form-field>
-          <button (click)="createAccount()" style="margin-top: 5%;width: 100%;" mat-raised-button color="primary">Sign Up</button>
-         <button (click)="navigate2Login()" style="margin-top: 5%;width: 100%;" mat-raised-button color="accent">Sign In</button>
+        <mat-form-field appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 20%;">
+          <mat-label>Phone Number</mat-label>
+          <input id="phone-input" type="text" matInput [(ngModel)]="phoneNumber" placeholder="Placeholder" [disabled]="disabled">
+          <mat-hint>An OTP will be sent to your phone number</mat-hint>
+        </mat-form-field>
 
+        <mat-form-field *ngIf = "showOTPInput" appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 20%;">
+          <mat-label>OTP</mat-label>
+          <input type="text" matInput [(ngModel)]="otp" placeholder="Placeholder">
+          <mat-hint>Enter the OTP sent to your phone</mat-hint>
+        </mat-form-field>
+
+        <button *ngIf = "!showOTPInput" (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Verify phone number</button>
+        <button *ngIf = "showOTPInput" (click)="loginWithPhone()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign In</button>
+        <button (click)="signupWithGoogle()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign Up with Google</button>
+          <!-- <button (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign Up</button>
+         <button (click)="navigate2Login()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In</button> -->
         </div>
     </div>
 </body>

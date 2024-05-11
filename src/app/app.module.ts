@@ -24,11 +24,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { CodeEditorModule } from '@ngstack/code-editor';
 import {MatRadioModule} from '@angular/material/radio';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { firebaseConfig } from './environment';
 import { UserContextService } from './userContext/user-context.service';
-
-
 
 @NgModule({
   declarations: [
@@ -39,7 +36,7 @@ import { UserContextService } from './userContext/user-context.service';
     CompanySpecificQuestionsComponent,
     CodeEditorComponent,
     VerdictResponseDialogExampleComponent,
-    DSSelectionComponent
+    DSSelectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +53,7 @@ import { UserContextService } from './userContext/user-context.service';
     MatDialogModule,
     MatGridListModule,
     MatRadioModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService],
   bootstrap: [AppComponent]
