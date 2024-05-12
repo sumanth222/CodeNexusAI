@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import 'firebase/compat/auth';
 import { CanActivate, Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,13 @@ export class AuthServiceService implements CanActivate {
         })
       }, 20)
     })
+  }
+
+  signoutUser(){
+    firebase.auth().signOut().then(() => {
+      this.router.navigate(['/signup'])
+    }).catch((error) => {
+      // An error happened.
+    });
   }
 }

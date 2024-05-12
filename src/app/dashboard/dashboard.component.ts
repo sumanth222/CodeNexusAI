@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthServiceService } from '../services/auth-service.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   companiesList : String[] = ['Google', 'Meta', 'Adobe', 'Apple', 'Netflix']
 
-  constructor(private router: Router, private activatedRoute : ActivatedRoute) { }
+  constructor(private router: Router, private activatedRoute : ActivatedRoute, private authService: AuthServiceService) { }
 
   ngOnInit(): void {
   }
@@ -23,5 +24,9 @@ export class DashboardComponent implements OnInit {
     else{
       this.router.navigate(['/dsselection/na'])
     }
+  }
+
+  logout(){
+    this.authService.signoutUser();
   }
 }

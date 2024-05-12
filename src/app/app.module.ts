@@ -26,6 +26,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AngularFireModule } from '@angular/fire/compat';
 import { firebaseConfig } from './environment';
 import { UserContextService } from './userContext/user-context.service';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { UserContextService } from './userContext/user-context.service';
     MatGridListModule,
     MatRadioModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    MatToolbarModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService],
   bootstrap: [AppComponent]

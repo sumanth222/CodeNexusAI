@@ -9,6 +9,7 @@ import { AuthServiceService } from './services/auth-service.service';
 
 const routes: Routes = [
   {path:'' ,component: SignupComponent},
+  {path: 'signup', component :SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate : [AuthServiceService]},
   {path: 'companySpecificQuestion/:title/:diffLevel/:company', component: CompanySpecificQuestionsComponent, canActivate : [AuthServiceService]},
