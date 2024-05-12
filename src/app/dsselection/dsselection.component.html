@@ -5,7 +5,14 @@
 </head>
 
 <body>
-    <button (click)="goBackToCompSelection()" mat-raised-button color="primary">Go back to Company selection</button>
+    <mat-toolbar>
+        <p class="welcome-header">Welcome {{username}}</p>
+        <span class="toolbar-spacer"></span>
+        <div (click)="logout()" class="logout-button">
+            <p class="logout-button-text">Logout</p>
+        </div>
+      </mat-toolbar>  
+    <button style="margin-top: 10px;" (click)="goBackToCompSelection()" mat-raised-button color="primary">Go back to Company selection</button>
     <h2 class="mat-tile-header">What do you want to practise on today?</h2>
     <div style="margin-left: 20%; margin-top: 4%; margin-right: 33%;">
         <mat-grid-list class="mat-tile" cols="4" rowHeight="30vh" style="width: 60vw">

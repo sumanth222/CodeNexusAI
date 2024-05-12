@@ -14,6 +14,8 @@ import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialo
 import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthServiceService } from '../services/auth-service.service';
+import { UserContextService } from '../userContext/user-context.service';
 
 
 @Component({
@@ -39,9 +41,10 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   diffLevel : any = "";
   user : any;
   company: any = "";
+  username : string | undefined = "";
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
-    private afAuth : AngularFireAuth) {
+    private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService) {
       this.afAuth.onAuthStateChanged((user) => {
         this.user = user?.email;
         console.log("Logged inuser is "+this.user)
@@ -53,6 +56,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     this.dsTopic = this.route.snapshot.paramMap.get('title');
     this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
     this.company = this.route.snapshot.paramMap.get("company");
+    this.username = this.userContextService.getUserDetails().username
     this.generateQuestion();
   }
 
@@ -206,6 +210,10 @@ export class CompanySpecificQuestionsComponent implements OnInit {
 
   goBackToSelection(){
     this.router.navigate(["/dsselection", this.company])
+  }
+
+  logout(){
+    this.authService.signoutUser();
   }
 }
 

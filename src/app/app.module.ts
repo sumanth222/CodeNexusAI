@@ -27,6 +27,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { firebaseConfig } from './environment';
 import { UserContextService } from './userContext/user-context.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatGridListModule,
     MatRadioModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    MatToolbarModule
+    MatToolbarModule,
+    MatProgressBarModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService],
   bootstrap: [AppComponent]

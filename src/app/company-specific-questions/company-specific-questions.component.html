@@ -5,6 +5,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <mat-toolbar *ngIf = "response.length != 0">
+        <p class="welcome-header">Welcome {{username}}</p>
+        <span class="toolbar-spacer"></span>
+        <div (click)="logout()" class="logout-button">
+            <p class="logout-button-text">Logout</p>
+        </div>
+    </mat-toolbar>  
+
     <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
         <mat-spinner style="margin-left: 35%;"></mat-spinner>
         <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>

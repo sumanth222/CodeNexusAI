@@ -41,17 +41,19 @@ export class DSSelectionComponent implements OnInit {
   diffLevel: string = "";
   user!: firebase.User | null;
   company: any = "";
+  username : string | undefined = "";
 
 
   constructor(private router : Router, private dialog : MatDialog, 
     private afAuth: AngularFireAuth, private userContextService: UserContextService,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute, private authService: AuthServiceService
   ) { 
   
     this.afAuth.onAuthStateChanged((user) =>{
       console.log("User is "+user?.displayName);
       this.user = user;
     })
+    this.username = this.userContextService.getUserDetails().username;
   }
 
 
@@ -87,5 +89,9 @@ export class DSSelectionComponent implements OnInit {
 
   goBackToCompSelection(){
     this.router.navigate(['dashboard']);
+  }
+
+  logout(){
+    this.authService.signoutUser();
   }
 }
