@@ -6,17 +6,23 @@ const genAI = new GoogleGenerativeAI(geminiApiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
 } from '@angular/material/dialog';
 import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthServiceService } from '../services/auth-service.service';
 import { UserContextService } from '../userContext/user-context.service';
+import { autoAdaptInfo } from '../constants/app.constant';
 
+const autoAdapt = "Auto Adapt";
+
+const difficultyMap = {
+  0: 'beginner',
+  1: 'easy',
+  2: 'moderate',
+  3: 'hard',
+  4: 'very difficult'
+}
 
 @Component({
   selector: 'app-company-specific-questions',
@@ -42,6 +48,9 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   user : any;
   company: any = "";
   username : string | undefined = "";
+  questionsSolved : number = 0;
+  solvedStreak : number = 0;
+  showNextQuestion : boolean = false;
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
     private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService) {
@@ -58,6 +67,9 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     this.company = this.route.snapshot.paramMap.get("company");
     this.username = this.userContextService.getUserDetails().username
     this.generateQuestion();
+    if(autoAdapt == this.diffLevel){
+      this.diffLevel = "easy"
+    }
   }
 
   async generateQuestion(){
@@ -78,6 +90,13 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     console.log(extractedResponse)
     this.response = JSON.parse(extractedResponse)
     this.populateContent();
+    if(autoAdapt == this.diffLevel){
+      this.dialog.open(VerdictResponseDialogExampleComponent,{
+      data: {
+        response: new String(autoAdaptInfo),
+      }
+    })
+  }
   }
 
   populateContent(){
@@ -108,7 +127,11 @@ export class CompanySpecificQuestionsComponent implements OnInit {
 
   async submitCode(code: string){
     console.log("Received code is:"+code)
-    if("hint" == code){
+    if("next" == code){
+      this.showNextQuestion = false
+      this.resetQuestion();
+    }
+    else if("hint" == code){
       this.askedForHint = true;
       this.askForHint();
     }
@@ -140,12 +163,15 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     console.log("Opening dialog with string "+text)
     var valid : String = 'N';
     var verdictResponse : string =  (isAIResponse ? JSON.stringify(text.text) : text)
-
     if(new String(verdictResponse).charAt(1) == 'Y'){
       valid = 'Y';
+      this.showNextQuestion = true;
+      this.questionsSolved++;
+      this.solvedStreak++;
     }
     else if(new String(verdictResponse).charAt(1) == 'N'){
       valid = 'N';
+      this.solvedStreak = 0;
     }
     else if(this.askedForHint){
       valid = 'H' //Hint usecase

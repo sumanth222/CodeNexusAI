@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
 <mat-card>
     <mat-card-header  style="background-color: #F5DAD2; padding: 5px">
         <mat-card-title>Write your logic below</mat-card-title>
@@ -6,13 +9,22 @@
         <ngs-code-editor [theme]="theme" (valueChanged)="onCodeChanged($event)" [codeModel]="model" [options]="options"></ngs-code-editor>
     </mat-card-content>
     <div class="footer-actions">
+        <button mat-raised-button *ngIf = "showNextQuestion == true" style="background-color: green; width: 100%;margin-top: 10px;" (click)="nextQuestion()">Nice work!
+            Go to the next question.
+        </button>
         <div class="sub-footer-actions" style="display: flex;">
-            <button mat-raised-button color="primary" (click)="askForHint()" style="width: 50%; margin: 10px;">Give me a hint</button>
             <button mat-raised-button color="accent" (click)="showSolution()" style="width: 50%; margin: 10px; display: inline-block;">Give me the solution</button>
+            <button [disabled] = "true" mat-raised-button color="primary" (click)="askForHint()" style="width: 50%; margin: 10px;" >Give me a hint
+                <span class="material-symbols-outlined">
+                    lock
+                </span></button>
         </div>   
         <div class="sub-footer-actions" style="display: flex;">
             <button mat-raised-button color="accent" (click)="submitCode()" style="width: 50%; margin: 10px; display: inline-block;">Submit Code</button>
-            <button mat-raised-button color="primary" (click)="optimizeCode()" style="width: 50%; margin: 10px;">Optimize my code</button>
+            <button [disabled] = "true" mat-raised-button color="primary" (click)="optimizeCode()" style="width: 50%; margin: 10px;">Optimize my code
+                <span class="material-symbols-outlined">
+                    lock
+                </span></button>
         </div>   
     </div> 
 </mat-card>

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../services/auth-service.service';
 import { UserContextService } from '../userContext/user-context.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
+import { about } from '../constants/app.constant';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,13 +16,19 @@ export class DashboardComponent implements OnInit {
   companiesList : String[] = ['Google', 'Meta', 'Adobe', 'Apple', 'Netflix']
 
   constructor(private router: Router, private activatedRoute : ActivatedRoute, private authService: AuthServiceService,
-    private userContext : UserContextService
+    private userContext : UserContextService, private dialog: MatDialog
   ) { }
 
   username : string | undefined = ""
 
   ngOnInit(): void {
     this.username = this.userContext.getUserDetails().username
+    var dialogHandle = this.dialog.open(VerdictResponseDialogExampleComponent,{
+      data: {
+        response: new String(about),
+        status: 'JM'
+      }
+    })
   }
 
   navigate(index: number){

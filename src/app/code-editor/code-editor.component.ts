@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 export interface CodeModel {
@@ -23,6 +23,8 @@ export class CodeEditorComponent implements OnInit {
   editorOptions: any;
   code: string = "";
   @Output() finalCode = new EventEmitter();
+  @Input() showNextQuestion : boolean = false;
+
 
   theme = 'vs-dark';
 
@@ -50,7 +52,7 @@ export class CodeEditorComponent implements OnInit {
   }
 
   askForHint(){
-    this.finalCode.emit("hint");
+    //this.finalCode.emit("hint");
   }
 
   showSolution(){
@@ -58,11 +60,15 @@ export class CodeEditorComponent implements OnInit {
   }  
 
   optimizeCode(){
-    this.finalCode.emit("op6"+this.code);
+    //this.finalCode.emit("op6"+this.code);
   }
 
   onCodeChanged(code: any){
     console.log("Updated code: "+code)
     this.code = code;
+  }
+
+  nextQuestion(){
+    this.finalCode.emit("next");
   }
 }
