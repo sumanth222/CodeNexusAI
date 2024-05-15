@@ -1,0 +1,59 @@
+.codingCard{
+    width: 45%;
+    height: 80%;
+    margin-top: 2%;
+    margin-left: 4%;
+    display: inline-block;
+    padding: 10px;
+    background-color: #FFFF80;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sqlCard{
+    width: 45%;
+    height: 80%;
+    margin-top: 2%;
+    margin-left: 2%;
+    display: inline-block;
+    padding: 10px;
+    background-color: #FFAA80;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cardText{
+    font-size: 40px;
+    text-align: center;
+    margin-top: 25%;
+    cursor: pointer;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+    text-align: center;
+}
+
+.cardIcons{
+    font-size: 80px;
+    margin-left: 43%;
+}
+
+.cardHeaderText{
+    font-size: 25px;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+    text-align: center;
+}
+
+body{
+    background: rgb(241,241,241);
+    background: linear-gradient(90deg, rgba(241,241,241,1) 0%, rgba(234,219,200,1) 100%, rgba(5,9,17,1) 100%);
+}

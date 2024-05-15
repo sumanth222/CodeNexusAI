@@ -28,6 +28,8 @@ import { firebaseConfig } from './environment';
 import { UserContextService } from './userContext/user-context.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { PracticeOptionsComponent } from './practice-options/practice-options.component';
+
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     CodeEditorComponent,
     VerdictResponseDialogExampleComponent,
     DSSelectionComponent,
+    PracticeOptionsComponent,
   ],
   imports: [
     BrowserModule,

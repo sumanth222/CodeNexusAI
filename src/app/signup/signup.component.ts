@@ -80,7 +80,8 @@ export class SignupComponent implements OnInit {
         this.userDetails.username = this.phoneNumber;
         this.userDetails.username = this.username;
         this.userContextService.setUserDetails(this.userDetails);
-        this.router.navigate(['/dashboard'])
+        //this.router.navigate(['/dashboard'])
+        this.router.navigate(['/practiceOptions'])
       })}).catch((error: any) => {
       console.log("Error while logging in "+error);
       this.disabled = false;

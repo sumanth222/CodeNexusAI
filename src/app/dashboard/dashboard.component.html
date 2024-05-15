@@ -8,9 +8,13 @@
     <mat-toolbar>
         <p class="welcome-header">Welcome {{username}}</p>
         <span class="toolbar-spacer"></span>
+        <div (click)="logout()" class="logout-button" style="margin-right: 10px;width: 15%;">
+            <p class="logout-button-text">Exit programming section</p>
+        </div>
         <div (click)="logout()" class="logout-button">
             <p class="logout-button-text">Logout</p>
         </div>
+        
       </mat-toolbar>      
     <h2 class="dash-header" style="text-align: center;margin-top: 8%;">Pick your Poison!</h2>
     <div style="margin-left: 35%; margin-top: 8%; margin-right: 33%;background-color: #F1F1F1; padding: 20px; border-radius: 10px;">
