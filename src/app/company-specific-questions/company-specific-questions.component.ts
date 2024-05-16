@@ -241,5 +241,9 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   logout(){
     this.authService.signoutUser();
   }
+
+  goToSectionScreen(){
+    this.router.navigate(['/practiceOptions'])
+  }
 }
 

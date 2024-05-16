@@ -94,4 +94,8 @@ export class DSSelectionComponent implements OnInit {
   logout(){
     this.authService.signoutUser();
   }
+
+  goToSectionScreen(){
+    this.router.navigate(['/practiceOptions'])
+  }
 }

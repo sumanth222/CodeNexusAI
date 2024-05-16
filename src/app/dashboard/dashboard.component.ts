@@ -43,4 +43,8 @@ export class DashboardComponent implements OnInit {
   logout(){
     this.authService.signoutUser();
   }
+
+  goToSectionScreen(){
+    this.router.navigate(['/practiceOptions'])
+  }
 }
