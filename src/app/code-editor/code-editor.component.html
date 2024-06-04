@@ -13,15 +13,15 @@
             Go to the next question.
         </button>
         <div class="sub-footer-actions" style="display: flex;">
-            <button mat-raised-button color="accent" (click)="showSolution()" style="width: 50%; margin: 10px; display: inline-block;">Give me the solution</button>
-            <button [disabled] = "true" mat-raised-button color="primary" (click)="askForHint()" style="width: 50%; margin: 10px;" >Give me a hint
+            <button *ngIf = "showSolutionButton" mat-raised-button color="accent" (click)="showSolution()" [ngStyle] = "{'width' : showHintButton == true ? '50%' : '100%' }" style="margin: 10px; display: inline-block;">Give me the solution</button>
+            <button *ngIf = "showHintButton" [disabled] = "true" mat-raised-button color="primary" (click)="askForHint()" style="width: 50%; margin: 10px;" >Give me a hint
                 <span class="material-symbols-outlined">
                     lock
                 </span></button>
         </div>   
         <div class="sub-footer-actions" style="display: flex;">
-            <button mat-raised-button color="accent" (click)="submitCode()" style="width: 50%; margin: 10px; display: inline-block;">Submit Code</button>
-            <button [disabled] = "true" mat-raised-button color="primary" (click)="optimizeCode()" style="width: 50%; margin: 10px;">Optimize my code
+            <button *ngIf = "showSubmitButton" mat-raised-button color="accent" (click)="submitCode()" [ngStyle] = "{'width' : showOptimizeButton == true ? '50%' : '100%' }" style="width: 50%; margin: 10px; display: inline-block;">Submit Code</button>
+            <button *ngIf = "showOptimizeButton" [disabled] = "true" mat-raised-button color="primary" (click)="optimizeCode()" style="width: 50%; margin: 10px;">Optimize my code
                 <span class="material-symbols-outlined">
                     lock
                 </span></button>

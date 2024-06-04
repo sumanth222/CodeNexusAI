@@ -36,7 +36,9 @@
             </mat-card>
         </div>
         <div style="height: 200px;">
-            <app-code-editor [showNextQuestion] = "showNextQuestion" (finalCode)="submitCode($event)"></app-code-editor>
+            <app-code-editor [showSubmitButton] = true [showSolutionButton] = true [showHintButton] = true 
+             [showOptimizeButton] = true [codeTemplate] = "codeTemplate" [showNextQuestion] = "showNextQuestion" 
+             (finalCode)="submitCode($event)"></app-code-editor>
         </div>
     </div>
 </body>  

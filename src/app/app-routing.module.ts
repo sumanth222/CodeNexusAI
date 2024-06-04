@@ -7,6 +7,7 @@ import { CompanySpecificQuestionsComponent } from './company-specific-questions/
 import { DSSelectionComponent } from './dsselection/dsselection.component';
 import { AuthServiceService } from './services/auth-service.service';
 import { PracticeOptionsComponent } from './practice-options/practice-options.component';
+import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
 
 const routes: Routes = [
   {path:'' ,component: SignupComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate : [AuthServiceService]},
   {path: 'companySpecificQuestion/:title/:diffLevel/:company', component: CompanySpecificQuestionsComponent, canActivate : [AuthServiceService]},
   {path: 'dsselection/:company', component: DSSelectionComponent, canActivate : [AuthServiceService]},
-  {path: 'practiceOptions', component: PracticeOptionsComponent, canActivate  :[AuthServiceService]}
+  {path: 'practiceOptions', component: PracticeOptionsComponent, canActivate  :[AuthServiceService]},
+  {path: 'sqlPractice', component:SqlPracticeComponent, canActivate: [AuthServiceService]}
 ];
 
 @NgModule({

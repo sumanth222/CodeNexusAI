@@ -1,0 +1,63 @@
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
+        <mat-spinner style="margin-left: 35%;"></mat-spinner>
+        <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
+    </div>
+    <div *ngIf = "response.length != 0">
+        <mat-toolbar>
+            <p class="welcome-header">Welcome </p>
+            <span class="toolbar-spacer"></span>
+            <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
+                <p class="logout-button-text">Exit programming section</p>
+            </div>
+            <div (click)="logout()" class="logout-button">
+                <p class="logout-button-text">Logout</p>
+            </div>
+        </mat-toolbar>  
+        <h1 class="sqlHeader">Read the question, and write your query in the editor at the  bottom</h1>
+        <div style="background-color: #F5DAD2; margin-top: 5%;">
+            <mat-card>
+                <mat-card-header style="background-color: #F5DAD2;">
+                    <mat-card-title class="cs-text">Scenario</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="cs-text" style="margin-top: 20px;">{{scenario}}</mat-card-content>
+            </mat-card>
+        </div>
+
+        <div style="background-color: #F5DAD2; margin-top: 5%;">
+            <mat-card>
+                <mat-card-header style="background-color: #F5DAD2;">
+                    <mat-card-title class="cs-text">Question</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="cs-text" style="margin-top: 20px;">{{question}}</mat-card-content>
+            </mat-card>
+        </div>
+
+        <div style="background-color: #F5DAD2; margin-top: 5%;">
+            <mat-card>
+                <mat-card-header style="background-color: #F5DAD2;">
+                    <mat-card-title class="cs-text">Points to consider</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="cs-text" style="margin-top: 20px;">
+                    {{ptc}}
+                    <br />
+                    <br />
+                    <b>Table Schema:</b> 
+                    <br />
+                    {{tableSchema}}
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div style="height: 200px; margin-top: 5%;">
+        <app-code-editor [showSubmitButton] = true [showSolutionButton] = true 
+        [showHintButton] = false  [showOptimizeButton] = false  [codeTemplate] = "codeTemplate"
+        (finalCode)="submitCode($event)"></app-code-editor>
+        </div>
+    </div>
+</body>

@@ -24,6 +24,11 @@ export class CodeEditorComponent implements OnInit {
   code: string = "";
   @Output() finalCode = new EventEmitter();
   @Input() showNextQuestion : boolean = false;
+  @Input() codeTemplate : string = "";
+  @Input() showSubmitButton : boolean = false;
+  @Input() showOptimizeButton : boolean = false;
+  @Input() showSolutionButton : boolean = false;
+  @Input() showHintButton : boolean = false;
 
 
   theme = 'vs-dark';
@@ -31,7 +36,7 @@ export class CodeEditorComponent implements OnInit {
   model: CodeModel = {
     language: 'java',
     uri: 'main.json',
-    value: 'public <Return Type> func(<Arguments if any>){\n\tSystem.out.println("Hello World");\n}'
+    value: this.codeTemplate
   };
 
   options = {
@@ -44,7 +49,7 @@ export class CodeEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.editorOptions = {theme: 'vs-dark', language: 'java'};
-    this.code = 'public <returnType> func(<params if any>) {\nSystem.out.println("Hello world!");\n}';
+    this.code = this.codeTemplate;
   }
 
   submitCode(){

@@ -14,7 +14,9 @@ export class PracticeOptionsComponent {
 
   navigateToProgramming(){
     this.router.navigate(['dashboard'])
-
   }
 
+  navigateToSQL(){
+    this.router.navigate(['sqlPractice'])
+  }
 }

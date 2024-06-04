@@ -51,6 +51,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   questionsSolved : number = 0;
   solvedStreak : number = 0;
   showNextQuestion : boolean = false;
+  codeTemplate : string = 'public <Return Type> func(<Arguments if any>){\n\tSystem.out.println("Hello World");\n}'
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
     private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService) {

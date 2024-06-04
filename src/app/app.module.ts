@@ -29,6 +29,7 @@ import { UserContextService } from './userContext/user-context.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { PracticeOptionsComponent } from './practice-options/practice-options.component';
+import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
 
 
 
@@ -43,6 +44,7 @@ import { PracticeOptionsComponent } from './practice-options/practice-options.co
     VerdictResponseDialogExampleComponent,
     DSSelectionComponent,
     PracticeOptionsComponent,
+    SqlPracticeComponent
   ],
   imports: [
     BrowserModule,
