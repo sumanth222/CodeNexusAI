@@ -101,14 +101,14 @@ export class SignupComponent implements OnInit {
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
     firebase.auth()
   .signInWithPopup(provider).then((result) => {
-    const user = firebase.auth().currentUser;
-    user?.updateProfile({
+    const fuser = firebase.auth().currentUser;
+    fuser?.updateProfile({
       displayName: this.username
     }).then((user) => {
       this.userDetails.email = this.email;
       this.userDetails.username = this.username;
       this.userContextService.setUserDetails(this.userDetails);
-      this.dataService.createUserInfo(this.username, this.email, "Starter", 0);
+      this.dataService.createUserInfo(fuser.displayName, fuser.email, "Starter", 0);
       this.router.navigate(['/dashboard'])
     })})
   .catch((error)=>{
