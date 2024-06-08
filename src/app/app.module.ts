@@ -30,6 +30,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { PracticeOptionsComponent } from './practice-options/practice-options.component';
 import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
+import { DataService } from './services/data-service.service';
+import { Firestore } from 'firebase/firestore';
 
 
 
@@ -65,7 +67,7 @@ import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
     MatToolbarModule,
     MatProgressBarModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService],
+  providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

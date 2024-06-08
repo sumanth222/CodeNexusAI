@@ -27,6 +27,9 @@ export class SqlPracticeComponent {
   tableSchema: any;
   codeTemplate : string = ""
   showLoaderWheel : boolean = false
+  showNextQuestion: boolean = false;
+  askedForSolution: boolean = false;
+
 
   ngOnInit(){
     this.generateQuestion();
@@ -57,17 +60,32 @@ export class SqlPracticeComponent {
     extractedResponse = extractedResponse.replace("```","");
     extractedResponse = extractedResponse.replace("/\n","");
     console.log(extractedResponse)
+    try{
     this.response = JSON.parse(extractedResponse)
+    }catch(err){
+      console.log("err")
+    }
     this.question = this.response["question"]
     this.scenario = this.response["scenario"]
     this.solution = this.response["solution"]
     this.ptc = this.response["pointsToConsider"]
     this.tableSchema = this.response["columnsInTheTable"];
-    this.tableSchema = this.tableSchema.replace("/\n","");
+    if(this.tableSchema != undefined){
+      this.tableSchema = this.tableSchema.replace("/\n","");
+    }
     console.log(this.response)
   }
 
   async submitCode(code: any){
+    if("solution" == code){
+      this.askedForSolution = true;
+      this.askForSolution();
+    } 
+    else if("next" == code){
+      this.showNextQuestion = false
+      this.resetQuestion();
+    }
+    else{
     var verdictResponse = "";
       var result = await model.generateContent("Go through the entire query and tell me if the query: " +code+" will give correct answer for the question: "+this.response['question']+
       "? answer me by saying Yes/No as the first word then the explanation"
@@ -77,6 +95,7 @@ export class SqlPracticeComponent {
       verdictResponse = response.candidates[0].content.parts[0]
       this.openDialog(verdictResponse, true);
       this.showLoaderWheel = false;
+    }
   }
 
   openDialog(text: any, isAIResponse: boolean){
@@ -107,6 +126,33 @@ export class SqlPracticeComponent {
       //   this.resetQuestion();
       // }
     });
+    if('Y' == valid){
+      this.showNextQuestion = true;
+    }
+  }
+
+  skipQuestion(){
+    console.log("Skipping question");
+    this.response = "";
+    this.generateQuestion();
+  }
+
+  askForSolution(){
+   this.showLoaderWheel = true;
+   this.askedForSolution = true;
+   console.log(this.response["solution"]);
+   var verdictResponse = this.response["solution"];
+   this.openDialog(verdictResponse, false);
+   this.showLoaderWheel = false
+  }
+
+  async resetQuestion(){
+    this.response = "";
+    await this.generateQuestion();
+  }
+
+  goBack(){
+    this.router.navigate(['/practiceOptions'])
   }
 
 }

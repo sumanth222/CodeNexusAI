@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { firebaseConfig } from '../environment';
 import firebase from "firebase/compat/app";
-import { getAuth, signInWithCredential } from "firebase/auth";
+import { getAuth, signInWithCredential } from "@firebase/auth";
 import { Router } from '@angular/router';
 import { UserContextService } from '../userContext/user-context.service';
 import { UserDetails } from 'src/objects/user-details';
-import { RecaptchaVerifier, PhoneAuthProvider } from 'firebase/auth';
+import { RecaptchaVerifier, PhoneAuthProvider } from '@firebase/auth';
+import { DataService } from '../services/data-service.service';
 
 
 
@@ -38,7 +39,9 @@ export class SignupComponent implements OnInit {
   isLoading : boolean = false;
   otpDisabled : boolean = false;
 
-  constructor(private router: Router, private userContextService: UserContextService) { 
+  constructor(private router: Router, private userContextService: UserContextService,
+    private dataService: DataService
+  ) { 
   }
 
   ngOnInit(): void {
@@ -105,6 +108,7 @@ export class SignupComponent implements OnInit {
       this.userDetails.email = this.email;
       this.userDetails.username = this.username;
       this.userContextService.setUserDetails(this.userDetails);
+      this.dataService.createUserInfo(this.username, this.email, "Starter", 0);
       this.router.navigate(['/dashboard'])
     })})
   .catch((error)=>{

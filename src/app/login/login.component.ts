@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import firebase from "firebase/compat/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "@firebase/auth";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../services/auth-service.service';

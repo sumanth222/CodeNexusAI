@@ -13,13 +13,18 @@
             <p class="welcome-header">Welcome </p>
             <span class="toolbar-spacer"></span>
             <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
-                <p class="logout-button-text">Exit programming section</p>
+                <p class="logout-button-text">Exit SQL section</p>
             </div>
             <div (click)="logout()" class="logout-button">
                 <p class="logout-button-text">Logout</p>
             </div>
         </mat-toolbar>  
         <h1 class="sqlHeader">Read the question, and write your query in the editor at the  bottom</h1>
+        <h2 class="cs-text" style="text-align: center;">Try this! if you feel like you have seen this question already, you can skip it</h2>
+        <div>
+            <button (click)="goBack()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
+            <button (click)="skipQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
+        </div>
         <div style="background-color: #F5DAD2; margin-top: 5%;">
             <mat-card>
                 <mat-card-header style="background-color: #F5DAD2;">
@@ -57,7 +62,7 @@
         <div style="height: 200px; margin-top: 5%;">
         <app-code-editor [showSubmitButton] = true [showSolutionButton] = true 
         [showHintButton] = false  [showOptimizeButton] = false  [codeTemplate] = "codeTemplate"
-        (finalCode)="submitCode($event)"></app-code-editor>
+        [showNextQuestion] = "showNextQuestion" (finalCode)="submitCode($event)"></app-code-editor>
         </div>
     </div>
 </body>
