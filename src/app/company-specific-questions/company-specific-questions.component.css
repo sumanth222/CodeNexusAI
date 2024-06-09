@@ -7,3 +7,16 @@
     font-variation-settings:
     "wdth" 100;
 }
+
+.bootstrap-timer{
+    color: #303030;
+    background-color: #eee;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #c9c9c9;
+    border-radius: 8px;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-left: 32%;
+}

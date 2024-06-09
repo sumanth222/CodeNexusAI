@@ -42,6 +42,8 @@ export class DSSelectionComponent implements OnInit {
   user!: firebase.User | null;
   company: any = "";
   username : string | undefined = "";
+  checked: boolean = false;
+  disabled: boolean = true;
 
 
   constructor(private router : Router, private dialog : MatDialog, 

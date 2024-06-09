@@ -109,7 +109,7 @@ export class SignupComponent implements OnInit {
       this.userDetails.username = this.username;
       this.userContextService.setUserDetails(this.userDetails);
       this.dataService.createUserInfo(fuser.displayName, fuser.email, "Starter", 0);
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/practiceOptions'])
     })})
   .catch((error)=>{
     console.log("Error"+error)

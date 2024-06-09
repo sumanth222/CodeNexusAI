@@ -52,6 +52,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   solvedStreak : number = 0;
   showNextQuestion : boolean = false;
   codeTemplate : string = 'public <Return Type> func(<Arguments if any>){\n\tSystem.out.println("Hello World");\n}'
+  endTime = 300;
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
     private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService) {
@@ -78,7 +79,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     if(this.company != "na"){
       companySuffix = " at "+this.company;
     }
-    var result = await model.generateContent("Generate a "+this.diffLevel+" programming question on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
+    var result = await model.generateContent("Generate a "+this.diffLevel+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
     " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
     var extractedResponse = "";
     console.log(JSON.stringify(geminiResponse))
@@ -249,6 +250,11 @@ export class CompanySpecificQuestionsComponent implements OnInit {
 
   goToProfile(){
     this.router.navigate(['/profilePage'])
+  }
+
+  timeOut(){
+    console.log("Timer completed")
+    this.resetQuestion();
   }
 }
 

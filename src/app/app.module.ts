@@ -33,7 +33,8 @@ import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
 import { DataService } from './services/data-service.service';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CdTimerModule } from 'angular-cd-timer';
 
 
 @NgModule({
@@ -68,7 +69,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     AngularFireModule.initializeApp(firebaseConfig),
     MatToolbarModule,
     MatProgressBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSlideToggleModule,
+    CdTimerModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService, DataService],
   bootstrap: [AppComponent]
