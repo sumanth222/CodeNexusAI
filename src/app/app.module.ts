@@ -31,7 +31,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { PracticeOptionsComponent } from './practice-options/practice-options.component';
 import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
 import { DataService } from './services/data-service.service';
-import { Firestore } from 'firebase/firestore';
+import {MatMenuModule} from '@angular/material/menu';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 
 
@@ -46,7 +47,8 @@ import { Firestore } from 'firebase/firestore';
     VerdictResponseDialogExampleComponent,
     DSSelectionComponent,
     PracticeOptionsComponent,
-    SqlPracticeComponent
+    SqlPracticeComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { Firestore } from 'firebase/firestore';
     MatRadioModule,
     AngularFireModule.initializeApp(firebaseConfig),
     MatToolbarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatMenuModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService, DataService],
   bootstrap: [AppComponent]

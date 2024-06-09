@@ -11,9 +11,16 @@
         <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
             <p class="logout-button-text">Exit programming section</p>
         </div>
-        <div (click)="logout()" class="logout-button">
-            <p class="logout-button-text">Logout</p>
-        </div>
+
+        <button mat-button [matMenuTriggerFor]="menu">
+            <span class="material-symbols-outlined" style="font-size: 30px;">
+                account_circle
+            </span>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="goToProfile()">My Profile</button>
+        <button mat-menu-item (click) = "logout()">Logout</button>
+        </mat-menu>
         
       </mat-toolbar>      
     <h2 class="dash-header" style="text-align: center;margin-top: 8%;">Pick your Poison!</h2>

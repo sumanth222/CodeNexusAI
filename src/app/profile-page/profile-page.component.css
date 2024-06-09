@@ -1,0 +1,14 @@
+.topHeader{
+    background-image: linear-gradient(60deg, #f09d3e, #e93f42);
+    height: 30%;
+}
+
+.bottomHeader{
+    background-color: #F9F9E0;
+    height: 70%;
+}
+
+.faceIcon{
+    font-size: 65px;
+    margin-left: 47%;
+}

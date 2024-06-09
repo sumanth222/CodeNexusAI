@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit {
     fuser?.updateProfile({
       displayName: this.username
     }).then((user) => {
-      this.userDetails.email = this.email;
+      this.userDetails.email = fuser.email;
       this.userDetails.username = this.username;
       this.userContextService.setUserDetails(this.userDetails);
       this.dataService.createUserInfo(fuser.displayName, fuser.email, "Starter", 0);

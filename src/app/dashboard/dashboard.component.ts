@@ -50,4 +50,8 @@ export class DashboardComponent implements OnInit {
   goToSectionScreen(){
     this.router.navigate(['/practiceOptions'])
   }
+
+  goToProfile(){
+    this.router.navigate(['/profilePage'])
+  }
 }
