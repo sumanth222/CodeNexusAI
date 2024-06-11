@@ -23,8 +23,9 @@
         </mat-menu>
         
       </mat-toolbar>      
-    <h2 class="dash-header" style="text-align: center;margin-top: 8%;">Pick your Poison!</h2>
-    <div style="margin-left: 35%; margin-top: 8%; margin-right: 33%;background-color: #F1F1F1; padding: 20px; border-radius: 10px;">
+    <h2 class="dash-header" style="text-align: center;margin-top: 8%;">Which company are you targeting?</h2>
+    <p class="dash-body">This will help us curate questions for you! <br />If there is no particular company in your mind, select "Anything goes"</p>
+    <div style="margin-left: 35%; margin-top: 4%; margin-right: 33%;background-color: #F1F1F1; padding: 20px; border-radius: 10px;">
         <div *ngFor = "let company of companiesList; let i = index">
             <button (click)="navigate(i)" style="margin-top: 5%;width: 100%;"
             [ngStyle] = "{'background-color' : i % 2 == 0 ? '#C7B7A3' : '#EADBC8'}" mat-raised-button>{{company}}</button>

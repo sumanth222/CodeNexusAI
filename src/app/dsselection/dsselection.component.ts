@@ -44,6 +44,7 @@ export class DSSelectionComponent implements OnInit {
   username : string | undefined = "";
   checked: boolean = false;
   disabled: boolean = true;
+  timedMode = false;
 
 
   constructor(private router : Router, private dialog : MatDialog, 
@@ -67,8 +68,9 @@ export class DSSelectionComponent implements OnInit {
   onTileSelect(title: string){
     console.log("Clicked on: "+title)
     console.log("Diff level selected: "+this.diffLevel);
+    console.log("Timedmode: "+this.timedMode)
     if(this.diffLevel != ""){
-      this.router.navigate(['/companySpecificQuestion', title, this.diffLevel, this.company])
+      this.router.navigate(['/companySpecificQuestion', title, this.diffLevel, this.company, this.timedMode])
     }
     else{
       this.openDialog("Please choose a difficulty level and then select a topic")

@@ -38,6 +38,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   subtract : boolean = false;
   headings: string[] = ["Question", "Example test case", "Time Complexity"];
   contents: string[] = [];
+  difficultyLevels: string[] = ["easy","moderate","hard","very hard"];
   headingsIndex : number = 0;
   askedForHint : boolean = false;
   askedForSolution : boolean = false;
@@ -53,6 +54,10 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   showNextQuestion : boolean = false;
   codeTemplate : string = 'public <Return Type> func(<Arguments if any>){\n\tSystem.out.println("Hello World");\n}'
   endTime = 300;
+  difficultyIndex = 0;
+  streak = 0;
+  highestStreak = 0;
+  timedMode : string | null = "";
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
     private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService) {
@@ -68,19 +73,34 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
     this.company = this.route.snapshot.paramMap.get("company");
     this.username = this.userContextService.getUserDetails().username
-    this.generateQuestion();
-    if(autoAdapt == this.diffLevel){
-      this.diffLevel = "easy"
+    this.timedMode = this.route.snapshot.paramMap.get("timedMode");
+    if(this.timedMode == 'false'){
+      this.endTime = 0;
     }
+    if(autoAdapt == this.diffLevel){
+      this.diffLevel = this.difficultyLevels[this.difficultyIndex];
+    }
+    this.generateQuestion();
   }
 
   async generateQuestion(){
+    if(this.streak == 2 && this.difficultyIndex < 3){
+      this.difficultyIndex++;
+      this.streak = 0
+    }
     var companySuffix = "";
     if(this.company != "na"){
       companySuffix = " at "+this.company;
     }
-    var result = await model.generateContent("Generate a "+this.diffLevel+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
+    var result = null;
+    if(autoAdapt == this.diffLevel){
+      result = await model.generateContent("Generate a "+this.difficultyLevels[this.difficultyIndex]+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
     " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
+    }
+    else{
+      result = await model.generateContent("Generate a "+this.diffLevel+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
+        " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
+    }
     var extractedResponse = "";
     console.log(JSON.stringify(geminiResponse))
     var response = await result.response;
@@ -170,10 +190,12 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       this.showNextQuestion = true;
       this.questionsSolved++;
       this.solvedStreak++;
+      this.streak++;
+      this.highestStreak = (this.solvedStreak > this.highestStreak ? this.solvedStreak : this.highestStreak)
     }
     else if(new String(verdictResponse).charAt(1) == 'N'){
       valid = 'N';
-      this.solvedStreak = 0;
+      this.streak = 0;
     }
     else if(this.askedForHint){
       valid = 'H' //Hint usecase
@@ -228,7 +250,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   async optimizeCode(code : string){
     this.askedToOptimize = true;
     this.showLoaderWheel = true;
-    var result = await model.generateContent("Can you optimize my code "+code+" for following programming question "+this.response['question']+"?");
+    var result = await model.generateContent("Optimize my code "+code+" for following programming question "+this.response['question']+"?");
     var response = await result.response;
     console.log(response.candidates[0].content.parts[0]);
     var verdictResponse = response.candidates[0].content.parts[0]

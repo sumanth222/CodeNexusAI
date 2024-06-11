@@ -33,7 +33,8 @@
         <h2 class="cs-text" style="text-align: center;">Try this! if you feel like you have seen this question already, you can skip it</h2>
         <div>
             <button (click)="goBackToSelection()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
-            <cd-timer class="bootstrap-timer" format="ms" [endTime]="endTime" (onComplete) = "timeOut()"></cd-timer>
+            <cd-timer class="bootstrap-timer" format="ms" [endTime]="endTime"
+             [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
             <button (click)="resetQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>
         <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2;"

@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'signup', component :SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate : [AuthServiceService]},
-  {path: 'companySpecificQuestion/:title/:diffLevel/:company', component: CompanySpecificQuestionsComponent, canActivate : [AuthServiceService]},
+  {path: 'companySpecificQuestion/:title/:diffLevel/:company/:timedMode', component: CompanySpecificQuestionsComponent, canActivate : [AuthServiceService]},
   {path: 'dsselection/:company', component: DSSelectionComponent, canActivate : [AuthServiceService]},
   {path: 'practiceOptions', component: PracticeOptionsComponent, canActivate  :[AuthServiceService]},
   {path: 'sqlPractice', component:SqlPracticeComponent, canActivate: [AuthServiceService]},

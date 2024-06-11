@@ -16,21 +16,10 @@ export class DataService{
     ngOnInit(){
     }
 
-    async createUserInfo(name: string | null, email: string | null, rank: string, questionsSolved: number) {
+    async createUserInfo(name: string | null, email: string | null) {
         console.log(this.firestore)
-        let userListWithEmail = await this.userWithEmailFilter(email);
-        if(userListWithEmail > 0){
-            console.log("New user, registering..");
-            const docRef = await addDoc(collection(this.firestore, 'user-info'), {
-                name: name,
-                rank: rank,
-                email: email,
-                questionsSolved: questionsSolved
-            });
-        }
-        else{
-            console.log("User already exists. Logging in")
-        }
+        console.log(email);
+        this.registerUser(email);
     }
 
     async getUserInfo(){
@@ -42,10 +31,24 @@ export class DataService{
         });
     }
 
-    async userWithEmailFilter(email: string | null) : Promise<any>{
+    async registerUser(email: string | null) : Promise<any>{
         const db = firebase.firestore();
         let userList: any = await db.collection("user-info").where("email", "==", email).get().then((querySnapshot) => {
-            return querySnapshot.size;
+            if(querySnapshot.size == 0){
+                console.log("New user, registering..");
+                    addDoc(collection(this.firestore, 'user-info'), {
+                    name: name,
+                    email: email,
+                    phoneNumber:  "",
+                    prgQuestions: 0,
+                    prgStreak : 0,
+                    sqlQuestion: 0,
+                    sqlStreak: 0
+                });
+            }
+            else{
+                console.log("User already exists in DB");
+            }
         });
     }
 }

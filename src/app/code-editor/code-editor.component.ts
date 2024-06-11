@@ -50,6 +50,11 @@ export class CodeEditorComponent implements OnInit {
   ngOnInit(): void {
     this.editorOptions = {theme: 'vs-dark', language: 'java'};
     this.code = this.codeTemplate;
+    this.model = {
+        language: 'java',
+        uri: 'main.json',
+        value: this.codeTemplate
+    }
   }
 
   submitCode(){

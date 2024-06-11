@@ -25,22 +25,16 @@
       </mat-toolbar>  
     <button style="margin-top: 10px;" (click)="goBackToCompSelection()" mat-raised-button color="primary">Go back to Company selection</button>
     <h2 class="mat-tile-header">What do you want to practise on today?</h2>
-        <p style="margin-left: 45%;display: inline-block;"><mat-slide-toggle [disabled]="disabled" [checked] = "checked">
-            Timed mode
-            <span *ngIf = "disabled == true" class="material-symbols-outlined">
-                lock
-            </span>
-        </mat-slide-toggle></p>
+        <p style="margin-left: 45%;display: inline-block;">
+            <mat-slide-toggle [disabled]="disabled" [checked] = "checked" [(ngModel)]="timedMode">
+                Timed mode
+                <span *ngIf = "disabled == true" class="material-symbols-outlined">
+                    lock
+                </span>
+            </mat-slide-toggle>
+        </p>
+        <br />
     <div style="margin-left: 20%; margin-right: 33%;">
-        <mat-grid-list class="mat-tile" cols="4" rowHeight="30vh" style="width: 60vw">
-            @for(tile of tiles; track tile){
-                <mat-grid-tile
-                [colspan]="tile.cols"
-                [rowspan]="tile.rows"
-                [style.background]="tile.color"
-                (click)="onTileSelect(tile.text)">{{tile.text}}</mat-grid-tile>
-            }
-        </mat-grid-list>
         <label class="mat-tile-header-2">Choose your difficulty level: </label>
         <mat-radio-group
             aria-labelledby="example-radio-group-label"
@@ -50,5 +44,14 @@
                 <mat-radio-button class="radio-button" [value]="difficulty">{{difficulty}}</mat-radio-button>
             }
         </mat-radio-group>
+        <mat-grid-list class="mat-tile" cols="4" rowHeight="30vh" style="width: 60vw">
+            @for(tile of tiles; track tile){
+                <mat-grid-tile
+                [colspan]="tile.cols"
+                [rowspan]="tile.rows"
+                [style.background]="tile.color"
+                (click)="onTileSelect(tile.text)">{{tile.text}}</mat-grid-tile>
+            }
+        </mat-grid-list>
     </div>
 </body>

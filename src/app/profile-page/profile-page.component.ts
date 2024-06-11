@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class ProfilePageComponent {
 
   username: string = ""
-  email: string = ""
-  phoneNumber: string = ""
+  email: string | null | undefined = ""
+  phoneNumber: string | null | undefined = ""
   sqlQuestionsSolved : number = 0;
   sqlHighestStreak : number = 0;
   pgmQuestionsSolved : number = 0;
@@ -25,6 +25,8 @@ export class ProfilePageComponent {
   ngOnInit(){
     const fuser = firebase.auth().currentUser;
     console.log("Email is" +fuser?.email)
+    this.email = fuser?.email;
+    this.phoneNumber = fuser?.phoneNumber
   }
 
   logout(){

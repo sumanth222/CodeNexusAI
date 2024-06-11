@@ -14,12 +14,12 @@
         <div style="background-color:bisque; border-radius: 8px;height: 100%;">
           <mat-form-field appearance="fill" style="width: 50%;margin-top: 35%;margin-left: 20%;">
             <mat-label>Username</mat-label>
-            <input id="phone-input" type="text" matInput [(ngModel)]="username" placeholder="Placeholder" [disabled]="disabled">
-            <mat-hint>Enter your Username</mat-hint>
+            <input minlength="5" type="text" (change)="onChangeName()" id="phone-input" type="text" matInput [(ngModel)]="username" placeholder="Placeholder" [disabled]="disabled">
+            <mat-hint>Enter your Username, only Alphabet accepted</mat-hint>
           </mat-form-field>
         <mat-form-field appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 20%;">
           <mat-label>Phone Number</mat-label>
-          <input id="phone-input" type="text" matInput [(ngModel)]="phoneNumber" placeholder="Placeholder" [disabled]="disabled">
+          <input (change)="onChangePhone()" id="phone-input" type="text" minlength="10" maxlength="10" matInput [(ngModel)]="phoneNumber" placeholder="Placeholder" [disabled]="disabled">
           <mat-hint>An OTP will be sent to your phone number</mat-hint>
         </mat-form-field>
 
@@ -31,7 +31,7 @@
 
         <button *ngIf = "!showOTPInput" (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Verify phone number</button>
         <button *ngIf = "showOTPInput" (click)="loginWithPhone()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign In</button>
-        <button (click)="signupWithGoogle()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign Up with Google</button>
+        <button [disabled] = "signUpDisabled" (click)="signupWithGoogle()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign Up with Google</button>
           <!-- <button (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign Up</button>
          <button (click)="navigate2Login()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In</button> -->
         </div>
