@@ -86,6 +86,7 @@ export class SignupComponent implements OnInit {
         this.userDetails.username = this.phoneNumber;
         this.userDetails.username = this.username;
         this.userContextService.setUserDetails(this.userDetails);
+        this.dataService.createUserInfo(this.username, "", this.phoneNumber);
         //this.router.navigate(['/dashboard'])
         this.router.navigate(['/practiceOptions'])
       })}).catch((error: any) => {
@@ -111,7 +112,7 @@ export class SignupComponent implements OnInit {
           this.userDetails.email = fuser.email;
           this.userDetails.username = this.username;
           this.userContextService.setUserDetails(this.userDetails);
-          this.dataService.createUserInfo(fuser.displayName, fuser.email);
+          this.dataService.createUserInfo(this.username, fuser.email, this.phoneNumber);
           this.router.navigate(['/practiceOptions'])
         })})
       .catch((error)=>{
@@ -136,6 +137,9 @@ export class SignupComponent implements OnInit {
     if(this.usernameValid && this.phoneNumberValid){
       this.signUpDisabled = false;
     }
+    else{
+      this.signUpDisabled  =true;
+    }
   }
 
   onChangePhone(){
@@ -150,6 +154,9 @@ export class SignupComponent implements OnInit {
       }
     if(this.usernameValid && this.phoneNumberValid){
       this.signUpDisabled = false;
+    }
+    else{
+      this.signUpDisabled = true;
     }
   }
 }

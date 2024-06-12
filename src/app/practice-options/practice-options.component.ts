@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-practice-options',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class PracticeOptionsComponent {
 
-  constructor(private router: Router){
+  constructor(private router: Router, private authService : AuthServiceService){
 
   }
 
@@ -18,5 +19,17 @@ export class PracticeOptionsComponent {
 
   navigateToSQL(){
     this.router.navigate(['sqlPractice'])
+  }
+
+  logout(){
+    this.authService.signoutUser();
+  }
+
+  goToProfile(){
+    this.router.navigate(['/profilePage'])
+  }
+
+  goToHome(){
+    this.router.navigate(['/practiceOptions'])
   }
 }

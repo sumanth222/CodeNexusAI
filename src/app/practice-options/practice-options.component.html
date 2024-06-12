@@ -5,6 +5,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <mat-toolbar>
+    <span class="toolbar-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <span class="material-symbols-outlined" style="font-size: 30px;">
+            account_circle
+        </span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+    <button mat-menu-item (click) = "logout()">Logout</button>
+    </mat-menu>
+</mat-toolbar>  
   <h2 class="cardHeaderText" style="text-align: center;">What do you want to practice today?</h2>
     <mat-card class="codingCard" (click) = "navigateToSQL()">
         <mat-card-content class="cs-text" style="margin-top: 20px;">

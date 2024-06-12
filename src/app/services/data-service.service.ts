@@ -16,10 +16,10 @@ export class DataService{
     ngOnInit(){
     }
 
-    async createUserInfo(name: string | null, email: string | null) {
+    async createUserInfo(name: string | null, email: string | null, phoneNumber : string | null) {
         console.log(this.firestore)
         console.log(email);
-        this.registerUser(email);
+        this.registerUser(name, email, phoneNumber);
     }
 
     async getUserInfo(){
@@ -31,7 +31,7 @@ export class DataService{
         });
     }
 
-    async registerUser(email: string | null) : Promise<any>{
+    async registerUser(name: string | null, email: string | null, phoneNumber : string | null) : Promise<any>{
         const db = firebase.firestore();
         let userList: any = await db.collection("user-info").where("email", "==", email).get().then((querySnapshot) => {
             if(querySnapshot.size == 0){
@@ -39,7 +39,7 @@ export class DataService{
                     addDoc(collection(this.firestore, 'user-info'), {
                     name: name,
                     email: email,
-                    phoneNumber:  "",
+                    phoneNumber:  phoneNumber,
                     prgQuestions: 0,
                     prgStreak : 0,
                     sqlQuestion: 0,

@@ -13,6 +13,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthServiceService } from '../services/auth-service.service';
 import { UserContextService } from '../userContext/user-context.service';
 import { autoAdaptInfo } from '../constants/app.constant';
+import { FirebaseServiceService } from '../services/firebase-service.service';
 
 const autoAdapt = "Auto Adapt";
 
@@ -60,7 +61,8 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   timedMode : string | null = "";
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
-    private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService) {
+    private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService,
+  private firebaseService: FirebaseServiceService) {
       this.afAuth.onAuthStateChanged((user) => {
         this.user = user?.email;
         console.log("Logged inuser is "+this.user)
@@ -192,6 +194,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       this.solvedStreak++;
       this.streak++;
       this.highestStreak = (this.solvedStreak > this.highestStreak ? this.solvedStreak : this.highestStreak)
+      this.firebaseService.updateUserStreak(this.highestStreak);
     }
     else if(new String(verdictResponse).charAt(1) == 'N'){
       valid = 'N';

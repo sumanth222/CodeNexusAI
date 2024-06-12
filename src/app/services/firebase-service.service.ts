@@ -11,12 +11,20 @@ export class FirebaseServiceService {
 
   constructor(private authService: AuthServiceService) { }
 
-  async updateUserStreak(){
-    let email = firebase.auth().currentUser;
+  async updateUserStreak(streak: number){
+    let user = firebase.auth().currentUser;
     const db = firebase.firestore();
 
-    let user: any = await db.collection("user-info").where("email", "==", email).get().then((querySnapshot) => {
+    await db.collection("user-info").where("email", "==", user?.email).get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {this.docId = doc.id})
-  });
+    });
+
+    db.collection("user-info").doc(this.docId).update({
+      prgStreak: streak
+    }).then(() => {
+      console.log("Updated user streak, successfully");
+    }).catch((error) => {
+      console.log("Error while updating user streak: "+error)
+    })
   }
 }
