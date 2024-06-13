@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import { AuthServiceService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
+import { FirebaseServiceService } from '../services/firebase-service.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -18,7 +19,7 @@ export class ProfilePageComponent {
   pgmQuestionsSolved : number = 0;
   pgmHighestStreak : number = 0;
 
-  constructor(private router: Router, private authService: AuthServiceService){
+  constructor(private router: Router, private authService: AuthServiceService, private firebaseService: FirebaseServiceService){
 
   }
 
@@ -27,6 +28,10 @@ export class ProfilePageComponent {
     console.log("Email is" +fuser?.email)
     this.email = fuser?.email;
     this.phoneNumber = fuser?.phoneNumber
+    this.firebaseService.getUserInfo(this.email).then((userInfo) => {
+      this.pgmHighestStreak = userInfo.prgStreak;
+      this.pgmQuestionsSolved = userInfo.prgQuestions;
+    });
   }
 
   logout(){

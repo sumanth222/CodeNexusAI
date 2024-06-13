@@ -51,7 +51,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   company: any = "";
   username : string | undefined = "";
   questionsSolved : number = 0;
-  solvedStreak : number = 0;
+  currentStreak : number = 0;
   showNextQuestion : boolean = false;
   codeTemplate : string = 'public <Return Type> func(<Arguments if any>){\n\tSystem.out.println("Hello World");\n}'
   endTime = 300;
@@ -82,6 +82,9 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     if(autoAdapt == this.diffLevel){
       this.diffLevel = this.difficultyLevels[this.difficultyIndex];
     }
+    this.firebaseService.getUserInfo(this.user).then((userInfo) => {
+      this.highestStreak = userInfo.prgStreak;
+    });
     this.generateQuestion();
   }
 
@@ -191,20 +194,27 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       valid = 'Y';
       this.showNextQuestion = true;
       this.questionsSolved++;
-      this.solvedStreak++;
+      this.currentStreak++;
       this.streak++;
-      this.highestStreak = (this.solvedStreak > this.highestStreak ? this.solvedStreak : this.highestStreak)
-      this.firebaseService.updateUserStreak(this.highestStreak);
+      if(this.currentStreak > this.highestStreak){
+        this.firebaseService.updateProgUserStreakAndQuestions(this.currentStreak);
+        this.highestStreak = this.currentStreak;
+      }
+      else{
+        this.firebaseService.updateUserProgQuestions();
+      }
     }
     else if(new String(verdictResponse).charAt(1) == 'N'){
       valid = 'N';
       this.streak = 0;
+      this.currentStreak = 0;
     }
     else if(this.askedForHint){
       valid = 'H' //Hint usecase
     }
     else if(this.askedForSolution){
       valid = 'S';
+      this.currentStreak = 0;
     }
     else if(this.askedToOptimize){
       valid = 'O';
@@ -233,7 +243,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
 
   async askForHint(){
    this.showLoaderWheel = true;
-   var result = await model.generateContent("Can you give me a hint on how to approach the following programming question "+this.response['question']+"?");
+   var result = await model.generateContent("Give me a hint on how to approach the following programming question "+this.response['question']+"?");
    var response = await result.response;
    console.log(response.candidates[0].content.parts[0]);
    var verdictResponse = response.candidates[0].content.parts[0]
