@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { AuthServiceService } from '../services/auth-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { geminiApiKey } from '../environment';
 import { sqlGeminiResponse } from 'src/objects/gemini-response';
 import { MatDialog } from '@angular/material/dialog';
 import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
+import { FirebaseServiceService } from '../services/firebase-service.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(geminiApiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+const autoAdapt = "Auto Adapt";
 
 @Component({
   selector: 'app-sql-practice',
@@ -15,8 +18,15 @@ const model = genAI.getGenerativeModel({ model: "gemini-pro"});
   styleUrl: './sql-practice.component.css'
 })
 export class SqlPracticeComponent {
+  sqlTopic: any;
+  diffLevel: string | null | undefined;
+  timedMode: string | null | undefined;
+  streak: number = 0;
+  user: string | null | undefined;
 
-  constructor(private authService: AuthServiceService, private router: Router, private dialog: MatDialog){}
+  constructor(private authService: AuthServiceService, private router: Router, private dialog: MatDialog,
+    private route: ActivatedRoute, private firebaseService: FirebaseServiceService, private afAuth: AngularFireAuth
+  ){}
 
   headings : string[] = ['Question']
   response : any = "";
@@ -29,9 +39,39 @@ export class SqlPracticeComponent {
   showLoaderWheel : boolean = false
   showNextQuestion: boolean = false;
   askedForSolution: boolean = false;
+  difficultyLevels: string[] = ["easy","moderate","hard","very hard"];
+  difficultyIndex : number = 0;
+  highestStreak : number = 0;
+  currentStreak : number = 0;
 
 
   ngOnInit(){
+    
+    this.sqlTopic = this.route.snapshot.paramMap.get('title');
+    this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
+    this.timedMode = this.route.snapshot.paramMap.get("timedMode");
+    if(this.sqlTopic != "Random"){
+      this.sqlTopic = " for the topic "+this.sqlTopic;
+    }
+    else{
+      this.sqlTopic = "";
+    }
+    if(this.diffLevel == "Easy" || this.diffLevel == autoAdapt){
+      this.difficultyIndex = 0;
+    }
+    else if("Moderate" == this.diffLevel){
+      this.difficultyIndex = 1;
+    }
+    else if("Hard" == this.diffLevel){
+      this.difficultyIndex = 2;
+    }
+    this.afAuth.onAuthStateChanged((user) => {
+      this.user = user?.email;
+      console.log("Logged inuser is "+this.user)
+    })
+    this.firebaseService.getUserInfo(this.user).then((userInfo) => {
+      this.highestStreak = userInfo.sqlStreak;
+    });
     this.generateQuestion();
   }
 
@@ -44,12 +84,18 @@ export class SqlPracticeComponent {
   }
 
   async generateQuestion(){
+    if(this.streak == 2 && this.difficultyIndex < 3){
+      this.difficultyIndex++;
+      this.streak = 0
+    }
     let result;
     try{
-      result = await model.generateContent("Generate a SQL question for a software engineer position in valid parseable JSON format in a single line"+
+      result = await model.generateContent("Generate a "+this.difficultyLevels[this.difficultyIndex]+" SQL question for a software engineer position in valid parseable JSON format in a single line "+
+        +this.sqlTopic+
       " which follows this structure  "+JSON.stringify(sqlGeminiResponse) + " and expects a SQL query as an answer and does not have any HTML markup");
     }catch(err){
       console.log("err")
+      await this.resetQuestion();
     }
     var extractedResponse = "";
     console.log(JSON.stringify(sqlGeminiResponse))
@@ -63,7 +109,8 @@ export class SqlPracticeComponent {
     try{
     this.response = JSON.parse(extractedResponse)
     }catch(err){
-      console.log("err")
+      console.log("Error occurred")
+      await this.resetQuestion();
     }
     this.question = this.response["question"]
     this.scenario = this.response["scenario"]
@@ -113,6 +160,15 @@ export class SqlPracticeComponent {
     console.log("Res was: "+new String(verdictResponse))
     if(new String(verdictResponse).charAt(0) == 'Y' || new String(verdictResponse).charAt(1) == 'Y'){
       valid = 'Y';
+      this.streak++;
+      this.currentStreak++;
+      if(this.currentStreak > this.highestStreak){
+        this.highestStreak = this.currentStreak;
+        this.firebaseService.updateSQLUserStreakAndQuestions(this.highestStreak);
+      }
+      else{
+        this.firebaseService.updateUserSQLQuestions();
+      }
     }
     var dialogHandle = this.dialog.open(VerdictResponseDialogExampleComponent,{
       data: {
@@ -142,7 +198,12 @@ export class SqlPracticeComponent {
    this.askedForSolution = true;
    console.log(this.response["solution"]);
    var verdictResponse = this.response["solution"];
-   this.openDialog(verdictResponse, false);
+   this.dialog.open(VerdictResponseDialogExampleComponent,{
+    data: {
+      response: new String(verdictResponse),
+      status: 'G'
+    }
+  })
    this.showLoaderWheel = false
   }
 
@@ -153,6 +214,10 @@ export class SqlPracticeComponent {
 
   goBack(){
     this.router.navigate(['/practiceOptions'])
+  }
+
+  goToProfile(){
+    this.router.navigate(['/profilePage'])
   }
 
 }

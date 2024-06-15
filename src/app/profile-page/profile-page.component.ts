@@ -18,19 +18,29 @@ export class ProfilePageComponent {
   sqlHighestStreak : number = 0;
   pgmQuestionsSolved : number = 0;
   pgmHighestStreak : number = 0;
+  rank : string = "";
+  rankTitles :string[] = ["Novice Ninja", "Shadow Scout", "Stealth Specialist", "Silent Assassin", "Shadow Master", "Grand Ninja Lord"]
+  rankTitle : string = "";
 
   constructor(private router: Router, private authService: AuthServiceService, private firebaseService: FirebaseServiceService){
-
   }
 
-  ngOnInit(){
+  async ngOnInit(){
     const fuser = firebase.auth().currentUser;
-    console.log("Email is" +fuser?.email)
     this.email = fuser?.email;
-    this.phoneNumber = fuser?.phoneNumber
-    this.firebaseService.getUserInfo(this.email).then((userInfo) => {
+    await this.populateData();
+    console.log(this.rank)
+  }
+
+  async populateData() {
+    await this.firebaseService.getUserInfo(this.email).then((userInfo) => {
       this.pgmHighestStreak = userInfo.prgStreak;
       this.pgmQuestionsSolved = userInfo.prgQuestions;
+      this.sqlQuestionsSolved = userInfo.sqlQuestion;
+      this.sqlHighestStreak = userInfo.sqlStreak;
+      this.phoneNumber = userInfo.phoneNumber
+      this.rank = userInfo.rank
+      this.rankTitle = this.rankTitles[parseInt(this.rank) - 1]
     });
   }
 

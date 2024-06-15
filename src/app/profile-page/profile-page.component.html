@@ -23,18 +23,17 @@
 
     </div>
     <div class="bottomHeader">
-        <span class="material-symbols-outlined faceIcon">
-            face
-        </span>
+        <div class="profileIcon" style="background-image: url('../../assets/profile_icons/rank_{{rank}}.svg');">
+        </div>
         <div>
-            <p class="profileSummary" style="font-size: 25px; text-align: center;">Hi <b>Sumanth!</b> <br />
+            <p class="profileSummary" style="font-size: 25px; text-align: center;">Greetings! <em><u>{{rankTitle}}</u></em>. (Sumanth)!<br />
             Your email is <b>{{email}}</b> and phone number is <b> {{phoneNumber}} </b>
             <br /> <br /> 
             In SQL <br />
-            You have solved <b>number</b> questions so far.<br/>
-            Your highest streak in SQL is <b>Streak</b> <br/> <br/> 
+            You have solved <b>{{sqlQuestionsSolved}}</b> questions so far.<br/>
+            Your highest streak in SQL is <b>{{sqlHighestStreak}}</b> <br/> <br/> 
             In Programming <br/>
-            You have solved <b>{{pgmQuestionsSolved}}</b> of questions so far<br/> Your highest streak in programming is <b>{{pgmHighestStreak}}</b></p>
+            You have solved <b>{{pgmQuestionsSolved}}</b> questions so far<br/> Your highest streak in programming is <b>{{pgmHighestStreak}}</b></p>
         </div>
     </div>
 </body>

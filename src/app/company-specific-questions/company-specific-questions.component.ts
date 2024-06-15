@@ -70,7 +70,6 @@ export class CompanySpecificQuestionsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log("Logged inuser is "+this.user)
     this.dsTopic = this.route.snapshot.paramMap.get('title');
     this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
     this.company = this.route.snapshot.paramMap.get("company");
@@ -81,6 +80,12 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     }
     if(autoAdapt == this.diffLevel){
       this.diffLevel = this.difficultyLevels[this.difficultyIndex];
+      this.dialog.open(VerdictResponseDialogExampleComponent,{
+        data: {
+          response: new String(autoAdaptInfo),
+          status: 'G'
+        }
+      })
     }
     this.firebaseService.getUserInfo(this.user).then((userInfo) => {
       this.highestStreak = userInfo.prgStreak;
@@ -98,6 +103,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       companySuffix = " at "+this.company;
     }
     var result = null;
+    try{
     if(autoAdapt == this.diffLevel){
       result = await model.generateContent("Generate a "+this.difficultyLevels[this.difficultyIndex]+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
     " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
@@ -105,6 +111,10 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     else{
       result = await model.generateContent("Generate a "+this.diffLevel+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
         " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
+    }
+    }catch(err){
+      console.log("Error while generating question: Retrying");
+      await this.resetQuestion();
     }
     var extractedResponse = "";
     console.log(JSON.stringify(geminiResponse))
@@ -115,7 +125,12 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     extractedResponse = extractedResponse.replace("```","");
     extractedResponse = extractedResponse.replace("/\n","");
     console.log(extractedResponse)
-    this.response = JSON.parse(extractedResponse)
+    try{
+      this.response = JSON.parse(extractedResponse)
+    }catch(err){
+      console.log("Error");
+      await this.generateQuestion();
+    }
     this.populateContent();
     if(autoAdapt == this.diffLevel){
       this.dialog.open(VerdictResponseDialogExampleComponent,{

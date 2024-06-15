@@ -7,6 +7,8 @@
 <h2 *ngIf = "data.status === 'S'" mat-dialog-title>Solution</h2>
 <h2 *ngIf = "data.status === 'O'" mat-dialog-title>Optimized Approach</h2>
 <h2 *ngIf = "data.status === 'JM'" mat-dialog-title>A warm welcome <3</h2>
+<h2 *ngIf = "data.status === 'G'" mat-dialog-title></h2>
+
 
 
 <mat-dialog-content [ngClass] = "{'success' : data.status === 'Y', 'failure' : data.status === 'N'}">

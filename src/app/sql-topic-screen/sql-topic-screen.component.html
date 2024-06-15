@@ -10,7 +10,7 @@
         <p class="welcome-header">Welcome {{username}}</p>
         <span class="toolbar-spacer"></span>
         <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
-            <p class="logout-button-text">Exit programming section</p>
+            <p class="logout-button-text">Exit SQL section</p>
         </div>
 
         <button mat-button [matMenuTriggerFor]="menu">
@@ -23,8 +23,8 @@
         <button mat-menu-item (click) = "logout()">Logout</button>
         </mat-menu>
       </mat-toolbar>  
-    <button style="margin-top: 10px;" (click)="goBackToCompSelection()" mat-raised-button color="primary">Go back to Company selection</button>
-    <h2 class="mat-tile-header">Choose a Data structure you want to practise on and the difficulty level.</h2>
+    <button style="margin-top: 10px;" (click)="goBack()" mat-raised-button color="primary">Go back</button>
+    <h2 class="mat-tile-header">Choose a topic you want to practise on and the difficulty level.</h2>
         <p style="margin-left: 45%;display: inline-block;">
             <mat-slide-toggle [disabled]="disabled" [checked] = "checked" [(ngModel)]="timedMode">
                 Timed mode

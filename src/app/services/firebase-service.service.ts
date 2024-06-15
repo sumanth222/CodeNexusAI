@@ -48,6 +48,43 @@ export class FirebaseServiceService {
     })
   }
 
+  async updateSQLUserStreakAndQuestions(streak: number){
+    let user = firebase.auth().currentUser;
+    const db = firebase.firestore();
+    let currentSolved : number = 0;
+
+    await db.collection("user-info").where("email", "==", user?.email).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {this.docId = doc.id; currentSolved = doc.data().sqlQuestion})
+    });
+
+    db.collection("user-info").doc(this.docId).update({
+      sqlStreak: streak,
+      sqlQuestion: currentSolved + 1
+    }).then(() => {
+      console.log("Updated Prog streak and questions, successfully");
+    }).catch((error) => {
+      console.log("Error while updating prog streak and questions: "+error)
+    })
+  }
+
+  async updateUserSQLQuestions(){
+    let user = firebase.auth().currentUser;
+    const db = firebase.firestore();
+    let currentSolved : number = 0;
+
+    await db.collection("user-info").where("email", "==", user?.email).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {this.docId = doc.id; currentSolved = doc.data().sqlQuestion})
+    });
+
+    db.collection("user-info").doc(this.docId).update({
+      sqlQuestion: currentSolved + 1
+    }).then(() => {
+      console.log("Updated SQL questions solved, successfully");
+    }).catch((error) => {
+      console.log("Error while updating SQL questions solved: "+error)
+    })
+  }
+
   async getUserInfo(email: string | undefined | null) : Promise<any>{
     let userInfo : any;
 

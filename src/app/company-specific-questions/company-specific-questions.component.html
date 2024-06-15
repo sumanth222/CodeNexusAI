@@ -30,7 +30,10 @@
     </div>
 
     <div *ngIf = "response.length != 0">
-        <h2 class="cs-text" style="text-align: center;">Try this! if you feel like you have seen this question already, you can skip it</h2>
+        <h2 class="cs-text" style="text-align: center;">Read the question and write your logic in the code editor at the bottom. 
+            <br />
+            <span style="font-size: 15px;">If you wish, you can skip this question by pressing the button on the right</span>
+        </h2>
         <div>
             <button (click)="goBackToSelection()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
             <cd-timer class="bootstrap-timer" format="ms" [endTime]="endTime"

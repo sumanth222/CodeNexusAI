@@ -43,7 +43,8 @@ export class DataService{
                     prgQuestions: 0,
                     prgStreak : 0,
                     sqlQuestion: 0,
-                    sqlStreak: 0
+                    sqlStreak: 0,
+                    rank: 1
                 });
             }
             else{

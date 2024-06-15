@@ -17,8 +17,8 @@ export class PracticeOptionsComponent {
     this.router.navigate(['dashboard'])
   }
 
-  navigateToSQL(){
-    this.router.navigate(['sqlPractice'])
+  navigateToSQLTopics(){
+    this.router.navigate(['sqlTopics'])
   }
 
   logout(){
