@@ -31,9 +31,12 @@
         <h2 class="cs-text" style="text-align: center;">Try this! if you feel like you have seen this question already, you can skip it</h2>
         <div>
             <button (click)="goBack()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
+            <cd-timer class="bootstrap-timer" format="ms" [endTime]="endTime"
+             [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
             <button (click)="skipQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>
-        <div style="background-color: #F5DAD2; margin-top: 5%;">
+        <h2 [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" class="timer-text">You have {{endTime / 60}} minutes!</h2>
+        <div style="background-color: #F5DAD2; margin-top: 2%;">
             <mat-card>
                 <mat-card-header style="background-color: #F5DAD2;">
                     <mat-card-title class="cs-text">Scenario</mat-card-title>

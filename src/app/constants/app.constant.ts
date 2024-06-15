@@ -5,4 +5,4 @@ export const about = "Welcome to Code Nexus, where coding mastery meets personal
 +"Here the focus will be on your <b>logic</b> because that is what matters the most in an interview.<br/>"
 +"This approach of solving problems helps you harness and increase your problem solving capability by simulating an interview experience.<br/>"
 +"With <em><u>PREMIUM</u></em> subscription, you can get additional features like getting hints, points to optimize your code and all other future updates!"
-export const autoAdaptInfo = "You are in Auto-Adapt mode, the questions here start from Easy level, then based on your performance, the subsequent questions difficulty will increase or decrease."
+export const autoAdaptInfo = "You are in Auto-Adapt mode, the questions here start from Easy level, then based on your performance, the subsequent questions difficulty will increase."

@@ -103,21 +103,24 @@ export class SignupComponent implements OnInit {
         this.isLoading = true;
         var provider = new firebase.auth.GoogleAuthProvider();
         provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-        firebase.auth()
-      .signInWithPopup(provider).then((result) => {
-        const fuser = firebase.auth().currentUser;
-        fuser?.updateProfile({
-          displayName: this.username
-        }).then((user) => {
-          this.userDetails.email = fuser.email;
-          this.userDetails.username = this.username;
-          this.userContextService.setUserDetails(this.userDetails);
-          this.dataService.createUserInfo(this.username, fuser.email, this.phoneNumber);
-          this.router.navigate(['/practiceOptions'])
-        })})
-      .catch((error)=>{
-        console.log("Error"+error)
-      })
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+            firebase.auth()
+            .signInWithPopup(provider).then((result) => {
+              const fuser = firebase.auth().currentUser;
+              fuser?.updateProfile({
+                displayName: this.username
+              }).then((user) => {
+                this.userDetails.email = fuser.email;
+                this.userDetails.username = this.username;
+                this.userContextService.setUserDetails(this.userDetails);
+                this.dataService.createUserInfo(this.username, fuser.email, this.phoneNumber);
+                this.router.navigate(['/practiceOptions'])
+              })})
+            .catch((error)=>{
+              console.log("Error"+error)
+            })
+        })
       this.isLoading = false;
     }
     else{

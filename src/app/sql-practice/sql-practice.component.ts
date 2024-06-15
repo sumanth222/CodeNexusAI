@@ -43,6 +43,7 @@ export class SqlPracticeComponent {
   difficultyIndex : number = 0;
   highestStreak : number = 0;
   currentStreak : number = 0;
+  endTime : number = 300;
 
 
   ngOnInit(){
@@ -218,6 +219,11 @@ export class SqlPracticeComponent {
 
   goToProfile(){
     this.router.navigate(['/profilePage'])
+  }
+
+  timeOut(){
+    console.log("Timer completed")
+    this.resetQuestion();
   }
 
 }

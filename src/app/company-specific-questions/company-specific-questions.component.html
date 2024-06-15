@@ -40,6 +40,7 @@
              [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
             <button (click)="resetQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>
+        <h2 [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" class="timer-text">You have {{endTime / 60}} minutes!</h2>
         <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2;"
         [ngStyle]="{'margin-top': i==0?'1%':'5%'}">
             <mat-card *ngIf = "i < 3">

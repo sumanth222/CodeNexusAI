@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../services/auth-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
+import { about } from '../constants/app.constant';
 
 @Component({
   selector: 'app-practice-options',
@@ -9,8 +12,17 @@ import { AuthServiceService } from '../services/auth-service.service';
 })
 export class PracticeOptionsComponent {
 
-  constructor(private router: Router, private authService : AuthServiceService){
+  constructor(private router: Router, private authService : AuthServiceService, private dialog: MatDialog){
 
+  }
+
+  ngOnInit(){
+    this.dialog.open(VerdictResponseDialogExampleComponent,{
+      data: {
+        response: new String(about),
+        status: 'JM'
+      }
+    })
   }
 
   navigateToProgramming(){

@@ -24,13 +24,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.userContext.getUserDetails().username
-    var dialogHandle = this.dialog.open(VerdictResponseDialogExampleComponent,{
-      data: {
-        response: new String(about),
-        status: 'JM'
-      }
-    })
-
     console.log(this.dataService.getUserInfo())
   }
 
