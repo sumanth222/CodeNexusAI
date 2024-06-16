@@ -13,3 +13,16 @@
     height: 0px;
     width: 0px;
 }
+
+.main-image{
+    margin-top: 25%;
+    margin-left: 16%;
+}
+
+.main-tag{
+    margin-top: 0%;
+    padding-top: 22%;
+    margin-left: 22%;
+    font-family: "Concert One", sans-serif;
+    font-weight: bold;
+}
