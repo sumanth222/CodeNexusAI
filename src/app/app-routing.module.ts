@@ -10,6 +10,8 @@ import { PracticeOptionsComponent } from './practice-options/practice-options.co
 import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SqlTopicScreenComponent } from './sql-topic-screen/sql-topic-screen.component';
+import { PremiumInfoComponent } from './premium-info/premium-info.component';
+import { TosComponent } from './tos/tos.component';
 
 const routes: Routes = [
   {path:'' ,component: SignupComponent},
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path: 'practiceOptions', component: PracticeOptionsComponent, canActivate  :[AuthServiceService]},
   {path: 'sqlPractice/:title/:diffLevel/:timedMode', component:SqlPracticeComponent, canActivate: [AuthServiceService]},
   {path: 'profilePage', component: ProfilePageComponent, canActivate: [AuthServiceService]},
-  {path: 'sqlTopics', component: SqlTopicScreenComponent, canActivate: [AuthServiceService]}
+  {path: 'sqlTopics', component: SqlTopicScreenComponent, canActivate: [AuthServiceService]},
+  {path: 'premiumInformation', component: PremiumInfoComponent, canActivate: [AuthServiceService]},
+  {path: 'tos', component: TosComponent, canActivate: [AuthServiceService]}
 ];
 
 @NgModule({

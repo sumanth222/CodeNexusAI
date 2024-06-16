@@ -22,6 +22,12 @@ export class DataService{
         this.registerUser(name, email, phoneNumber);
     }
 
+    async createUserInfoWithPhone(name: string | null, email: string | null, phoneNumber : string | null) {
+        console.log(this.firestore)
+        console.log(email);
+        this.registerUserWithPhone(name, email, phoneNumber);
+    }
+
     async getUserInfo(){
         const db = firebase.firestore();
         return db.collection("user-info").get().then((querySnapshot) => {
@@ -44,7 +50,31 @@ export class DataService{
                     prgStreak : 0,
                     sqlQuestion: 0,
                     sqlStreak: 0,
-                    rank: 1
+                    rank: 1,
+                    premium: false
+                });
+            }
+            else{
+                console.log("User already exists in DB");
+            }
+        });
+    }
+
+    async registerUserWithPhone(name: string | null, email: string | null, phoneNumber : string | null) : Promise<any>{
+        const db = firebase.firestore();
+        let userList: any = await db.collection("user-info").where("phoneNumber", "==", phoneNumber).get().then((querySnapshot) => {
+            if(querySnapshot.size == 0){
+                console.log("New user, registering..");
+                    addDoc(collection(this.firestore, 'user-info'), {
+                    name: name,
+                    email: email,
+                    phoneNumber:  phoneNumber,
+                    prgQuestions: 0,
+                    prgStreak : 0,
+                    sqlQuestion: 0,
+                    sqlStreak: 0,
+                    rank: 1,
+                    premium: false
                 });
             }
             else{

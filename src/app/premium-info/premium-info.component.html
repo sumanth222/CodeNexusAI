@@ -1,0 +1,67 @@
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <mat-toolbar>
+        <p class="welcome-header">Welcome</p>
+        <span class="toolbar-spacer"></span>
+        <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 5%;">
+            <p class="logout-button-text">Exit</p>
+        </div>
+
+        <button mat-button [matMenuTriggerFor]="menu">
+            <span class="material-symbols-outlined" style="font-size: 30px;">
+                account_circle
+            </span>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+        <button mat-menu-item (click) = "logout()">Logout</button>
+        </mat-menu>
+      </mat-toolbar>  
+    <h1 class="monoton-regular" style="text-align: center; font-size: 55px;">CodeNexus</h1>
+    <br/>
+    <mat-card style="width: 50%;margin-left: 25%;">
+        <mat-card-header class="card-header">
+            <mat-card-title class="card-title">Premium</mat-card-title>
+          </mat-card-header>
+        <mat-card-content class="card-body"> <br/> {{premiumTextBody}}</mat-card-content>
+    </mat-card>
+    <br/>
+    <div style="text-align: center;">
+        <p class="concert-one-regular prem-text">So you want to get PREMIUM subscription </p>
+            <div style="height: 20px; width: 20px;" class="prem-text">
+                <img src="../../assets/icons/premium-icon.svg" style="height: 40px; width: 40px;">
+            </div>
+        <p class="concert-one-regular prem-text">, great choice!</p>
+    </div>
+    <br/><br/>
+    <div style="text-align: center;">
+        <h1 class="concert-one-regular prem-text-points">Why Go Premium?</h1><br/>
+        <h1 class="concert-one-regular prem-text-points" style="text-align: left;">1. <u>Timed Mode</u><div style="display: inline;"><img src="../../assets/icons/timer.svg" style="height: 45px; width: 45px;"></div>
+            : Nothing feels more stressful than the ticking clock!</h1>
+        <br/>
+        <h1 class="concert-one-regular prem-text-points">2. <u>Auto Adapt Mode</u><div style="display: inline;"><img src="../../assets/icons/adapt.svg" style="height: 50px; width: 50px;margin-bottom: -10px;"></div>
+            : Questions automatically change their difficulty as you keep solving them!</h1>
+        <br />
+        <h1 class="concert-one-regular prem-text-points">3. <u>Access to Hints</u><div style="display: inline;"><img src="../../assets/icons/hints.svg" style="height: 50px; width: 50px;margin-bottom: -15px;"></div>
+            : Accessing solutions is okay, but getting hints and finding the solution yourself is what will help you to improve.</h1>
+        <br />
+        <h1 class="concert-one-regular prem-text-points">4. <u>Optimize your code</u><div style="display: inline;"><img src="../../assets/icons/optimize.svg" style="height: 50px; width: 50px;margin-bottom: -10px;"></div>
+            : You can even optimize the code which you have written!</h1>
+        <br />
+        <h1 class="concert-one-regular prem-text-points">5. <u>Future</u><div style="display: inline;"><img src="../../assets/icons/updates.svg" style="height: 60px; width: 60px;margin-bottom: -18px;"></div>
+            : All the future PREMIUM updates, and yes we are planning to drop a ton of those ;)</h1>
+        <br />
+    </div><br/>
+    <div id="tosTextLink" style="text-align: center; cursor: pointer;" (click)="readTOS()">
+        <a style="text-align: center;">Read our Terms of Service</a>
+    </div>
+    <div (click)="subscribe()" style="margin-left: 44%; background-color: aqua;width: 12%; border-radius: 20px;height: 35px;">
+        <p class="subscribeButtonText" style="margin-top: 8px;">Go PREMIUM</p>
+    </div>
+</body>

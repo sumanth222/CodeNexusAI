@@ -94,4 +94,14 @@ export class FirebaseServiceService {
     });
     return userInfo
   }
+
+  async getUserInfoByPhone(phone: string | undefined | null) : Promise<any>{
+    let userInfo : any;
+    phone = phone?.substring(3, phone.length);
+    const db = firebase.firestore();
+    await db.collection("user-info").where("phoneNumber", "==", phone).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {userInfo = doc.data()})
+    });
+    return userInfo
+  }
 }

@@ -28,20 +28,34 @@ export class ProfilePageComponent {
   async ngOnInit(){
     const fuser = firebase.auth().currentUser;
     this.email = fuser?.email;
+    this.phoneNumber = fuser?.phoneNumber;
     await this.populateData();
     console.log(this.rank)
   }
 
   async populateData() {
-    await this.firebaseService.getUserInfo(this.email).then((userInfo) => {
-      this.pgmHighestStreak = userInfo.prgStreak;
-      this.pgmQuestionsSolved = userInfo.prgQuestions;
-      this.sqlQuestionsSolved = userInfo.sqlQuestion;
-      this.sqlHighestStreak = userInfo.sqlStreak;
-      this.phoneNumber = userInfo.phoneNumber
-      this.rank = userInfo.rank
-      this.rankTitle = this.rankTitles[parseInt(this.rank) - 1]
-    });
+    if(this.email != undefined && this.email != ""){
+        await this.firebaseService.getUserInfo(this.email).then((userInfo) => {
+        this.pgmHighestStreak = userInfo.prgStreak;
+        this.pgmQuestionsSolved = userInfo.prgQuestions;
+        this.sqlQuestionsSolved = userInfo.sqlQuestion;
+        this.sqlHighestStreak = userInfo.sqlStreak;
+        this.phoneNumber = userInfo.phoneNumber
+        this.rank = userInfo.rank
+        this.rankTitle = this.rankTitles[parseInt(this.rank) - 1]
+      });
+    }
+    else{
+      await this.firebaseService.getUserInfoByPhone(this.phoneNumber).then((userInfo) => {
+        this.pgmHighestStreak = userInfo.prgStreak;
+        this.pgmQuestionsSolved = userInfo.prgQuestions;
+        this.sqlQuestionsSolved = userInfo.sqlQuestion;
+        this.sqlHighestStreak = userInfo.sqlStreak;
+        this.phoneNumber = userInfo.phoneNumber
+        this.rank = userInfo.rank
+        this.rankTitle = this.rankTitles[parseInt(this.rank) - 1]
+      });
+    }
   }
 
   logout(){

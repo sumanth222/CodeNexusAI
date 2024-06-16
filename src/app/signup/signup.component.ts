@@ -86,7 +86,7 @@ export class SignupComponent implements OnInit {
         this.userDetails.username = this.phoneNumber;
         this.userDetails.username = this.username;
         this.userContextService.setUserDetails(this.userDetails);
-        this.dataService.createUserInfo(this.username, "", this.phoneNumber);
+        this.dataService.createUserInfoWithPhone(this.username, "", this.phoneNumber);
         //this.router.navigate(['/dashboard'])
         this.router.navigate(['/practiceOptions'])
       })}).catch((error: any) => {

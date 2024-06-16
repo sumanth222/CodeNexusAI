@@ -47,4 +47,8 @@ export class DashboardComponent implements OnInit {
   goToProfile(){
     this.router.navigate(['/profilePage'])
   }
+
+  getPremium(){
+    this.router.navigate(['/premiumInformation'])
+  }
 }

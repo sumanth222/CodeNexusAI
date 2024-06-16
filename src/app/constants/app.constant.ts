@@ -6,3 +6,6 @@ export const about = "Welcome to Code Nexus, where coding mastery meets personal
 +"This approach of solving problems helps you harness and increase your problem solving capability by simulating an interview experience.<br/>"
 +"With <em><u>PREMIUM</u></em> subscription, you can get additional features like getting hints, points to optimize your code and all other future updates!"
 export const autoAdaptInfo = "You are in Auto-Adapt mode, the questions here start from Easy level, then based on your performance, the subsequent questions difficulty will increase."
+
+export const premiumSubscriptionDetails = "Monthly Subscription at INR 150 /-"
+export const premiumSubscriptionBody = "Get Access to all our PREMIUM features listed below and also any future updates that we release!"

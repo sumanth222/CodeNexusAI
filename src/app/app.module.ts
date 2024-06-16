@@ -36,6 +36,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CdTimerModule } from 'angular-cd-timer';
 import { SqlTopicScreenComponent } from './sql-topic-screen/sql-topic-screen.component';
+import { PremiumInfoComponent } from './premium-info/premium-info.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { SqlTopicScreenComponent } from './sql-topic-screen/sql-topic-screen.com
     PracticeOptionsComponent,
     SqlPracticeComponent,
     ProfilePageComponent,
-    SqlTopicScreenComponent
+    SqlTopicScreenComponent,
+    PremiumInfoComponent
   ],
   imports: [
     BrowserModule,

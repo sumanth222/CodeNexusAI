@@ -1,0 +1,65 @@
+body{
+    background-image: linear-gradient(60deg, #5C2FC2, #AF47D2);
+    height: 100%;
+    width: 100%;
+}
+
+.prem-text{
+    text-align: center;
+     font-size: 35;
+     display: inline;
+}
+
+.prem-text-points{
+    text-align: left;
+     font-size: 25px;
+     display: inline;
+}
+
+.card-header{
+    background-color: #26355D;
+}
+
+.card-title{
+    background-color: #26355D;
+    font-family: "Concert One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: antiquewhite;
+    font-size: 30px;
+}
+
+.card-body{
+    font-family: "Concert One", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    background-color: #A7E6FF;
+    font-size: 25px;
+}
+
+.icon{
+    height: 40px;
+    width: 40px;
+    display: inline;
+}
+
+.subscribeButton{
+    font-family: "Concert One", sans-serif;
+    border-radius: 20px;
+    width: 6%;
+    height: 40px;
+    background-color: #B5C18E;
+    cursor: pointer;
+}
+
+.subscribeButtonText{
+    font-family: "Concert One", sans-serif;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#tosTextLink:hover{
+    color: blue;
+}
