@@ -19,3 +19,13 @@
     font-size: 16px;
     text-align: center;
 }
+body{
+    background: #9B86BD
+}
+
+.button-text{
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+}

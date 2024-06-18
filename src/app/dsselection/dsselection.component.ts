@@ -24,12 +24,12 @@ export interface Tile {
 export class DSSelectionComponent implements OnInit {
 
   tiles: Tile[] = [
-    {text: 'Strings', cols: 3, rows: 1, color: '#7469B6'},
-    {text: 'Arrays', cols: 1, rows: 2, color: '#AD88C6'},
+    {text: 'Strings', cols: 3, rows: 1, color: '#CA8787'},
+    {text: 'Arrays', cols: 1, rows: 2, color: '#E1ACAC'},
     {text: 'Stacks', cols: 1, rows: 1, color: '#E1AFD1'},
     {text: 'Queues', cols: 2, rows: 1, color: '#FFE6E6'},
-    {text: 'Hash Maps', cols: 2, rows: 1, color: '#AD88C6'},
-    {text: 'Linked Lists', cols: 2, rows: 1, color: '#7469B6'},
+    {text: 'Hash Maps', cols: 2, rows: 1, color: '#E1ACAC'},
+    {text: 'Linked Lists', cols: 2, rows: 1, color: '#CA8787'},
   ];
 
   difficulties= [

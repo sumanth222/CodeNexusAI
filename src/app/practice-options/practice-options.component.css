@@ -10,6 +10,14 @@
     cursor: pointer;
 }
 
+.codingCard:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sqlCard:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .sqlCard{
     width: 45%;
     height: 80%;
@@ -55,5 +63,5 @@
 
 body{
     background: rgb(241,241,241);
-    background: linear-gradient(90deg, rgba(241,241,241,1) 0%, rgba(234,219,200,1) 100%, rgba(5,9,17,1) 100%);
+    background: #9B86BD
 }

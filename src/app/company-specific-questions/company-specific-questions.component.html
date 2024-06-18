@@ -26,6 +26,7 @@
 
     <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
         <mat-spinner style="margin-left: 35%;"></mat-spinner>
+        <img src = "/src/assets/gifs/loading-blob.gif" width="40px">
         <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
     </div>
 

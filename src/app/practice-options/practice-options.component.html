@@ -5,7 +5,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <mat-toolbar>
+  <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
     <span class="toolbar-spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
         <span class="material-symbols-outlined" style="font-size: 30px;">
@@ -21,17 +21,13 @@
     <mat-card class="codingCard" (click) = "navigateToSQLTopics()">
         <mat-card-content class="cs-text" style="margin-top: 20px;">
           <p class="cardText">SQL</p>
-          <span class="material-symbols-outlined cardIcons">
-            database
-          </span>
+          <img src="../../assets/icons/database.svg" height="15%" width="15%" style="margin-left: 43%;">
         </mat-card-content>
     </mat-card>
     <mat-card class="sqlCard" (click) = "navigateToProgramming()">
         <mat-card-content class="cs-text" style="margin-top: 20px;">
           <p class="cardText">Programming</p>
-          <span class="material-symbols-outlined cardIcons">
-            terminal
-          </span>
+          <img src="../../assets/icons/programming.svg" height="15%" width="15%" style="margin-left: 43%;">
         </mat-card-content>
     </mat-card>
   </body>

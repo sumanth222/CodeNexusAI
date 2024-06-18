@@ -9,14 +9,14 @@
   <mat-progress-bar *ngIf = "isLoading" mode="indeterminate"></mat-progress-bar>
   <div class="left-pane">
     <div>
-      <img class="main-image" src="../../assets/images/code-nexus.png">
+      <img class="main-image" src="../../assets/images/code-nexus.png" style="height: 62%;width: 62%;">
     </div>
   </div>
     <div class="right-pane">
         <div id="recaptcha-container"></div>
         <div style="background-color:#c484f1; border-radius: 8px;height: 100%;">
-          <h1 class="main-tag">The AI-based Coding platform</h1>
-          <mat-form-field appearance="fill" style="width: 50%;margin-left: 20%;margin-top: 12%;">
+          <h1 class="main-tag">The AI-based Coding platform<br/><br/>Login to get started!</h1>
+          <mat-form-field appearance="fill" style="width: 50%;margin-left: 20%;margin-top: 6%;">
             <mat-label>Username</mat-label>
             <input minlength="5" type="text" (change)="onChangeName()" id="phone-input" type="text" matInput [(ngModel)]="username" placeholder="Minimum 5 characters" [disabled]="disabled">
             <mat-hint>Enter your Username, only Alphabet accepted</mat-hint>
@@ -35,7 +35,8 @@
 
         <button *ngIf = "!showOTPInput" [disabled] = "signUpDisabled" (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Verify phone number and Log in</button>
         <button *ngIf = "showOTPInput" [disabled] = "signUpDisabled" (click)="loginWithPhone()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign In</button>
-        <button [disabled] = "signUpDisabled" (click)="signupWithGoogle()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In with Google</button>
+        <h1 class="main-tag" style="padding-top: 0%; margin-bottom: 0%; margin-left: 40%;">OR</h1>
+        <button [disabled] = "signUpDisabled" (click)="signupWithGoogle()" style="margin-top: 1%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In with Google</button>
           <!-- <button (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign Up</button>
          <button (click)="navigate2Login()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In</button> -->
         </div>
