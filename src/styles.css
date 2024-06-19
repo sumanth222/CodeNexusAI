@@ -76,4 +76,6 @@
     background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);
   }
   
-  
+.mat-mdc-card-header-text{
+    margin-left: 45%;
+}

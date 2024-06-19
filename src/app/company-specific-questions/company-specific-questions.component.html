@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <mat-toolbar *ngIf = "response.length != 0">
+    <mat-toolbar *ngIf = "response.length != 0"  style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
         <p class="welcome-header">Welcome {{username}}</p>
         <span class="toolbar-spacer"></span>
         <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
@@ -26,7 +26,7 @@
 
     <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
         <mat-spinner style="margin-left: 35%;"></mat-spinner>
-        <img src = "/src/assets/gifs/loading-blob.gif" width="40px">
+        <div style="background-image: url(../../assets/gifs/loading-blob.gif); height: 40px; width: 40px; "></div>
         <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
     </div>
 
@@ -42,13 +42,13 @@
             <button (click)="resetQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>
         <h2 [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" class="timer-text">You have {{endTime / 60}} minutes!</h2>
-        <div *ngFor = "let item of headings; let i = index" style="background-color: #F5DAD2;"
+        <div class="specifics-row" *ngFor = "let item of headings; let i = index"
         [ngStyle]="{'margin-top': i==0?'1%':'5%'}">
             <mat-card *ngIf = "i < 3">
-                <mat-card-header style="background-color: #F5DAD2;" [ngStyle]="{'padding': i==0?'0px':'5px'}">
+                <mat-card-header style="background-color: #EF9C66;" [ngStyle]="{'padding': i==0?'0px':'5px'}">
                     <mat-card-title class="cs-text">{{item}}</mat-card-title>
                   </mat-card-header>
-                <mat-card-content class="cs-text" style="margin-top: 20px;">{{contents[i]}}</mat-card-content>
+                <mat-card-content class="cs-text" style="color: white; padding-top: 20px; background-color: #102C57;">{{contents[i]}}</mat-card-content>
             </mat-card>
         </div>
         <div style="height: 200px;">
