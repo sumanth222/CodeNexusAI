@@ -44,4 +44,12 @@ export class PracticeOptionsComponent {
   goToHome(){
     this.router.navigate(['/practiceOptions'])
   }
+
+  getPremium(){
+    this.router.navigate(['/premiumInformation'])
+  }
+
+  navigateToDailyRead(){
+    this.router.navigate(['dailyRead'])
+  }
 }

@@ -19,7 +19,6 @@ export class ProfilePageComponent {
   pgmQuestionsSolved : number = 0;
   pgmHighestStreak : number = 0;
   rank : string = "";
-  rankTitles :string[] = ["Novice Ninja", "Shadow Scout", "Stealth Specialist", "Silent Assassin", "Shadow Master", "Grand Ninja Lord"]
   rankTitle : string = "";
 
   constructor(private router: Router, private authService: AuthServiceService, private firebaseService: FirebaseServiceService){
@@ -41,8 +40,8 @@ export class ProfilePageComponent {
         this.sqlQuestionsSolved = userInfo.sqlQuestion;
         this.sqlHighestStreak = userInfo.sqlStreak;
         this.phoneNumber = userInfo.phoneNumber
-        this.rank = userInfo.rank
-        this.rankTitle = this.rankTitles[parseInt(this.rank) - 1]
+        this.rank = userInfo.rank;
+        this.username = userInfo.name;
       });
     }
     else{
@@ -53,7 +52,6 @@ export class ProfilePageComponent {
         this.sqlHighestStreak = userInfo.sqlStreak;
         this.phoneNumber = userInfo.phoneNumber
         this.rank = userInfo.rank
-        this.rankTitle = this.rankTitles[parseInt(this.rank) - 1]
       });
     }
   }
@@ -70,4 +68,7 @@ export class ProfilePageComponent {
     this.router.navigate(['/practiceOptions'])
   }
 
+  getPremium(){
+    this.router.navigate(['/premiumInformation'])
+  }
 }

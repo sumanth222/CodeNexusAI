@@ -9,8 +9,11 @@
     <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
         <p class="welcome-header">Welcome {{username}}</p>
         <span class="toolbar-spacer"></span>
+        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+            <p class="logout-button-text">Get <b>PREMIUM</b></p>
+        </div>
         <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
-            <p class="logout-button-text">Exit programming section</p>
+            <p class="logout-button-text">Back to Home</p>
         </div>
 
         <button mat-button [matMenuTriggerFor]="menu">
@@ -24,11 +27,13 @@
         </mat-menu>
       </mat-toolbar>  
     <button style="margin-top: 10px;" (click)="goBackToCompSelection()" mat-raised-button color="primary">Go back to Company selection</button>
-    <h2 class="mat-tile-header">Choose a Data structure you want to practise on and the difficulty level.</h2>
+    <h2 class="mat-tile-header">Choose the difficulty level and a data structure you want to practice on.</h2>
         <p style="margin-left: 45%;display: inline-block;">
-            <mat-slide-toggle [disabled]="disabled" [checked] = "checked" [(ngModel)]="timedMode">
-                Timed mode
-                <span *ngIf = "disabled == true" class="material-symbols-outlined">
+            <mat-slide-toggle [disabled]="!isPremium" [checked] = "checked" [(ngModel)]="timedMode">
+                <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
+                    Timed mode
+                </span>
+                <span *ngIf = "disabled == !isPremium" class="material-symbols-outlined">
                     lock
                 </span>
             </mat-slide-toggle>
@@ -41,16 +46,32 @@
             class="example-radio-group"
             [(ngModel)]="diffLevel" style="margin-left: 10%;">
             @for (difficulty of difficulties; track difficulty) {
-                <mat-radio-button class="radio-button" [value]="difficulty">{{difficulty}}</mat-radio-button>
+                <mat-radio-button 
+                [disabled] = "(difficulty == 'Auto Adapt' && isPremium == false) ? true : false" class="radio-button" [value]="difficulty">
+                <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
+                    {{difficulty}}
+                </span>
+                </mat-radio-button>
             }
+            <span *ngIf = "!isPremium" class="material-symbols-outlined">
+                lock
+            </span> 
         </mat-radio-group>
         <mat-grid-list class="mat-tile" cols="4" rowHeight="20vh" style="width: 60vw">
             @for(tile of tiles; track tile){
                 <mat-grid-tile
+                id="{{tile.text}}"
                 [colspan]="tile.cols"
                 [rowspan]="tile.rows"
                 [style.background]="tile.color"
-                (click)="onTileSelect(tile.text)">{{tile.text}}</mat-grid-tile>
+                (mouseenter)="onTileHover(tile.text)"
+                (mouseleave)="onTileHoverEnd(tile.text)"
+                (click)="onTileSelect(tile.text)"
+                style="transition: 330ms ease-in-out;">
+                    {{tile.text}}
+                    <img src="../../assets/icons/data-structure/{{tile.text}}.svg" 
+                    style="margin-left: 10px;" height="35px" width="35px">
+                </mat-grid-tile>
             }
         </mat-grid-list>
     </div>

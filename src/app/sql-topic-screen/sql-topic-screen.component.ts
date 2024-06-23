@@ -4,6 +4,8 @@ import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialo
 import { MatDialog } from '@angular/material/dialog';
 import { AuthServiceService } from '../services/auth-service.service';
 import firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FirebaseServiceService } from '../services/firebase-service.service';
 
 export interface Tile {
   color: string;
@@ -24,7 +26,7 @@ export class SqlTopicScreenComponent {
     {text: 'Aggregations', cols: 1, rows: 2, color: '#FFF6E9'},
     {text: 'Joins', cols: 1, rows: 1, color: '#80C4E9'},
     {text: 'SubQueries', cols: 2, rows: 1, color: '#604CC3'},
-    {text: 'Random', cols: 4, rows: 1, color: '#AD88C4'},
+    {text: 'Random', cols: 4, rows: 1, color: '#AD88A1'},
   ];
 
   difficulties= [
@@ -40,8 +42,30 @@ export class SqlTopicScreenComponent {
   checked: boolean = false;
   disabled: boolean = true;
   timedMode = false;
+  isPremium: boolean = false;
 
-  constructor(private router : Router, private dialog : MatDialog, private authService: AuthServiceService){}
+
+  constructor(private router : Router, private dialog : MatDialog,
+    private afAuth: AngularFireAuth, private authService: AuthServiceService,
+  private firebaseService: FirebaseServiceService){
+    this.afAuth.onAuthStateChanged((user) =>{
+      this.user = user;
+    })
+  }
+
+  ngOnInit(): void {
+    if(this.user?.email != undefined && this.user.email != ""){
+      this.firebaseService.getUserInfo(this.user?.email).then((user) => {
+          this.isPremium = user.isPremium;
+      })
+    }
+    else{
+      this.firebaseService.getUserInfoByPhone(this.user?.phoneNumber).then((user) => {
+        this.isPremium = user.isPremium;
+    })
+    }
+    console.log("Is premium user? "+this.isPremium)
+  }
 
   onTileSelect(title: string){
     console.log("Clicked on: "+title)
@@ -83,5 +107,17 @@ export class SqlTopicScreenComponent {
 
   goToProfile(){
     this.router.navigate(['/profilePage'])
+  }
+
+  onTileHover(id: any){
+    document.getElementById(id)?.classList.add('tileHover')
+  }
+
+  onTileHoverEnd(id: any){
+    document.getElementById(id)?.classList.remove('tileHover')
+  }
+
+  getPremium(){
+    this.router.navigate(['/premiumInformation'])
   }
 }

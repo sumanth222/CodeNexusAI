@@ -34,12 +34,20 @@
 
 .radio-button{
     margin-left: 2%;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+}
+
+.example-radio-group{
+    font-family: "Open Sans", sans-serif;
 }
 
 body{
-    background: #9B86BD
+    background-image: linear-gradient(120deg, #9B86BD, #610480);
 }
 
-.mat-tile:hover{
+.tileHover{
+    transform: scale(1.2);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 1;
 }

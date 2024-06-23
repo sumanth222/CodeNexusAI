@@ -8,6 +8,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { UserContextService } from '../userContext/user-context.service';
+import { FirebaseServiceService } from '../services/firebase-service.service';
 
 export interface Tile {
   color: string;
@@ -47,15 +48,16 @@ export class DSSelectionComponent implements OnInit {
   checked: boolean = false;
   disabled: boolean = true;
   timedMode = false;
+  isPremium: boolean = false;
+  userDetails: any;
 
 
   constructor(private router : Router, private dialog : MatDialog, 
     private afAuth: AngularFireAuth, private userContextService: UserContextService,
-    private activatedRoute : ActivatedRoute, private authService: AuthServiceService
+    private activatedRoute : ActivatedRoute, private authService: AuthServiceService,
+    private firebaseService: FirebaseServiceService
   ) { 
-  
     this.afAuth.onAuthStateChanged((user) =>{
-      console.log("User is "+user?.displayName);
       this.user = user;
     })
     this.username = this.userContextService.getUserDetails().username;
@@ -65,6 +67,17 @@ export class DSSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.company = this.activatedRoute.snapshot.paramMap.get('company');
+    if(this.user?.email != undefined && this.user.email != ""){
+      this.firebaseService.getUserInfo(this.user?.email).then((user) => {
+          this.isPremium = user.isPremium;
+      })
+    }
+    else{
+      this.firebaseService.getUserInfoByPhone(this.user?.phoneNumber).then((user) => {
+        this.isPremium = user.isPremium;
+    })
+    }
+    console.log("Is premium user? "+this.isPremium)
   }
 
   onTileSelect(title: string){
@@ -93,6 +106,14 @@ export class DSSelectionComponent implements OnInit {
     });
   }
 
+  onTileHover(id: any){
+    document.getElementById(id)?.classList.add('tileHover')
+  }
+
+  onTileHoverEnd(id: any){
+    document.getElementById(id)?.classList.remove('tileHover')
+  }
+
   goBackToCompSelection(){
     this.router.navigate(['dashboard']);
   }
@@ -107,5 +128,9 @@ export class DSSelectionComponent implements OnInit {
 
   goToProfile(){
     this.router.navigate(['/profilePage'])
+  }
+
+  getPremium(){
+    this.router.navigate(['/premiumInformation'])
   }
 }

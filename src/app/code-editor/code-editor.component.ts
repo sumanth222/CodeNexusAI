@@ -1,5 +1,8 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { FirebaseServiceService } from '../services/firebase-service.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 export interface CodeModel {
   language: string;
@@ -29,6 +32,9 @@ export class CodeEditorComponent implements OnInit {
   @Input() showOptimizeButton : boolean = false;
   @Input() showSolutionButton : boolean = false;
   @Input() showHintButton : boolean = false;
+  disabled: boolean = true
+  user!: firebase.User | null;
+  isPremium: boolean = false;
 
 
   theme = 'vs-dark';
@@ -45,15 +51,37 @@ export class CodeEditorComponent implements OnInit {
       enabled: true
     }
   };
-  constructor() { }
+  constructor(private firebaseService: FirebaseServiceService, private afAuth: AngularFireAuth) {
+    this.afAuth.onAuthStateChanged((user) =>{
+      this.user = user;
+    })
+   }
 
   ngOnInit(): void {
+    this.user = firebase.auth().currentUser;
     this.editorOptions = {theme: 'vs-dark', language: 'java'};
     this.code = this.codeTemplate;
     this.model = {
         language: 'java',
         uri: 'main.json',
         value: this.codeTemplate
+    }
+    console.log("userdeets: "+this.user?.email + " "+ this.user?.phoneNumber)
+    if(this.user?.email != undefined && this.user.email != ""){
+      this.firebaseService.getUserInfo(this.user?.email).then((user) => {
+          this.isPremium = user.isPremium;
+          if(user.isPremium == null){
+            this.isPremium = false;
+          }
+      })
+    }
+    else{
+      this.firebaseService.getUserInfoByPhone(this.user?.phoneNumber).then((user) => {
+        this.isPremium = user.isPremium;
+        if(user.isPremium == null){
+          this.isPremium = false;
+        }
+      })
     }
   }
 
@@ -62,7 +90,7 @@ export class CodeEditorComponent implements OnInit {
   }
 
   askForHint(){
-    //this.finalCode.emit("hint");
+    this.finalCode.emit("hint");
   }
 
   showSolution(){
@@ -70,7 +98,7 @@ export class CodeEditorComponent implements OnInit {
   }  
 
   optimizeCode(){
-    //this.finalCode.emit("op6"+this.code);
+    this.finalCode.emit("op6"+this.code);
   }
 
   onCodeChanged(code: any){

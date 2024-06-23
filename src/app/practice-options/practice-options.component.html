@@ -6,7 +6,11 @@
 </head>
 <body>
   <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
+    Welcome
     <span class="toolbar-spacer"></span>
+    <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+      <p class="logout-button-text">Get <b>PREMIUM</b></p>
+  </div>
     <button mat-button [matMenuTriggerFor]="menu">
         <span class="material-symbols-outlined" style="font-size: 30px;">
             account_circle
@@ -17,16 +21,23 @@
     <button mat-menu-item (click) = "logout()">Logout</button>
     </mat-menu>
 </mat-toolbar>  
-  <h2 class="cardHeaderText" style="text-align: center;">What do you want to practice today?</h2>
+
+  <mat-card class="daily-read-card" (click) = "navigateToDailyRead()">
+    <mat-card-content style="padding-top: 0%; text-align: center;" class="daily-read-text">
+      <p style="margin-top: 0; text-align: center; display: inline;">Daily Read</p>
+      <img src="../../assets/icons/read.svg" height="25px" width="25px" style="display: inline; margin-left: 10px;">
+    </mat-card-content>
+  </mat-card>
+
     <mat-card class="codingCard" (click) = "navigateToSQLTopics()">
         <mat-card-content class="cs-text" style="margin-top: 20px;">
-          <p class="cardText">SQL</p>
+          <p class="cardText">Practice SQL</p>
           <img src="../../assets/icons/database.svg" height="15%" width="15%" style="margin-left: 43%;">
         </mat-card-content>
     </mat-card>
     <mat-card class="sqlCard" (click) = "navigateToProgramming()">
         <mat-card-content class="cs-text" style="margin-top: 20px;">
-          <p class="cardText">Programming</p>
+          <p class="cardText">Practice Programming</p>
           <img src="../../assets/icons/programming.svg" height="15%" width="15%" style="margin-left: 43%;">
         </mat-card-content>
     </mat-card>

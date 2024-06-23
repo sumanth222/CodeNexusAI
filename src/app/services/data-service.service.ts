@@ -39,6 +39,8 @@ export class DataService{
 
     async registerUser(name: string | null, email: string | null, phoneNumber : string | null) : Promise<any>{
         const db = firebase.firestore();
+        let docId : string | undefined;
+        let userExists : boolean = false;
         let userList: any = await db.collection("user-info").where("email", "==", email).get().then((querySnapshot) => {
             if(querySnapshot.size == 0){
                 console.log("New user, registering..");
@@ -51,18 +53,34 @@ export class DataService{
                     sqlQuestion: 0,
                     sqlStreak: 0,
                     rank: 1,
-                    premium: false
+                    premium: false,
+                    dateCreated: new Date().toISOString(),
+                    lastLogin: new Date().toISOString()
                 });
             }
             else{
                 console.log("User already exists in DB");
             }
         });
+
+        await db.collection("user-info").where("email", "==", email).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {docId = doc.id})
+        });
+
+        db.collection("user-info").doc(docId).update({
+            lastLogin: new Date().toISOString()
+        }).then(() => {
+            console.log("Updated last login time")
+        }).catch((err) => {
+            console.log("Error while updating last login: "+err)
+        })
     }
 
     async registerUserWithPhone(name: string | null, email: string | null, phoneNumber : string | null) : Promise<any>{
         const db = firebase.firestore();
-        let userList: any = await db.collection("user-info").where("phoneNumber", "==", phoneNumber).get().then((querySnapshot) => {
+        let userExists: boolean = false;
+        let docId : string | undefined;
+        await db.collection("user-info").where("phoneNumber", "==", phoneNumber).get().then((querySnapshot) => {
             if(querySnapshot.size == 0){
                 console.log("New user, registering..");
                     addDoc(collection(this.firestore, 'user-info'), {
@@ -74,12 +92,28 @@ export class DataService{
                     sqlQuestion: 0,
                     sqlStreak: 0,
                     rank: 1,
-                    premium: false
+                    premium: false,
+                    dateCreated: new Date().toISOString(),
+                    lastLogin: new Date().toISOString()
                 });
             }
             else{
                 console.log("User already exists in DB");
+                userExists = true;
             }
         });
+
+        await db.collection("user-info").where("phoneNumber", "==", phoneNumber).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {docId = doc.id})
+        });
+
+        db.collection("user-info").doc(docId).update({
+            lastLogin: Date.now()
+        }).then(() => {
+            console.log("Updated last login time")
+        }).catch((err) => {
+            console.log("Error while updating last login: "+err)
+        })
+
     }
 }

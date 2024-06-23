@@ -20,7 +20,7 @@
     text-align: center;
 }
 body{
-    background: #9B86BD
+    background-image: linear-gradient(120deg, #9B86BD, #610480);
 }
 
 .button-text{

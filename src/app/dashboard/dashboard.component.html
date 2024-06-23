@@ -13,7 +13,7 @@
             <p class="logout-button-text">Get <b>PREMIUM</b></p>
         </div>
         <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
-            <p class="logout-button-text">Exit programming section</p>
+            <p class="logout-button-text">Back to Home</p>
         </div>
 
         <button mat-button [matMenuTriggerFor]="menu">
@@ -28,8 +28,8 @@
         </mat-menu>
         
       </mat-toolbar>      
-    <h2 class="dash-header" style="text-align: center;margin-top: 8%;">Which company are you targeting?</h2>
-    <p class="dash-body">This will help us curate questions for you! <br />If there is no particular company in your mind, select "Anything goes"</p>
+    <h1 class="dash-header" style="text-align: center;margin-top: 8%;">Which company are you targeting?</h1>
+    <p class="dash-body">This will help us curate questions for you!</p>
     <div style="margin-left: 35%; margin-top: 4%; margin-right: 33%;background-color: #F1F1F1; padding: 20px; border-radius: 10px;">
         <div *ngFor = "let company of companiesList; let i = index">
             <button (click)="navigate(i)" style="margin-top: 5%;width: 100%;"
@@ -39,7 +39,7 @@
         </button>
         </div>
         <button (click)="navigate(-1)" style="margin-top: 5%;width: 100%;background-color: #B5C18E;" mat-raised-button>
-            <span class="button-text">Anything goes</span>
+            <span class="button-text">Random</span>
             <img src="../../assets/icons/companies/Anything goes.svg" height="30px" width="30px" style="margin-left: 10px;">
         </button>
     </div>

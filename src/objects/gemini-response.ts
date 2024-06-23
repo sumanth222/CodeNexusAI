@@ -1,7 +1,7 @@
 export const geminiResponse =
 {
     question:"",
-    solution:"",
+    bruteForceCodeSolution:"",
     exampleTestcase:"",
     timeComplexity:""
 }

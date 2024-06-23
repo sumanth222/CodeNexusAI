@@ -4,17 +4,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
+<body [ngStyle]="{'height': response.length == 0 ? '100%' : '150%'}">
     <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
-        <mat-spinner style="margin-left: 35%;"></mat-spinner>
+        <mat-spinner style="margin-left: 35%;" color="accent"></mat-spinner>
         <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
     </div>
     <div *ngIf = "response.length != 0">
-        <mat-toolbar>
+        <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
             <p class="welcome-header">Welcome </p>
             <span class="toolbar-spacer"></span>
+            <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+                <p class="logout-button-text">Get <b>PREMIUM</b></p>
+            </div>
             <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
-                <p class="logout-button-text">Exit SQL section</p>
+                <p class="logout-button-text">Back to Home</p>
             </div>
             
             <button mat-button [matMenuTriggerFor]="menu">
@@ -28,38 +31,42 @@
             </mat-menu>
         </mat-toolbar>  
         <h1 class="sqlHeader">Read the question, and write your query in the editor at the  bottom</h1>
-        <h2 class="cs-text" style="text-align: center;">Try this! if you feel like you have seen this question already, you can skip it</h2>
+        <h2 class="cs-text" style="text-align: center;">If the table name is not mentioned, you can use any name you like</h2>
         <div>
             <button (click)="goBack()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
             <cd-timer class="bootstrap-timer" format="ms" [endTime]="endTime"
              [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
             <button (click)="skipQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>
-        <h2 [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" class="timer-text">You have {{endTime / 60}} minutes!</h2>
-        <div style="background-color: #F5DAD2; margin-top: 2%;">
+        <h2 [ngStyle] = "{'display': timedMode == 'false' ? 'none' : 'block'}" class="timer-text">You have {{endTime / 60}} minutes!</h2>
+        <div class="specifics-row" style="background-color: #F5DAD2; margin-top: 2%;">
             <mat-card>
-                <mat-card-header style="background-color: #F5DAD2;">
+                <mat-card-header style="background-color: #EF9C66;">
                     <mat-card-title class="cs-text">Scenario</mat-card-title>
                 </mat-card-header>
-                <mat-card-content class="cs-text" style="margin-top: 20px;">{{scenario}}</mat-card-content>
+                <mat-card-content class="cs-text" style="padding-top: 20px;background-color: #102C57; color: white;">
+                    {{scenario}}
+                </mat-card-content>
             </mat-card>
         </div>
 
-        <div style="background-color: #F5DAD2; margin-top: 5%;">
+        <div class="specifics-row" style="background-color: #F5DAD2; margin-top: 5%;">
             <mat-card>
-                <mat-card-header style="background-color: #F5DAD2;">
+                <mat-card-header style="background-color: #EF9C66;">
                     <mat-card-title class="cs-text">Question</mat-card-title>
                 </mat-card-header>
-                <mat-card-content class="cs-text" style="margin-top: 20px;">{{question}}</mat-card-content>
+                <mat-card-content class="cs-text" style="padding-top: 20px; background-color: #102C57; color: white;">
+                    {{question}}
+                </mat-card-content>
             </mat-card>
         </div>
 
-        <div style="background-color: #F5DAD2; margin-top: 5%;">
+        <div class="specifics-row" style="background-color: #F5DAD2; margin-top: 5%;">
             <mat-card>
-                <mat-card-header style="background-color: #F5DAD2;">
+                <mat-card-header style="background-color: #EF9C66;">
                     <mat-card-title class="cs-text">Points to consider</mat-card-title>
                 </mat-card-header>
-                <mat-card-content class="cs-text" style="margin-top: 20px;">
+                <mat-card-content class="cs-text" style="padding-top: 20px; background-color: #102C57; color: white;">
                     {{ptc}}
                     <br />
                     <br />

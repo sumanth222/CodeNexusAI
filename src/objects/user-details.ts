@@ -3,4 +3,5 @@ export class UserDetails {
     uid: string | undefined;
     username: string | undefined; 
     phoneNumber : string | undefined;
+    isPremium: boolean | undefined;
 }

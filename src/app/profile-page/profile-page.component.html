@@ -4,8 +4,11 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <mat-toolbar>
+    <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
         <span class="toolbar-spacer"></span>
+        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+            <p class="logout-button-text">Get <b>PREMIUM</b></p>
+        </div>
         <div (click)="goToHome()" class="logout-button" style="width: 10%;">
             <p class="logout-button-text">Back to Home</p>
         </div>
@@ -20,20 +23,22 @@
         </mat-menu>
     </mat-toolbar>  
     <div class="topHeader">
-
+        <img src="../../assets/images/code-nexus.png" height="100%">
     </div>
     <div class="bottomHeader">
         <div class="profileIcon" style="background-image: url('../../assets/profile_icons/rank_{{rank}}.svg');">
         </div>
         <div>
-            <p class="profileSummary" style="font-size: 25px; text-align: center;">Greetings! <em><u>{{rankTitle}}</u></em>. (Sumanth)!<br />
-            Your email is <b>{{email}}</b> and phone number is <b> {{phoneNumber}} </b>
+            <p class="profileSummary" style="font-size: 25px; text-align: center;">Hi <em><u>{{username}}</u></em><br /><br />
+            <b>Email</b>: {{email}}<br/>
+            <b>Phone Number</b>: {{phoneNumber}}
             <br /> <br /> 
-            In SQL <br />
-            You have solved <b>{{sqlQuestionsSolved}}</b> questions so far.<br/>
-            Your highest streak in SQL is <b>{{sqlHighestStreak}}</b> <br/> <br/> 
-            In Programming <br/>
-            You have solved <b>{{pgmQuestionsSolved}}</b> questions so far<br/> Your highest streak in programming is <b>{{pgmHighestStreak}}</b></p>
+            <b><u>SQL</u></b> <br />
+            <b>Questions Solved</b>:{{sqlQuestionsSolved}}<br/>
+            <b>Highest streak</b>: {{sqlHighestStreak}} <br/> <br/> 
+            <b><u>Programming</u></b> <br/>
+            <b>Questions Solved</b>: {{pgmQuestionsSolved}}<br/> 
+            <b>Highest streak:</b>{{pgmHighestStreak}}</p>
         </div>
     </div>
 </body>

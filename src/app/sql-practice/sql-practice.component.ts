@@ -43,11 +43,10 @@ export class SqlPracticeComponent {
   difficultyIndex : number = 0;
   highestStreak : number = 0;
   currentStreak : number = 0;
-  endTime : number = 300;
+  endTime : number = 180;
 
 
   ngOnInit(){
-    
     this.sqlTopic = this.route.snapshot.paramMap.get('title');
     this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
     this.timedMode = this.route.snapshot.paramMap.get("timedMode");
@@ -134,15 +133,27 @@ export class SqlPracticeComponent {
       this.resetQuestion();
     }
     else{
-    var verdictResponse = "";
-      var result = await model.generateContent("Go through the entire query and tell me if the query: " +code+" will give correct answer for the question: "+this.response['question']+
-      "? answer me by saying Yes/No as the first word then the explanation"
-      );
-      var response = await result.response;
-      console.log(response.candidates[0].content.parts[0]);
-      verdictResponse = response.candidates[0].content.parts[0]
-      this.openDialog(verdictResponse, true);
-      this.showLoaderWheel = false;
+      code = new String(code).trim();
+      if(code != undefined && code == ""){
+        this.dialog.open(VerdictResponseDialogExampleComponent,{
+          data: {
+            response: new String("Kindly enter your answer, then Submit your code"),
+            status: 'G'
+          }
+        })
+      }
+      else if (code != "") {
+        this.showLoaderWheel = true;
+        var verdictResponse = "";
+          var result = await model.generateContent("Go through the entire query and tell me if the query: " +code+" will give correct answer for the question: "+this.response['question']+
+          "? answer me by saying Yes/No as the first word then the explanation"
+          );
+          var response = await result.response;
+          console.log(response.candidates[0].content.parts[0]);
+          verdictResponse = response.candidates[0].content.parts[0]
+          this.openDialog(verdictResponse, true);
+          this.showLoaderWheel = false;
+      }
     }
   }
 
@@ -214,7 +225,7 @@ export class SqlPracticeComponent {
   }
 
   goBack(){
-    this.router.navigate(['/practiceOptions'])
+    this.router.navigate(['/sqlTopics'])
   }
 
   goToProfile(){
@@ -225,5 +236,8 @@ export class SqlPracticeComponent {
     console.log("Timer completed")
     this.resetQuestion();
   }
-
+  
+  getPremium(){
+    this.router.navigate(['/premiumInformation'])
+  }
 }

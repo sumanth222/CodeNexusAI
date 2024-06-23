@@ -40,6 +40,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   headings: string[] = ["Question", "Example test case", "Time Complexity"];
   contents: string[] = [];
   difficultyLevels: string[] = ["easy","moderate","hard","very hard"];
+  endTimes: number[] = [240, 360, 480, 600]
   headingsIndex : number = 0;
   askedForHint : boolean = false;
   askedForSolution : boolean = false;
@@ -54,8 +55,9 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   currentStreak : number = 0;
   showNextQuestion : boolean = false;
   codeTemplate : string = 'public <Return Type> func(<Arguments if any>){\n\tSystem.out.println("Hello World");\n}'
-  endTime = 300;
+  endTime = 240;
   difficultyIndex = 0;
+  endTimeIndex = 0;
   streak = 0;
   highestStreak = 0;
   timedMode : string | null = "";
@@ -90,12 +92,23 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     this.firebaseService.getUserInfo(this.user).then((userInfo) => {
       this.highestStreak = userInfo.prgStreak;
     });
+    if("Easy" == this.diffLevel){
+      this.endTime = 240;
+    }
+    else if("Medium" == this.diffLevel){
+      this.endTime = 360;
+    }
+    else if("Hard" == this.diffLevel){
+      this.endTime = 480;
+    }
     this.generateQuestion();
   }
 
   async generateQuestion(){
+    
     if(this.streak == 2 && this.difficultyIndex < 3){
       this.difficultyIndex++;
+      this.endTimeIndex++;
       this.streak = 0
     }
     var companySuffix = "";
@@ -107,6 +120,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     if(autoAdapt == this.diffLevel){
       result = await model.generateContent("Generate a "+this.difficultyLevels[this.difficultyIndex]+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
     " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
+      this.endTime = this.endTimes[this.endTimeIndex]
     }
     else{
       result = await model.generateContent("Generate a "+this.diffLevel+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
@@ -150,12 +164,13 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       this.contents.push(this.response["exampleTestcase"]);
     }
     this.contents.push(this.response["timeComplexity"]);
-    this.contents.push(this.response["solution"]);
+    this.contents.push(this.response["bruteForceCodeSolution"]);
   }
 
   async resetQuestion(){
     this.response = "";
     this.contents = [];
+    this.showNextQuestion = false;
     await this.generateQuestion();
   }
 
@@ -186,18 +201,28 @@ export class CompanySpecificQuestionsComponent implements OnInit {
       this.optimizeCode(code.substring(3, code.length-1));
     }
     else{
-      this.showLoaderWheel = true;
-      this.askedForHint = false;
-      console.log("The code is"+code)
-      var verdictResponse = "";
-      var result = await model.generateContent("Will the code " +code+" work for the question "+this.response['question']+
-      "? answer me by saying Yes/No as the first word then the explanation"
-      );
-      var response = await result.response;
-      console.log(response.candidates[0].content.parts[0]);
-      verdictResponse = response.candidates[0].content.parts[0]
-      this.openDialog(verdictResponse, true);
-      this.showLoaderWheel = false;
+      code = new String(code).trim();
+      if(code != undefined && code == ""){
+        this.dialog.open(VerdictResponseDialogExampleComponent,{
+          data: {
+            response: new String("Kindly enter your answer, then Submit your code"),
+            status: 'G'
+          }
+        })
+      }
+      else if (code != "") {
+        this.showLoaderWheel = true;
+        this.askedForHint = false;
+        var verdictResponse = "";
+        var result = await model.generateContent("Will the following code: "+code+" compile successfully and passes all testcases the question: "+this.response['question']+
+        "? answer me by saying Yes/No as the first word then the explanation"
+        );
+        var response = await result.response;
+        console.log(response.candidates[0].content.parts[0]);
+        verdictResponse = response.candidates[0].content.parts[0]
+        this.openDialog(verdictResponse, true);
+        this.showLoaderWheel = false;
+      }
     }
   }
 
@@ -270,7 +295,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
    this.showLoaderWheel = true;
    this.askedForSolution = true;
    console.log(this.response["solution"]);
-   var verdictResponse = this.response["solution"];
+   var verdictResponse = this.response["bruteForceCodeSolution"];
    this.openDialog(verdictResponse, false);
    this.showLoaderWheel = false
   }
@@ -305,6 +330,10 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   timeOut(){
     console.log("Timer completed")
     this.resetQuestion();
+  }
+
+  getPremium(){
+    this.router.navigate(['/premiumInformation'])
   }
 }
 

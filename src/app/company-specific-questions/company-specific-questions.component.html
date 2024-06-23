@@ -5,12 +5,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
+<body [ngStyle]="{'height': response.length == 0 ? '100%' : '140%'}">
     <mat-toolbar *ngIf = "response.length != 0"  style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
         <p class="welcome-header">Welcome {{username}}</p>
         <span class="toolbar-spacer"></span>
+        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+            <p class="logout-button-text">Get <b>PREMIUM</b></p>
+        </div>
         <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
-            <p class="logout-button-text">Exit programming section</p>
+            <p class="logout-button-text">Back to Home</p>
         </div>
 
         <button mat-button [matMenuTriggerFor]="menu">
@@ -25,7 +28,7 @@
     </mat-toolbar>  
 
     <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 42%; margin-top: 18%; margin-right: 33%;">
-        <mat-spinner style="margin-left: 35%;"></mat-spinner>
+        <mat-spinner style="margin-left: 35%;" color="accent"></mat-spinner>
         <div style="background-image: url(../../assets/gifs/loading-blob.gif); height: 40px; width: 40px; "></div>
         <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;margin-left: 22%;font-size: large;">Generating a question for you!</div>
     </div>
@@ -37,11 +40,11 @@
         </h2>
         <div>
             <button (click)="goBackToSelection()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
-            <cd-timer class="bootstrap-timer" format="ms" [endTime]="endTime"
-             [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
+            <cd-timer class="bootstrap-timer" format="ms" [startTime]="endTime" [countdown] = 'true'
+            [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
             <button (click)="resetQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>
-        <h2 [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" class="timer-text">You have {{endTime / 60}} minutes!</h2>
+        <br />
         <div class="specifics-row" *ngFor = "let item of headings; let i = index"
         [ngStyle]="{'margin-top': i==0?'1%':'5%'}">
             <mat-card *ngIf = "i < 3">
@@ -52,7 +55,7 @@
             </mat-card>
         </div>
         <div style="height: 200px;">
-            <app-code-editor [showSubmitButton] = true [showSolutionButton] = true [showHintButton] = true 
+            <app-code-editor [showSubmitButton] = true [showSolutionButton] = false [showHintButton] = true 
              [showOptimizeButton] = true [codeTemplate] = "codeTemplate" [showNextQuestion] = "showNextQuestion" 
              (finalCode)="submitCode($event)"></app-code-editor>
         </div>

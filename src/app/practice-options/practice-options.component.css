@@ -1,11 +1,22 @@
 .codingCard{
     width: 45%;
-    height: 80%;
-    margin-top: 2%;
+    height: 60%;
+    margin-top: 5%;
     margin-left: 4%;
     display: inline-block;
     padding: 10px;
     background-color: #FFFF80;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.daily-read-card{
+    width: 45%;
+    height: 7%;
+    margin-left: 30%;
+    margin-top: 5%;
+    padding: 10px;
+    background-color: #ADD899;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -18,10 +29,14 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.daily-read-card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .sqlCard{
     width: 45%;
-    height: 80%;
-    margin-top: 2%;
+    height: 60%;
+    margin-top: 5%;
     margin-left: 2%;
     display: inline-block;
     padding: 10px;
@@ -31,7 +46,7 @@
 }
 
 .cardText{
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
     margin-top: 25%;
     cursor: pointer;
@@ -62,6 +77,12 @@
 }
 
 body{
-    background: rgb(241,241,241);
-    background: #9B86BD
+    background-image: linear-gradient(120deg, #9B86BD, #b714ee);
+}
+
+.daily-read-text{
+    padding-top: 0;
+    margin-top: 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 22px;
 }

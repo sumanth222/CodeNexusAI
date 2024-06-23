@@ -1,10 +1,11 @@
 .topHeader{
-    background-image: linear-gradient(60deg, #f09d3e, #e93f42);
+    background: #100d28;
     height: 30%;
+    text-align: center;
 }
 
 .bottomHeader{
-    background-color: #F9F9E0;
+    background-color: #102C57;
     height: 70%;
 }
 
@@ -30,4 +31,8 @@
     height: 75px;
     width: 75px;
     background-size: cover;
+}
+
+body{
+    background-color: #102C57; color: white;
 }

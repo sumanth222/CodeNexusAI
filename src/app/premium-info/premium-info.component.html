@@ -2,8 +2,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
     <mat-toolbar>
@@ -23,7 +22,9 @@
         <button mat-menu-item (click) = "logout()">Logout</button>
         </mat-menu>
       </mat-toolbar>  
-    <h1 class="monoton-regular" style="text-align: center; font-size: 55px;">CodeNexus</h1>
+      <div class="premium-header">
+        <img src="../../assets/images/code-nexus.png" height="100%">
+      </div>
     <br/>
     <mat-card style="width: 50%;margin-left: 25%;">
         <mat-card-header class="card-header">
@@ -32,16 +33,9 @@
         <mat-card-content class="card-body"> <br/> {{premiumTextBody}}</mat-card-content>
     </mat-card>
     <br/>
-    <div style="text-align: center;">
-        <p class="concert-one-regular prem-text">So you want to get PREMIUM subscription </p>
-            <div style="height: 20px; width: 20px;" class="prem-text">
-                <img src="../../assets/icons/premium-icon.svg" style="height: 40px; width: 40px;">
-            </div>
-        <p class="concert-one-regular prem-text">, great choice!</p>
-    </div>
     <br/><br/>
     <div style="text-align: center;">
-        <h1 class="concert-one-regular prem-text-points">Why Go Premium?</h1><br/>
+        <h1 class="concert-one-regular prem-text-points"><b>Why Go Premium?</b></h1><br/>
         <h1 class="concert-one-regular prem-text-points" style="text-align: left;">1. <u>Timed Mode</u><div style="display: inline;"><img src="../../assets/icons/timer.svg" style="height: 45px; width: 45px;"></div>
             : Nothing feels more stressful than the ticking clock!</h1>
         <br/>

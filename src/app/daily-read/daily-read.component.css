@@ -1,0 +1,9 @@
+.styled-font{
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+body{
+    background-image: url("../../assets/images/read-background.jpg");
+    background-size: contain;
+}
