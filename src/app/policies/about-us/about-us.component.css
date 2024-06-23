@@ -7,10 +7,14 @@
 .about-us-body{
     background-image: url("../../../assets/images/about-us-bg.jpg");
     background-size: cover;
-    height: 100%;
+    background-repeat: repeat;
+    height: 180%;
 }
 
 .about-us-text{
     margin-left: 10%;
     margin-right: 10%;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+    font-size: 20px;
 }
