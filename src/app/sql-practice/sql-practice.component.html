@@ -34,7 +34,7 @@
         <h2 class="cs-text" style="text-align: center;">If the table name is not mentioned, you can use any name you like</h2>
         <div>
             <button (click)="goBack()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
-            <cd-timer class="bootstrap-timer" format="ms" [endTime]="endTime"
+            <cd-timer class="bootstrap-timer" format="ms" [startTime]="endTime" [countdown] = 'true'
              [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
             <button (click)="skipQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>

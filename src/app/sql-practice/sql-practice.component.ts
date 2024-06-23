@@ -9,7 +9,7 @@ import { FirebaseServiceService } from '../services/firebase-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(geminiApiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro"});
 const autoAdapt = "Auto Adapt";
 
 @Component({
@@ -44,6 +44,8 @@ export class SqlPracticeComponent {
   highestStreak : number = 0;
   currentStreak : number = 0;
   endTime : number = 180;
+  endTimes: number[] = [120, 240, 300, 520]
+  endTimeIndex : number = 0;
 
 
   ngOnInit(){
@@ -58,12 +60,18 @@ export class SqlPracticeComponent {
     }
     if(this.diffLevel == "Easy" || this.diffLevel == autoAdapt){
       this.difficultyIndex = 0;
+      this.endTimeIndex = 0;
+      this.endTime = this.endTimes[0];
     }
     else if("Moderate" == this.diffLevel){
       this.difficultyIndex = 1;
+      this.endTimeIndex = 1;
+      this.endTime = this.endTimes[1];
     }
     else if("Hard" == this.diffLevel){
       this.difficultyIndex = 2;
+      this.endTimeIndex = 2;
+      this.endTime = this.endTimes[2];
     }
     this.afAuth.onAuthStateChanged((user) => {
       this.user = user?.email;
@@ -84,8 +92,9 @@ export class SqlPracticeComponent {
   }
 
   async generateQuestion(){
-    if(this.streak == 2 && this.difficultyIndex < 3){
+    if((this.diffLevel == autoAdapt) && (this.streak == 4 && this.difficultyIndex < 3)){
       this.difficultyIndex++;
+      this.endTimeIndex++;
       this.streak = 0
     }
     let result;
@@ -93,6 +102,9 @@ export class SqlPracticeComponent {
       result = await model.generateContent("Generate a "+this.difficultyLevels[this.difficultyIndex]+" SQL question for a software engineer position in valid parseable JSON format in a single line "+
         +this.sqlTopic+
       " which follows this structure  "+JSON.stringify(sqlGeminiResponse) + " and expects a SQL query as an answer and does not have any HTML markup");
+      if(this.timedMode){
+        this.endTime = this.endTimes[this.endTimeIndex];
+      }
     }catch(err){
       console.log("err")
       await this.resetQuestion();

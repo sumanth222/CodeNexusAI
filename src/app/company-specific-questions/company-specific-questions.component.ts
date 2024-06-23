@@ -3,7 +3,7 @@ import { geminiApiKey } from '../environment';
 import { geminiResponse } from 'src/objects/gemini-response';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(geminiApiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro"});
 import {
   MatDialog,
 } from '@angular/material/dialog';

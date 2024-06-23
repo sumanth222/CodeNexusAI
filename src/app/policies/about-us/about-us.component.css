@@ -1,0 +1,16 @@
+.premium-header{
+    height: 20%;
+    background-color: #100d28; 
+    text-align: center;
+}
+
+.about-us-body{
+    background-image: url("../../../assets/images/about-us-bg.jpg");
+    background-size: cover;
+    height: 100%;
+}
+
+.about-us-text{
+    margin-left: 10%;
+    margin-right: 10%;
+}

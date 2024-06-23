@@ -38,6 +38,7 @@ import { CdTimerModule } from 'angular-cd-timer';
 import { SqlTopicScreenComponent } from './sql-topic-screen/sql-topic-screen.component';
 import { PremiumInfoComponent } from './premium-info/premium-info.component';
 import { DailyReadComponent } from './daily-read/daily-read.component';
+import { AboutUsComponent } from './policies/about-us/about-us.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { DailyReadComponent } from './daily-read/daily-read.component';
     ProfilePageComponent,
     SqlTopicScreenComponent,
     PremiumInfoComponent,
-    DailyReadComponent
+    DailyReadComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

@@ -11,8 +11,9 @@ import { SqlPracticeComponent } from './sql-practice/sql-practice.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SqlTopicScreenComponent } from './sql-topic-screen/sql-topic-screen.component';
 import { PremiumInfoComponent } from './premium-info/premium-info.component';
-import { TosComponent } from './tos/tos.component';
+import { TosComponent } from './policies/tos/tos.component';
 import { DailyReadComponent } from './daily-read/daily-read.component';
+import { AboutUsComponent } from './policies/about-us/about-us.component';
 
 const routes: Routes = [
   {path:'' ,component: SignupComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'sqlTopics', component: SqlTopicScreenComponent, canActivate: [AuthServiceService]},
   {path: 'premiumInformation', component: PremiumInfoComponent, canActivate: [AuthServiceService]},
   {path: 'tos', component: TosComponent, canActivate: [AuthServiceService]},
-  {path: 'dailyRead', component: DailyReadComponent, canActivate: [AuthServiceService]}
+  {path: 'dailyRead', component: DailyReadComponent, canActivate: [AuthServiceService]},
+  {path: 'about-us', component: AboutUsComponent}
 ];
 
 @NgModule({
