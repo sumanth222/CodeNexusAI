@@ -133,4 +133,8 @@ export class DSSelectionComponent implements OnInit {
   getPremium(){
     this.router.navigate(['/premiumInformation'])
   }
+
+  goToAbout(){
+    this.router.navigate(['/about-us'])
+  }
 }

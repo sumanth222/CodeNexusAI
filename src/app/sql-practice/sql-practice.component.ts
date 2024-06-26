@@ -252,4 +252,8 @@ export class SqlPracticeComponent {
   getPremium(){
     this.router.navigate(['/premiumInformation'])
   }
+
+  goToAbout(){
+    this.router.navigate(['/about-us'])
+  }
 }

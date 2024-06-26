@@ -5,9 +5,8 @@
 }
 
 .about-us-body{
-    background-image: url("../../../assets/images/about-us-bg.jpg");
-    background-size: cover;
-    background-repeat: repeat;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
     height: 180%;
 }
 

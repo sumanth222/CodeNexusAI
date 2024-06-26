@@ -47,4 +47,8 @@ export class PremiumInfoComponent {
     window.open("http://localhost:4200/tos")
   }
 
+  goToAbout(){
+    this.router.navigate(['/about-us'])
+  }
+
 }

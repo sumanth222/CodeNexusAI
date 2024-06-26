@@ -118,7 +118,7 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     var result = null;
     try{
     if(autoAdapt == this.diffLevel){
-      result = await model.generateContent("Generate a "+this.difficultyLevels[this.difficultyIndex]+" programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
+      result = await model.generateContent("Generate a "+this.difficultyLevels[this.difficultyIndex]+" difficulty programming question in java on "+this.dsTopic+" topic for a software engineer position"+companySuffix+" in valid parseable JSON format in a single line"+
     " which follows this structure  "+JSON.stringify(geminiResponse) + " and does not have any HTML markup");
       this.endTime = this.endTimes[this.endTimeIndex]
     }
@@ -334,6 +334,10 @@ export class CompanySpecificQuestionsComponent implements OnInit {
 
   getPremium(){
     this.router.navigate(['/premiumInformation'])
+  }
+
+  goToAbout(){
+    this.router.navigate(['/about-us'])
   }
 }
 

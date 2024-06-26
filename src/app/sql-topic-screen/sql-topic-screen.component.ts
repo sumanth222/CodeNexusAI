@@ -120,4 +120,8 @@ export class SqlTopicScreenComponent {
   getPremium(){
     this.router.navigate(['/premiumInformation'])
   }
+
+  goToAbout(){
+    this.router.navigate(['/about-us'])
+  }
 }

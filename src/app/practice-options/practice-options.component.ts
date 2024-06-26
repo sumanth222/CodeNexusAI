@@ -52,4 +52,8 @@ export class PracticeOptionsComponent {
   navigateToDailyRead(){
     this.router.navigate(['dailyRead'])
   }
+
+  goToAbout(){
+    this.router.navigate(['/about-us'])
+  }
 }
