@@ -14,6 +14,8 @@ import { PremiumInfoComponent } from './premium-info/premium-info.component';
 import { TosComponent } from './policies/tos/tos.component';
 import { DailyReadComponent } from './daily-read/daily-read.component';
 import { AboutUsComponent } from './policies/about-us/about-us.component';
+import { RefundPolicyComponent } from './policies/refund-policy/refund-policy.component';
+import { LoadingSphereComponent } from './loading-sphere/loading-sphere.component';
 
 const routes: Routes = [
   {path:'' ,component: SignupComponent},
@@ -29,7 +31,9 @@ const routes: Routes = [
   {path: 'premiumInformation', component: PremiumInfoComponent, canActivate: [AuthServiceService]},
   {path: 'tos', component: TosComponent, canActivate: [AuthServiceService]},
   {path: 'dailyRead', component: DailyReadComponent, canActivate: [AuthServiceService]},
-  {path: 'about-us', component: AboutUsComponent}
+  {path: 'about-us', component: AboutUsComponent},
+  {path: 'refund-policy', component: RefundPolicyComponent},
+  {path: 'loading-sphere', component: LoadingSphereComponent}
 ];
 
 @NgModule({

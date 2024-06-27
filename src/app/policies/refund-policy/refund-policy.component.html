@@ -1,0 +1,50 @@
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
+        Welcome
+        <span class="toolbar-spacer"></span>
+        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+            <p class="logout-button-text">Get <b>PREMIUM</b></p>
+        </div>
+        <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
+            <p class="logout-button-text">Back to Home</p>
+        </div>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <span class="material-symbols-outlined" style="font-size: 30px;">
+                account_circle
+            </span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+          <button mat-menu-item (click) = "logout()">Logout</button>
+        </mat-menu>
+    </mat-toolbar>
+    <div class="premium-header">
+        <img src="../../assets/images/code-nexus.png" height="100%">
+    </div>
+    <div class="refund-body">
+        <div class="refund-text">
+            <h1 style="margin-top: 0; text-align: center;">Refund Policy</h1>
+            <br/><br/>
+            <b>Overview</b><br/>
+            Thank you for shopping with CodeNexusAI. We strive to provide the best products and services. If you are not entirely satisfied with your purchase, we're here to help.
+            <br/><br/>
+            <b>Refund Eligibility</b><br/>  
+            Timeframe: You have 3 calendar days from the date of purchase to request a refund.<br/>
+            Refunds requested after 3 calendar days from the date of purchase will not be considered or actioned.<br/>
+            Condition: To be eligible for a refund, you need to provide a valid reason and if applicable a proof.<br/><br/>
+            <b>Refund Process</b><br/>
+            <b>Contact Us</b>: To initiate a refund, please contact our customer service team 
+            at [customer service email or phone number]. Provide your email or phone number and 
+            reason for the refund request along with a valid proof.<br/><br/>
+            <b>Contact Information</b><br/>
+            For more information about our refund policy, if you have questions,
+             or if you would like to make a complaint, 
+             please contact us by e-mail at [customer service email].
+        </div>
+    </div>
+</body>

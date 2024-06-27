@@ -47,6 +47,10 @@ export class PremiumInfoComponent {
     window.open("http://localhost:4200/tos")
   }
 
+  readRP(){
+    window.open("http://localhost:4200/refund-policy")
+  }
+
   goToAbout(){
     this.router.navigate(['/about-us'])
   }

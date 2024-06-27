@@ -45,7 +45,7 @@
         <mat-radio-group
             aria-labelledby="example-radio-group-label"
             class="example-radio-group"
-            [(ngModel)]="diffLevel" style="margin-left: 10%;">
+            [(ngModel)]="diffLevel" style="margin-left: 6%;">
             @for (difficulty of difficulties; track difficulty) {
                 <mat-radio-button 
                 [disabled] = "(difficulty == 'Auto Adapt' && isPremium == false) ? true : false" class="radio-button" [value]="difficulty">

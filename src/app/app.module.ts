@@ -39,6 +39,8 @@ import { SqlTopicScreenComponent } from './sql-topic-screen/sql-topic-screen.com
 import { PremiumInfoComponent } from './premium-info/premium-info.component';
 import { DailyReadComponent } from './daily-read/daily-read.component';
 import { AboutUsComponent } from './policies/about-us/about-us.component';
+import { RefundPolicyComponent } from './policies/refund-policy/refund-policy.component';
+import { LoadingSphereComponent } from './loading-sphere/loading-sphere.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { AboutUsComponent } from './policies/about-us/about-us.component';
     SqlTopicScreenComponent,
     PremiumInfoComponent,
     DailyReadComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    RefundPolicyComponent,
+    LoadingSphereComponent
   ],
   imports: [
     BrowserModule,

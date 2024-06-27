@@ -7,6 +7,7 @@ import { UserContextService } from '../userContext/user-context.service';
 import { UserDetails } from 'src/objects/user-details';
 import { RecaptchaVerifier, PhoneAuthProvider } from '@firebase/auth';
 import { DataService } from '../services/data-service.service';
+import anime from 'animejs/lib/anime.es.js';
 
 
 
@@ -50,6 +51,49 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.app = firebase.initializeApp(firebaseConfig);
     this.auth = getAuth(this.app);
+  }
+
+  ngAfterViewInit(): void{
+    anime.timeline({loop: true})
+  .add({
+    targets: '.ml5 .line',
+    opacity: [0.5,1],
+    scaleX: [0, 1],
+    easing: "easeInOutExpo",
+    duration: 700
+  }).add({
+    targets: '.ml5 .line',
+    duration: 600,
+    easing: "easeOutExpo",
+    translateY: () => (-0.625 + 0.625*2*2) + "em"
+  }).add({
+    targets: '.ml5 .ampersand',
+    opacity: [0,1],
+    scaleY: [0.5, 1],
+    easing: "easeOutExpo",
+    duration: 600,
+    offset: '-=600'
+  }).add({
+    targets: '.ml5 .letters-left',
+    opacity: [0,1],
+    translateX: ["0.5em", 0],
+    easing: "easeOutExpo",
+    duration: 600,
+    offset: '-=300'
+  }).add({
+    targets: '.ml5 .letters-right',
+    opacity: [0,1],
+    translateX: ["-0.5em", 0],
+    easing: "easeOutExpo",
+    duration: 600,
+    offset: '-=600'
+  }).add({
+    targets: '.ml5',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
   }
 
   async createAccount(){
