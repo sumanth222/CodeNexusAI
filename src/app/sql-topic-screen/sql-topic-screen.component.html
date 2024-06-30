@@ -29,7 +29,7 @@
       </mat-toolbar>  
     <button style="margin-top: 10px;" (click)="goBack()" mat-raised-button color="primary">Go back</button>
     <h2 class="mat-tile-header">Choose a topic you want to practise on and the difficulty level.</h2>
-        <p style="margin-left: 45%;display: inline-block;">
+        <p style="margin-left: 45%;display: inline-block;"  matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
             <mat-slide-toggle [disabled]="!isPremium" [checked] = "checked" [(ngModel)]="timedMode">
                 <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
                     Timed mode
@@ -45,14 +45,17 @@
         <mat-radio-group
             aria-labelledby="example-radio-group-label"
             class="example-radio-group"
-            [(ngModel)]="diffLevel" style="margin-left: 6%;">
+            [(ngModel)]="diffLevel" style="margin-left: 4%;">
             @for (difficulty of difficulties; track difficulty) {
-                <mat-radio-button class="radio-button" [value]="difficulty"
-                [disabled] = "(difficulty == 'Auto Adapt' && isPremium == false) ? true : false">
-                <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
-                    {{difficulty}}
-                </span>
-                </mat-radio-button>
+                <div style="display: inline;" matTooltip="{{premiumTooltip}}"
+                [matTooltipDisabled]="difficulty != 'Auto Adapt' && isPremium == false">
+                    <mat-radio-button class="radio-button" [value]="difficulty"
+                    [disabled] = "(difficulty == 'Auto Adapt' && isPremium == false) ? true : false">
+                    <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
+                        {{difficulty}}
+                    </span>
+                    </mat-radio-button>
+                </div>
             }
             <span *ngIf = "isPremium == false" class="material-symbols-outlined">
                 lock

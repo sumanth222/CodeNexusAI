@@ -3,6 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { FirebaseServiceService } from '../services/firebase-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import { premiumToolTip } from '../constants/app.constant';
 
 export interface CodeModel {
   language: string;
@@ -35,6 +36,7 @@ export class CodeEditorComponent implements OnInit {
   disabled: boolean = true
   user!: firebase.User | null;
   isPremium: boolean = false;
+  premiumTooltip : string = "";
 
 
   theme = 'vs-dark';
@@ -55,6 +57,7 @@ export class CodeEditorComponent implements OnInit {
     this.afAuth.onAuthStateChanged((user) =>{
       this.user = user;
     })
+    this.premiumTooltip = premiumToolTip
    }
 
   ngOnInit(): void {

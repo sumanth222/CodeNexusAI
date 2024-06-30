@@ -18,14 +18,18 @@
                 <button *ngIf = "showSolutionButton" mat-raised-button color="accent" (click)="showSolution()" [ngStyle] = "{'width' : showSubmitButton == true ? '50%' : '100%' }" style="margin: 10px; display: inline-block;">Give me the solution</button>
             </div>   
             <div class="sub-footer-actions" style="display: flex;">
-                <button *ngIf = "showHintButton"  [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="askForHint()" style="width: 50%; margin: 10px; cursor: pointer;" >Give me a hint
+                <div style="width: 100%;" matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
+                <button *ngIf = "showHintButton" [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="askForHint()" style="width: 98%; margin: 10px; cursor: pointer;" >Give me a hint
                     <span *ngIf = "isPremium == false" class="material-symbols-outlined">
                         lock
                     </span></button>
-                <button *ngIf = "showOptimizeButton" [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="optimizeCode()" style="width: 50%; margin: 10px; cursor: pointer;">Optimize my code
-                    <span *ngIf = "isPremium == false" class="material-symbols-outlined">
+                </div>
+                <div style="width: 100%;" matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
+                <button *ngIf = "showOptimizeButton" [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="optimizeCode()" style="width: 98%; margin: 10px; cursor: pointer;">Optimize my code
+                    <span *ngIf = "isPremium == false" class="material-symbols-outlined" title="Unlock with PREMIUM subscription">
                         lock
                     </span></button>
+                </div>
             </div>   
         </div> 
     </mat-card>

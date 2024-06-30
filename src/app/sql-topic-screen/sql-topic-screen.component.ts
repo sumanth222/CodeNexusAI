@@ -6,6 +6,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseServiceService } from '../services/firebase-service.service';
+import { premiumToolTip } from '../constants/app.constant';
 
 export interface Tile {
   color: string;
@@ -43,6 +44,7 @@ export class SqlTopicScreenComponent {
   disabled: boolean = true;
   timedMode = false;
   isPremium: boolean = false;
+  premiumTooltip : string = premiumToolTip
 
 
   constructor(private router : Router, private dialog : MatDialog,

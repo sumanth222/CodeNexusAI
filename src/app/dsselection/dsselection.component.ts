@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { UserContextService } from '../userContext/user-context.service';
 import { FirebaseServiceService } from '../services/firebase-service.service';
+import { premiumToolTip } from '../constants/app.constant';
 
 export interface Tile {
   color: string;
@@ -50,6 +51,7 @@ export class DSSelectionComponent implements OnInit {
   timedMode = false;
   isPremium: boolean = false;
   userDetails: any;
+  premiumTooltip : string = premiumToolTip
 
 
   constructor(private router : Router, private dialog : MatDialog, 

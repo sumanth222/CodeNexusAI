@@ -31,7 +31,7 @@
     <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 47%; margin-top: 15%; margin-right: 33%;">
         <!-- <mat-spinner style="margin-left: 35%;" color="accent"></mat-spinner> -->
          <app-loading-sphere></app-loading-sphere>
-        <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 10px;margin-left: 22%;font-size: large;">Just a minute!</div>
+        <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 10px;font-size: large;">Generating</div>
     </div>
 
     <div *ngIf = "response.length != 0">

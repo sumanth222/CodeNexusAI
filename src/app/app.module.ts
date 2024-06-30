@@ -41,6 +41,7 @@ import { DailyReadComponent } from './daily-read/daily-read.component';
 import { AboutUsComponent } from './policies/about-us/about-us.component';
 import { RefundPolicyComponent } from './policies/refund-policy/refund-policy.component';
 import { LoadingSphereComponent } from './loading-sphere/loading-sphere.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { LoadingSphereComponent } from './loading-sphere/loading-sphere.componen
     MatProgressBarModule,
     MatMenuModule,
     MatSlideToggleModule,
-    CdTimerModule
+    CdTimerModule,
+    MatTooltipModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}, UserContextService, DataService],
   bootstrap: [AppComponent]
