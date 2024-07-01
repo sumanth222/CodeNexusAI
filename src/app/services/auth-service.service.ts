@@ -17,7 +17,7 @@ export class AuthServiceService implements CanActivate {
       const wait = setInterval(() =>{
          this.afAuth.onAuthStateChanged((user) => {
           console.log(user?.email)
-          if( (user?.email != null && user?.email != "") || user?.phoneNumber != undefined){
+          if( ((user?.email != undefined && user?.email != null) && user?.email != "") || user?.phoneNumber != undefined){
             clearInterval(wait);
             resolve(true);
           }

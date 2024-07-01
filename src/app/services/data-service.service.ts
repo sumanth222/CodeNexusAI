@@ -55,7 +55,8 @@ export class DataService{
                     rank: 1,
                     premium: false,
                     dateCreated: new Date().toISOString(),
-                    lastLogin: new Date().toISOString()
+                    lastLogin: new Date().toISOString(),
+                    lastLoginDate: new Date(),
                 });
             }
             else{
@@ -68,7 +69,8 @@ export class DataService{
         });
 
         db.collection("user-info").doc(docId).update({
-            lastLogin: new Date().toISOString()
+            lastLogin: new Date().toISOString(),
+            lastLoginDate: new Date(),
         }).then(() => {
             console.log("Updated last login time")
         }).catch((err) => {
@@ -94,7 +96,8 @@ export class DataService{
                     rank: 1,
                     premium: false,
                     dateCreated: new Date().toISOString(),
-                    lastLogin: new Date().toISOString()
+                    lastLogin: new Date().toISOString(),
+                    lastLoginDate: new Date(),
                 });
             }
             else{
@@ -108,7 +111,8 @@ export class DataService{
         });
 
         db.collection("user-info").doc(docId).update({
-            lastLogin: Date.now()
+            lastLogin: new Date().toISOString(),
+            lastLoginDate: new Date(),
         }).then(() => {
             console.log("Updated last login time")
         }).catch((err) => {
