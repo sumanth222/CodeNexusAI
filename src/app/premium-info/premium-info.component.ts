@@ -4,6 +4,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-premium-info',
@@ -12,10 +13,13 @@ import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialo
 })
 export class PremiumInfoComponent {
 
-  constructor(private authService: AuthServiceService, private router: Router, private dialog: MatDialog){}
+  constructor(private authService: AuthServiceService, private router: Router, private dialog: MatDialog){
+    this.url = environment.baseUrl;
+  }
 
   premiumText: string = "";
   premiumTextBody: string = "";
+  url: string = "";
 
   ngOnInit(){
     this.premiumText = premiumSubscriptionDetails
@@ -44,11 +48,11 @@ export class PremiumInfoComponent {
   }
 
   readTOS(){
-    window.open("http://localhost:4200/tos")
+    window.open(this.url+"tos")
   }
 
   readRP(){
-    window.open("http://localhost:4200/refund-policy")
+    window.open(this.url+"refund-policy")
   }
 
   goToAbout(){
