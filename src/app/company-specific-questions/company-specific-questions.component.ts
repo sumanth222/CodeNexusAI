@@ -339,5 +339,9 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   goToAbout(){
     this.router.navigate(['/about-us'])
   }
+
+  goToSupport(){
+    this.router.navigate(['/support'])
+  }
 }
 

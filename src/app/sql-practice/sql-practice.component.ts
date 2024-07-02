@@ -256,4 +256,8 @@ export class SqlPracticeComponent {
   goToAbout(){
     this.router.navigate(['/about-us'])
   }
+
+  goToSupport(){
+    this.router.navigate(['/support'])
+  }
 }

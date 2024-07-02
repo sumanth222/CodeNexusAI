@@ -139,4 +139,8 @@ export class DSSelectionComponent implements OnInit {
   goToAbout(){
     this.router.navigate(['/about-us'])
   }
+
+  goToSupport(){
+    this.router.navigate(['/support'])
+  }
 }

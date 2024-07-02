@@ -16,6 +16,7 @@ import { DailyReadComponent } from './daily-read/daily-read.component';
 import { AboutUsComponent } from './policies/about-us/about-us.component';
 import { RefundPolicyComponent } from './policies/refund-policy/refund-policy.component';
 import { LoadingSphereComponent } from './loading-sphere/loading-sphere.component';
+import { SupportPageComponent } from './support-page/support-page.component';
 
 const routes: Routes = [
   {path:'' ,component: SignupComponent},
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path: 'dailyRead', component: DailyReadComponent, canActivate: [AuthServiceService]},
   {path: 'about-us', component: AboutUsComponent},
   {path: 'refund-policy', component: RefundPolicyComponent},
-  {path: 'loading-sphere', component: LoadingSphereComponent}
+  {path: 'loading-sphere', component: LoadingSphereComponent},
+  {path: 'support', component: SupportPageComponent, canActivate : [AuthServiceService]}
 ];
 
 @NgModule({

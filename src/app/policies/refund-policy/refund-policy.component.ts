@@ -31,4 +31,7 @@ export class RefundPolicyComponent {
     this.router.navigate(['/practiceOptions'])
   }
 
+  goToSupport(){
+    this.router.navigate(['/support'])
+  }
 }

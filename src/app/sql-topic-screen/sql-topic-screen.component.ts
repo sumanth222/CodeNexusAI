@@ -126,4 +126,8 @@ export class SqlTopicScreenComponent {
   goToAbout(){
     this.router.navigate(['/about-us'])
   }
+
+  goToSupport(){
+    this.router.navigate(['/support'])
+  }
 }

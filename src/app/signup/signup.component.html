@@ -42,8 +42,8 @@
           <mat-hint>Enter the OTP sent to your phone</mat-hint>
         </mat-form-field>
 
-        <button *ngIf = "!showOTPInput" [disabled] = "signUpDisabled" (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Verify phone number and Log in</button>
-        <button *ngIf = "showOTPInput" [disabled] = "signUpDisabled" (click)="loginWithPhone()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign In</button>
+        <button *ngIf = "!showOTPInput" [disabled] = "signUpDisabled" (click)="createAccount()" style="margin-top: 3%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Verify phone number and Log in</button>
+        <button *ngIf = "showOTPInput" [disabled] = "signUpDisabled" (click)="loginWithPhone()" style="margin-top: 3%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign In</button>
         <h3 class="main-tag" style="padding-top: 0%; margin-bottom: 0%; margin-left: 45%;">OR</h3>
         <button [disabled] = "signUpDisabled" (click)="signupWithGoogle()" style="margin-top: 1%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In with Google</button>
           <!-- <button (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign Up</button>

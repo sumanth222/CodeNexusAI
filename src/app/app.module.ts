@@ -42,6 +42,7 @@ import { AboutUsComponent } from './policies/about-us/about-us.component';
 import { RefundPolicyComponent } from './policies/refund-policy/refund-policy.component';
 import { LoadingSphereComponent } from './loading-sphere/loading-sphere.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { SupportPageComponent } from './support-page/support-page.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DailyReadComponent,
     AboutUsComponent,
     RefundPolicyComponent,
-    LoadingSphereComponent
+    LoadingSphereComponent,
+    SupportPageComponent
   ],
   imports: [
     BrowserModule,

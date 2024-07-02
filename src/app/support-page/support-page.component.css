@@ -1,0 +1,23 @@
+.premium-header{
+    height: 20%;
+    background-color: #100d28; 
+    text-align: center;
+}
+
+.refund-body{
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    height: 80%;
+}
+
+.refund-text{
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+    font-size: 20px;
+}
+
+body{
+    height: 190%;
+}

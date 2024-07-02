@@ -59,4 +59,7 @@ export class PremiumInfoComponent {
     this.router.navigate(['/about-us'])
   }
 
+  goToSupport(){
+    this.router.navigate(['/support'])
+  }
 }

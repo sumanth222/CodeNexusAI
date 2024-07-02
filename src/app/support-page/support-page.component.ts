@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
+import { AuthServiceService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
-  selector: 'app-about-us',
-  templateUrl: './about-us.component.html',
-  styleUrl: './about-us.component.css'
+  selector: 'app-support-page',
+  templateUrl: './support-page.component.html',
+  styleUrl: './support-page.component.css'
 })
-export class AboutUsComponent {
+export class SupportPageComponent {
 
   constructor(private authService: AuthServiceService, private router: Router){}
 
@@ -31,7 +31,4 @@ export class AboutUsComponent {
     this.router.navigate(['/practiceOptions'])
   }
 
-  goToSupport(){
-    this.router.navigate(['/support'])
-  }
 }

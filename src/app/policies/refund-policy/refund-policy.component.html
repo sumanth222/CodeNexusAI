@@ -20,6 +20,7 @@
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+          <button mat-menu-item (click) = "goToSupport()">Support</button>
           <button mat-menu-item (click) = "logout()">Logout</button>
         </mat-menu>
     </mat-toolbar>
@@ -44,7 +45,7 @@
             <b>Contact Information</b><br/>
             For more information about our refund policy, if you have questions,
              or if you would like to make a complaint, 
-             please contact us by e-mail at [customer service email].
+             please contact us by e-mail at <em>founder&#64;codenexusai.com</em>.
         </div>
     </div>
 </body>
