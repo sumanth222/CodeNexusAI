@@ -3,51 +3,111 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11155656868">
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-11155656868');
+    </script>
 </head>
 
-<body>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-  <mat-progress-bar *ngIf = "isLoading" mode="indeterminate"></mat-progress-bar>
-  <div class="left-pane">
-    <div>
-      <img class="main-image" src="../../assets/images/code-nexus.png" style="height: 62%;width: 62%;">
+<body [ngStyle] = "{'background-image' : isMobileOrTablet == true ? 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)' : '',
+                    'background-color': isMobileOrTablet == true ? '#4158D0' : '' }">
+  <div *ngIf = "!isMobileOrTablet" class="main-div-desktop">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <mat-progress-bar *ngIf = "isLoading" mode="indeterminate"></mat-progress-bar>
+    <div class="left-pane">
+      <div>
+        <img class="main-image" src="../../assets/images/code-nexus.png" style="height: 62%;width: 62%;">
+      </div>
     </div>
-  </div>
-    <div class="right-pane">
-        <div id="recaptcha-container"></div>
-        <div class="right-pane-1">
-          <h1 class="main-tag">The AI-based Coding platform<br/><br/></h1>
-          <h1 class="ml5" style="margin-left: 26%;">
-            <span class="text-wrapper">
-              <span class="line line1"></span>
-              <span class="letters letters-left">Login to get Started!</span>
-              <span class="line line2"></span>
-            </span>
-          </h1>
-          <mat-form-field appearance="fill" style="width: 50%;margin-left: 20%;margin-top: 6%;">
-            <mat-label>Username</mat-label>
-            <input minlength="5" type="text" (change)="onChangeName()" id="phone-input" type="text" matInput [(ngModel)]="username" placeholder="Minimum 5 characters" [disabled]="disabled">
-            <mat-hint>Enter your Username, only Alphabet accepted</mat-hint>
+      <div class="right-pane">
+          <div id="recaptcha-container"></div>
+          <div class="right-pane-1">
+            <h1 class="main-tag">The AI-based Coding platform<br/><br/></h1>
+            <h1 class="ml5" style="margin-left: 26%;">
+              <span class="text-wrapper">
+                <span class="line line1"></span>
+                <span class="letters letters-left">Login to get Started!</span>
+                <span class="line line2"></span>
+              </span>
+            </h1>
+            <mat-form-field appearance="fill" style="width: 50%;margin-left: 20%;margin-top: 6%;">
+              <mat-label>Username</mat-label>
+              <input minlength="5" type="text" (change)="onChangeName()" id="phone-input" type="text" matInput [(ngModel)]="username" placeholder="Minimum 5 characters" [disabled]="disabled">
+              <mat-hint>Enter your Username, only Alphabet accepted</mat-hint>
+            </mat-form-field>
+          <mat-form-field appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 20%;">
+            <mat-label>Phone Number</mat-label>
+            <input (change)="onChangePhone()" id="phone-input" type="text" minlength="10" maxlength="10" matInput [(ngModel)]="phoneNumber" placeholder="Your 10 digit phone number" [disabled]="disabled">
+            <mat-hint>An OTP will be sent, if you choose to sign in with phone number</mat-hint>
           </mat-form-field>
-        <mat-form-field appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 20%;">
-          <mat-label>Phone Number</mat-label>
-          <input (change)="onChangePhone()" id="phone-input" type="text" minlength="10" maxlength="10" matInput [(ngModel)]="phoneNumber" placeholder="Your 10 digit phone number" [disabled]="disabled">
-          <mat-hint>An OTP will be sent, if you choose to sign in with phone number</mat-hint>
-        </mat-form-field>
 
-        <mat-form-field *ngIf = "showOTPInput" appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 20%;">
-          <mat-label>OTP</mat-label>
-          <input type="text" matInput [(ngModel)]="otp" placeholder="Placeholder" [disabled]="otpDisabled">
-          <mat-hint>Enter the OTP sent to your phone</mat-hint>
-        </mat-form-field>
+          <mat-form-field *ngIf = "showOTPInput" appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 20%;">
+            <mat-label>OTP</mat-label>
+            <input type="text" matInput [(ngModel)]="otp" placeholder="Placeholder" [disabled]="otpDisabled">
+            <mat-hint>Enter the OTP sent to your phone</mat-hint>
+          </mat-form-field>
 
-        <button *ngIf = "!showOTPInput" [disabled] = "signUpDisabled" (click)="createAccount()" style="margin-top: 3%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Verify phone number and Log in</button>
-        <button *ngIf = "showOTPInput" [disabled] = "signUpDisabled" (click)="loginWithPhone()" style="margin-top: 3%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign In</button>
-        <h3 class="main-tag" style="padding-top: 0%; margin-bottom: 0%; margin-left: 45%;">OR</h3>
-        <button [disabled] = "signUpDisabled" (click)="signupWithGoogle()" style="margin-top: 1%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In with Google</button>
-          <!-- <button (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign Up</button>
-         <button (click)="navigate2Login()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In</button> -->
+          <button *ngIf = "!showOTPInput" [disabled] = "signUpDisabled" (click)="createAccount()" style="margin-top: 3%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Verify phone number and Log in</button>
+          <button *ngIf = "showOTPInput" [disabled] = "signUpDisabled" (click)="loginWithPhone()" style="margin-top: 3%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign In</button>
+          <h3 class="main-tag" style="padding-top: 0%; margin-bottom: 0%; margin-left: 45%;">OR</h3>
+          <button [disabled] = "signUpDisabled" (click)="signupWithGoogle()" style="margin-top: 1%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In with Google</button>
+            <!-- <button (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign Up</button>
+          <button (click)="navigate2Login()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In</button> -->
+          </div>
+      </div>
+    </div>
+
+    <div *ngIf = "isMobileOrTablet" class="main-div-mobile">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+      <mat-progress-bar *ngIf = "isLoading" mode="indeterminate"></mat-progress-bar>
+      <div class="top-pane">
+        <div style="text-align: center;">
+          <img class="mob-main-image" src="../../assets/images/code-nexus.png" style="height: 30%;width: 50%;">
         </div>
+      </div>
+
+        <div class="bottom-pane">
+          <div id="recaptcha-container"></div>
+          <div class="bottom-pane-1">
+            <h1 class="main-tag" style="font-size: 50px;margin-left: 0;">
+              <span style="margin-left: 12%;">Learn Advanced coding with AI</span><br/><br/></h1>
+            <h1 class="ml5" style="margin-left: 33%;">
+              <span class="text-wrapper">
+                <span class="line line1"></span>
+                <span class="letters letters-left">Login to get Started!</span>
+                <span class="line line2"></span>
+              </span>
+            </h1>
+            <mat-form-field appearance="fill" style="width: 50%;margin-left: 25%;margin-top: 6%;height: 80px;">
+              <mat-label>Username</mat-label>
+              <input minlength="5" type="text" (change)="onChangeName()" id="phone-input" type="text" matInput [(ngModel)]="username" placeholder="Minimum 5 characters" [disabled]="disabled">
+              <mat-hint>Enter your Username, only Alphabet accepted</mat-hint>
+            </mat-form-field>
+          <mat-form-field appearance="fill" style="width: 50%;margin-top: 6%;margin-left: 25%;height: 80px;">
+            <mat-label>Phone Number</mat-label>
+            <input (change)="onChangePhone()" id="phone-input" type="text" minlength="10" maxlength="10" matInput [(ngModel)]="phoneNumber" placeholder="Your 10 digit phone number" [disabled]="disabled">
+            <mat-hint>An OTP will be sent, if you choose to sign in with phone number</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field *ngIf = "showOTPInput" appearance="fill" style="width: 50%;margin-top: 1%;margin-left: 25%;">
+            <mat-label>OTP</mat-label>
+            <input type="text" matInput [(ngModel)]="otp" placeholder="Placeholder" [disabled]="otpDisabled">
+            <mat-hint>Enter the OTP sent to your phone</mat-hint>
+          </mat-form-field>
+
+          <button *ngIf = "!showOTPInput" [disabled] = "signUpDisabled" (click)="createAccount()" style="margin-top: 15%;width: 60%;margin-left: 20%;height: 60px;" mat-raised-button color="primary">Verify phone number and Log in</button>
+          <button *ngIf = "showOTPInput" [disabled] = "signUpDisabled" (click)="loginWithPhone()" style="margin-top: 3%;width: 60%;margin-left: 20%;height: 60px;" mat-raised-button color="primary">Sign In</button>
+          <h3 class="main-tag" style="padding-top: 0%; margin-bottom: 0%; margin-left: 48%; margin-top: 4%;">OR</h3>
+          <button [disabled] = "signUpDisabled" (click)="signupWithGoogle()" style="margin-top: 4%;width: 60%;margin-left: 20%;height: 60px;" mat-raised-button color="accent">Sign In with Google</button>
+            <!-- <button (click)="createAccount()" style="margin-top: 5%;width: 60%;margin-left: 15%;" mat-raised-button color="primary">Sign Up</button>
+          <button (click)="navigate2Login()" style="margin-top: 2%;width: 60%;margin-left: 15%;" mat-raised-button color="accent">Sign In</button> -->
+          </div>
+      </div>
     </div>
 </body>

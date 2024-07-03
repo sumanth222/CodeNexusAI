@@ -9,5 +9,5 @@ export const about = "Welcome to Code Nexus, a no-nonsense programming practice 
 export const autoAdaptInfo = "You are in Auto-Adapt mode, the questions here start from Easy level, then based on your performance, the subsequent questions difficulty will increase."
 
 export const premiumSubscriptionDetails = "Monthly Subscription at INR 150 /-"
-export const premiumSubscriptionBody = "Get Access to all our PREMIUM features listed below and also any future updates that we release!"
+export const premiumSubscriptionBody = "Get Access to all our PREMIUM features listed below and also any future updates we release at just <b>₹99/-</b>"
 export const premiumToolTip = "Unlock with PREMIUM access"

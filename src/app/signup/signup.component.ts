@@ -8,6 +8,8 @@ import { UserDetails } from 'src/objects/user-details';
 import { RecaptchaVerifier, PhoneAuthProvider } from '@firebase/auth';
 import { DataService } from '../services/data-service.service';
 import anime from 'animejs/lib/anime.es.js';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
 
 
 
@@ -42,15 +44,17 @@ export class SignupComponent implements OnInit {
   signUpDisabled : boolean = true;
   usernameValid : boolean = false;
   phoneNumberValid: boolean = false;
+  isMobileOrTablet : boolean = false;
 
   constructor(private router: Router, private userContextService: UserContextService,
-    private dataService: DataService
+    private dataService: DataService, private deviceService: DeviceDetectorService
   ) { 
   }
 
   ngOnInit(): void {
     this.app = firebase.initializeApp(firebaseConfig);
     this.auth = getAuth(this.app);
+    this.isMobileOrTablet = this.deviceService.isMobile() || this.deviceService.isTablet();
   }
 
   ngAfterViewInit(): void{

@@ -37,7 +37,7 @@ export class PremiumInfoComponent {
   subscribe(){
     this.dialog.open(VerdictResponseDialogExampleComponent,{
       data: {
-        response: new String("We are working with payment providers, hang tight!"),
+        response: new String("We are currently working with payment providers to enable a payment gateway,</br> In the meantime, you can contact us at <b>founder&#64;codenexusai.com</b> for the PREMIUM subscription."),
         status: 'G'
       }
     })
