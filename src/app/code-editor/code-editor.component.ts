@@ -4,6 +4,7 @@ import { FirebaseServiceService } from '../services/firebase-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { premiumToolTip } from '../constants/app.constant';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 export interface CodeModel {
   language: string;
@@ -53,7 +54,9 @@ export class CodeEditorComponent implements OnInit {
       enabled: true
     }
   };
-  constructor(private firebaseService: FirebaseServiceService, private afAuth: AngularFireAuth) {
+  isMobileOrTablet: boolean = false;
+  ;
+  constructor(private firebaseService: FirebaseServiceService, private afAuth: AngularFireAuth,  private deviceService: DeviceDetectorService) {
     this.afAuth.onAuthStateChanged((user) =>{
       this.user = user;
     })
@@ -62,6 +65,8 @@ export class CodeEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = firebase.auth().currentUser;
+    this.isMobileOrTablet = this.deviceService.isMobile() || this.deviceService.isTablet();
+
     this.editorOptions = {theme: 'vs-dark', language: 'java'};
     this.code = this.codeTemplate;
     this.model = {

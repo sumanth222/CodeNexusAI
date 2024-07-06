@@ -2,6 +2,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11155656868">
@@ -15,42 +16,87 @@
 </script>
 </head>
 <body>
-  <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
-    Welcome
-    <span class="toolbar-spacer"></span>
-    <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
-      <p class="logout-button-text">Get <b>PREMIUM</b></p>
-  </div>
-    <button mat-button [matMenuTriggerFor]="menu">
-        <span class="material-symbols-outlined" style="font-size: 30px;">
-            account_circle
-        </span>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click) = "goToProfile()">My Profile</button>
-      <button mat-menu-item (click) = "goToAbout()">About CodeNexusAI</button>
-      <button mat-menu-item (click) = "goToSupport()">Support</button>
-      <button mat-menu-item (click) = "logout()">Logout</button>
-    </mat-menu>
-</mat-toolbar>  
+  <div *ngIf = "!isMobileOrTablet" class="main-div-mobile">
+      <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
+        Welcome
+        <span class="toolbar-spacer"></span>
+        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+          <p class="logout-button-text">Get <b>PREMIUM</b></p>
+        </div>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <span class="material-symbols-outlined" style="font-size: 30px;">
+                account_circle
+            </span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+          <button mat-menu-item (click) = "goToAbout()">About CodeNexusAI</button>
+          <button mat-menu-item (click) = "goToSupport()">Support</button>
+          <button mat-menu-item (click) = "logout()">Logout</button>
+        </mat-menu>
+      </mat-toolbar>  
 
-  <mat-card class="daily-read-card" (click) = "navigateToDailyRead()">
-    <mat-card-content style="padding-top: 0%; text-align: center;" class="daily-read-text">
-      <p style="margin-top: 0; text-align: center; display: inline;">Daily Read</p>
-      <img src="../../assets/icons/read.svg" height="25px" width="25px" style="display: inline; margin-left: 10px;">
-    </mat-card-content>
-  </mat-card>
+    <mat-card class="daily-read-card" (click) = "navigateToDailyRead()">
+      <mat-card-content style="padding-top: 0%; text-align: center;" class="daily-read-text">
+        <p style="margin-top: 0; text-align: center; display: inline;">Daily Read</p>
+        <img src="../../assets/icons/read.svg" height="25px" width="25px" style="display: inline; margin-left: 10px;">
+      </mat-card-content>
+    </mat-card>
 
-    <mat-card class="codingCard" (click) = "navigateToSQLTopics()">
-        <mat-card-content class="cs-text" style="margin-top: 20px;">
-          <p class="cardText">Practice SQL</p>
-          <img src="../../assets/icons/database.svg" height="15%" width="15%" style="margin-left: 43%;">
-        </mat-card-content>
+      <mat-card class="codingCard" (click) = "navigateToSQLTopics()">
+          <mat-card-content class="cs-text" style="margin-top: 20px;">
+            <p class="cardText">Practice SQL</p>
+            <img src="../../assets/icons/database.svg" height="15%" width="15%" style="margin-left: 43%;">
+          </mat-card-content>
+      </mat-card>
+      <mat-card class="sqlCard" (click) = "navigateToProgramming()">
+          <mat-card-content class="cs-text" style="margin-top: 20px;">
+            <p class="cardText">Practice Programming</p>
+            <img src="../../assets/icons/programming.svg" height="15%" width="15%" style="margin-left: 43%;">
+          </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- UI for Mobiles -->
+    <div *ngIf = "isMobileOrTablet" class="main-div-mobile">
+      <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);height: 5%;">
+        Welcome
+        <span class="toolbar-spacer"></span>
+        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 20%;height: 50%;">
+          <p class="logout-button-text" style="font-size: 22px;">Get <b>PREMIUM</b></p>
+        </div>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <span class="material-symbols-outlined" style="font-size: 50px;">
+                account_circle
+            </span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+          <button mat-menu-item (click) = "goToAbout()">About CodeNexusAI</button>
+          <button mat-menu-item (click) = "goToSupport()">Support</button>
+          <button mat-menu-item (click) = "logout()">Logout</button>
+        </mat-menu>
+      </mat-toolbar>  
+
+    <mat-card class="mob-daily-read-card" (click) = "navigateToDailyRead()">
+      <mat-card-content style="padding-top: 0%; text-align: center;" class="daily-read-text">
+        <p style="margin-top: 0; text-align: center; display: inline;">Daily Read</p>
+        <img src="../../assets/icons/read.svg" height="50px" width="50px" style="display: inline; margin-left: 10px;">
+      </mat-card-content>
     </mat-card>
-    <mat-card class="sqlCard" (click) = "navigateToProgramming()">
-        <mat-card-content class="cs-text" style="margin-top: 20px;">
-          <p class="cardText">Practice Programming</p>
-          <img src="../../assets/icons/programming.svg" height="15%" width="15%" style="margin-left: 43%;">
-        </mat-card-content>
-    </mat-card>
+
+      <mat-card class="mob-codingCard" (click) = "navigateToSQLTopics()">
+          <mat-card-content class="cs-text" style="margin-top: 20px;">
+            <p class="cardText">Practice SQL</p>
+            <img src="../../assets/gifs/database-gif.gif" height="25%" width="21%" style="margin-left: 38%;" />
+          </mat-card-content>
+      </mat-card>
+      <mat-card class="mob-sqlCard" (click) = "navigateToProgramming()">
+          <mat-card-content class="cs-text" style="margin-top: 20px;">
+            <p class="cardText">Practice Programming</p>
+            <img src="../../assets/gifs/coding-gif.gif" height="30%" width="30%" style="margin-left: 38%;">
+          </mat-card-content>
+      </mat-card>
+
+    </div>
   </body>

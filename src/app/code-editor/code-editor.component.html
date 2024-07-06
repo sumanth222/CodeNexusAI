@@ -10,22 +10,27 @@
             <ngs-code-editor [theme]="theme" (valueChanged)="onCodeChanged($event)" [codeModel]="model" [options]="options"></ngs-code-editor>
         </mat-card-content>
         <div class="footer-actions">
-            <button mat-raised-button *ngIf = "showNextQuestion == true" style="background-color: green; width: 100%;margin-top: 10px;" (click)="nextQuestion()">Nice work!
-                Go to the next question.
+            <button mat-raised-button *ngIf = "showNextQuestion == true" style="background-color: green; width: 100%;margin-top: 10px;" (click)="nextQuestion()"
+            [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '25px' : 'auto', 'height' : isMobileOrTablet == true ? '60px' :'auto'}">Nice work! Go to the next question.
             </button>
             <div class="sub-footer-actions" style="display: flex;">
-                <button *ngIf = "showSubmitButton" mat-raised-button color="accent" (click)="submitCode()" [ngStyle] = "{'width' : showSolutionButton == true ? '50%' : '100%' }" style="width: 50%; margin: 10px; display: inline-block; cursor: pointer;">Submit Code</button>
-                <button *ngIf = "showSolutionButton" mat-raised-button color="accent" (click)="showSolution()" [ngStyle] = "{'width' : showSubmitButton == true ? '50%' : '100%' }" style="margin: 10px; display: inline-block;">Give me the solution</button>
+                <button *ngIf = "showSubmitButton" mat-raised-button color="accent"
+                 (click)="submitCode()" 
+                 [ngStyle] = "{'width' : showSolutionButton == true ? '50%' : '100%', 'height' : isMobileOrTablet == true ? '60px' :'auto', 'font-size' : isMobileOrTablet == true ? '25px' : 'auto' }"
+                 style="width: 50%; margin: 10px; display: inline-block; cursor: pointer;">Submit Code</button>
+                <button *ngIf = "showSolutionButton" mat-raised-button color="accent"
+                 (click)="showSolution()"
+                  [ngStyle] = "{'width' : showSubmitButton == true ? '50%' : '100%', 'height' : isMobileOrTablet == true ? '60px' :'auto', 'font-size' : isMobileOrTablet == true ? '25px' : 'auto' }" style="margin: 10px; display: inline-block;">Give me the solution</button>
             </div>   
             <div class="sub-footer-actions" style="display: flex;">
                 <div style="width: 100%;" matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
-                <button *ngIf = "showHintButton" [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="askForHint()" style="width: 98%; margin: 10px; cursor: pointer;" >Give me a hint
+                <button [ngStyle] = "{'height' : isMobileOrTablet == true ? '60px' :'auto', 'font-size' : isMobileOrTablet == true ? '25px' : 'auto'}" *ngIf = "showHintButton" [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="askForHint()" style="width: 98%; margin: 10px; cursor: pointer;" >Give me a hint
                     <span *ngIf = "isPremium == false" class="material-symbols-outlined">
                         lock
                     </span></button>
                 </div>
                 <div style="width: 100%;" matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
-                <button *ngIf = "showOptimizeButton" [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="optimizeCode()" style="width: 98%; margin: 10px; cursor: pointer;">Optimize my code
+                <button [ngStyle] = "{'height' : isMobileOrTablet == true ? '60px' :'auto', 'font-size' : isMobileOrTablet == true ? '25px' : 'auto'}" *ngIf = "showOptimizeButton" [ngClass]="{'disabled': !isPremium}" [disabled] = "!isPremium" mat-raised-button color="primary" (click)="optimizeCode()" style="width: 98%; margin: 10px; cursor: pointer;">Optimize my code
                     <span *ngIf = "isPremium == false" class="material-symbols-outlined" title="Unlock with PREMIUM subscription">
                         lock
                     </span></button>

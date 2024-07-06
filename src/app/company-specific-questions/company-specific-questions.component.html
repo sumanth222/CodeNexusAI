@@ -16,18 +16,23 @@
 </script>
 </head>
 <body [ngStyle]="{'height': response.length == 0 ? '100%' : '170%'}">
-    <mat-toolbar *ngIf = "response.length != 0"  style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
+    <div *ngIf = "response.length == 0 || showLoaderWheel == true" class="loading-anim" [ngStyle] = "{'margin-top' : (isMobileOrTablet == true) ? '80%' : '15%'}">
+        <!-- <mat-spinner style="margin-left: 35%;" color="accent"></mat-spinner> -->
+         <app-loading-sphere></app-loading-sphere>
+        <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 10px;font-size: large;">Generating</div>
+    </div>
+    <mat-toolbar *ngIf = "response.length != 0" [ngStyle] ="{'height' : (isMobileOrTablet == true) ? '3%' : 'auto'}"  style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
         <p class="welcome-header">Welcome {{username}}</p>
         <span class="toolbar-spacer"></span>
-        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;" [ngStyle] ="{'height' : (isMobileOrTablet == true) ? '48px' : '40px', 'width' : (isMobileOrTablet == true) ? '18%' : '8%'}">
             <p class="logout-button-text">Get <b>PREMIUM</b></p>
         </div>
-        <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
+        <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;" [ngStyle] ="{'height' : (isMobileOrTablet == true) ? '48px' : '40px', 'width' : (isMobileOrTablet == true) ? '18%' : '8%'}">
             <p class="logout-button-text">Back to Home</p>
         </div>
 
         <button mat-button [matMenuTriggerFor]="menu">
-            <span class="material-symbols-outlined" style="font-size: 30px;">
+            <span class="material-symbols-outlined" [ngStyle] ="{'font-size' : (isMobileOrTablet == true) ? '50px' : '30px'}">
                 account_circle
             </span>
         </button>
@@ -39,22 +44,16 @@
         </mat-menu>
     </mat-toolbar>  
 
-    <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 47%; margin-top: 15%; margin-right: 33%;">
-        <!-- <mat-spinner style="margin-left: 35%;" color="accent"></mat-spinner> -->
-         <app-loading-sphere></app-loading-sphere>
-        <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 10px;font-size: large;">Generating</div>
-    </div>
-
     <div *ngIf = "response.length != 0">
-        <h2 class="cs-text" style="text-align: center;">Read the question and write your logic in the code editor at the bottom. 
+        <h2 class="cs-text" [ngClass] = "{'cs-text-white' : isMobileOrTablet}" style="text-align: center;">Read the question and write your logic in the code editor at the bottom. 
             <br />
             <span style="font-size: 15px;">If you wish, you can skip this question by pressing the button on the right</span>
         </h2>
         <div>
-            <button (click)="goBackToSelection()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
+            <button (click)="goBackToSelection()" style="display: inline; float: left" [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '25px' : 'auto', 'height' : (isMobileOrTablet == true) ? '60px' : '40px'}" mat-raised-button color="primary">Go back to selection</button>
             <cd-timer class="bootstrap-timer" format="ms" [startTime]="endTime" [countdown] = 'true'
             [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
-            <button (click)="resetQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
+            <button (click)="resetQuestion()" style="display: inline; float: right" [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '25px' : 'auto', 'height' : (isMobileOrTablet == true) ? '60px' : '40px'}" mat-raised-button color="primary">Skip question</button>
         </div>
         <br />
         <div class="specifics-row" *ngFor = "let item of headings; let i = index"

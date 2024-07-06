@@ -7,6 +7,7 @@ import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseServiceService } from '../services/firebase-service.service';
 import { premiumToolTip } from '../constants/app.constant';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 export interface Tile {
   color: string;
@@ -30,6 +31,14 @@ export class SqlTopicScreenComponent {
     {text: 'Random', cols: 4, rows: 1, color: '#AD88A1'},
   ];
 
+  mobTiles: Tile[] = [
+    {text: 'Group By', cols: 2, rows: 1, color: '#FF6969'},
+    {text: 'Aggregations', cols: 1, rows: 1, color: '#FFF6E9'},
+    {text: 'Joins', cols: 1, rows: 1, color: '#80C4E9'},
+    {text: 'SubQueries', cols: 2, rows: 1, color: '#604CC3'},
+    {text: 'Random', cols: 2, rows: 1, color: '#AD88A1'},
+  ];
+
   difficulties= [
     "Easy",
     "Medium",
@@ -45,17 +54,20 @@ export class SqlTopicScreenComponent {
   timedMode = false;
   isPremium: boolean = false;
   premiumTooltip : string = premiumToolTip
+  isMobileOrTablet: boolean = false;
 
 
   constructor(private router : Router, private dialog : MatDialog,
     private afAuth: AngularFireAuth, private authService: AuthServiceService,
-  private firebaseService: FirebaseServiceService){
+  private firebaseService: FirebaseServiceService, private deviceService: DeviceDetectorService){
     this.afAuth.onAuthStateChanged((user) =>{
       this.user = user;
     })
   }
 
   ngOnInit(): void {
+    this.isMobileOrTablet = this.deviceService.isMobile() || this.deviceService.isTablet();
+
     if(this.user?.email != undefined && this.user.email != ""){
       this.firebaseService.getUserInfo(this.user?.email).then((user) => {
           this.isPremium = user.isPremium;

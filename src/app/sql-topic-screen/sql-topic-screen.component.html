@@ -16,77 +16,161 @@
 </head>
 
 <body>
-    <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
-        <p class="welcome-header">Welcome {{username}}</p>
-        <span class="toolbar-spacer"></span>
-        <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
-            <p class="logout-button-text">Get <b>PREMIUM</b></p>
-        </div>
-        <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
-            <p class="logout-button-text">Back to Home</p>
-        </div>
+    <div *ngIf = "!isMobileOrTablet">
+        <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
+            <p class="welcome-header">Welcome {{username}}</p>
+            <span class="toolbar-spacer"></span>
+            <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+                <p class="logout-button-text">Get <b>PREMIUM</b></p>
+            </div>
+            <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
+                <p class="logout-button-text">Back to Home</p>
+            </div>
 
-        <button mat-button [matMenuTriggerFor]="menu">
-            <span class="material-symbols-outlined" style="font-size: 30px;">
-                account_circle
-            </span>
-        </button>
-        <mat-menu #menu="matMenu">
-        <button mat-menu-item (click) = "goToProfile()">My Profile</button>
-        <button mat-menu-item (click) = "goToAbout()">About CodeNexusAI</button>
-        <button mat-menu-item (click) = "goToSupport()">Support</button>
-        <button mat-menu-item (click) = "logout()">Logout</button>
-        </mat-menu>
-      </mat-toolbar>  
-    <button style="margin-top: 10px;" (click)="goBack()" mat-raised-button color="primary">Go back</button>
-    <h2 class="mat-tile-header">Choose a topic you want to practise on and the difficulty level.</h2>
-        <p style="margin-left: 45%;display: inline-block;"  matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
-            <mat-slide-toggle [disabled]="!isPremium" [checked] = "checked" [(ngModel)]="timedMode">
-                <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
-                    Timed mode
+            <button mat-button [matMenuTriggerFor]="menu">
+                <span class="material-symbols-outlined" style="font-size: 30px;">
+                    account_circle
                 </span>
-                <span *ngIf = "!isPremium" class="material-symbols-outlined">
-                    lock
-                </span>
-            </mat-slide-toggle>
-        </p>
-        <br />
-    <div style="margin-left: 20%; margin-right: 33%;">
-        <label class="mat-tile-header-2">Choose your difficulty level: </label>
-        <mat-radio-group
-            aria-labelledby="example-radio-group-label"
-            class="example-radio-group"
-            [(ngModel)]="diffLevel" style="margin-left: 4%;">
-            @for (difficulty of difficulties; track difficulty) {
-                <div style="display: inline;" matTooltip="{{premiumTooltip}}"
-                [matTooltipDisabled]="difficulty != 'Auto Adapt' && isPremium == false">
-                    <mat-radio-button class="radio-button" [value]="difficulty"
-                    [disabled] = "(difficulty == 'Auto Adapt' && isPremium == false) ? true : false">
+            </button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+            <button mat-menu-item (click) = "goToAbout()">About CodeNexusAI</button>
+            <button mat-menu-item (click) = "goToSupport()">Support</button>
+            <button mat-menu-item (click) = "logout()">Logout</button>
+            </mat-menu>
+        </mat-toolbar>  
+        <button style="margin-top: 10px;" (click)="goBack()" mat-raised-button color="primary">Go back</button>
+        <h2 class="mat-tile-header">Choose a topic you want to practise on and the difficulty level.</h2>
+            <p style="margin-left: 45%;display: inline-block;"  matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
+                <mat-slide-toggle [disabled]="!isPremium" [checked] = "checked" [(ngModel)]="timedMode">
                     <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
-                        {{difficulty}}
+                        Timed mode
                     </span>
-                    </mat-radio-button>
-                </div>
-            }
-            <span *ngIf = "isPremium == false" class="material-symbols-outlined">
-                lock
-            </span> 
-        </mat-radio-group>
-        <mat-grid-list class="mat-tile" cols="4" rowHeight="20vh" style="width: 60vw">
-            @for(tile of tiles; track tile){
-                <mat-grid-tile
-                id="{{tile.text}}"
-                [colspan]="tile.cols"
-                [rowspan]="tile.rows"
-                [style.background]="tile.color"
-                (click)="onTileSelect(tile.text)"
-                (mouseenter)="onTileHover(tile.text)"
-                (mouseleave)="onTileHoverEnd(tile.text)"
-                style="transition: 330ms ease-in-out;">
-                {{tile.text}}
-                <img src="../../assets/icons/sql/{{tile.text}}.svg" 
-                style="margin-left: 10px;" height="35px" width="35px"></mat-grid-tile>
-            }
-        </mat-grid-list>
+                    <span *ngIf = "!isPremium" class="material-symbols-outlined">
+                        lock
+                    </span>
+                </mat-slide-toggle>
+            </p>
+            <br />
+        <div style="margin-left: 20%; margin-right: 33%;">
+            <label class="mat-tile-header-2">Choose your difficulty level: </label>
+            <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="diffLevel" style="margin-left: 4%;">
+                @for (difficulty of difficulties; track difficulty) {
+                    <div style="display: inline;" matTooltip="{{premiumTooltip}}"
+                    [matTooltipDisabled]="difficulty != 'Auto Adapt' && isPremium == false">
+                        <mat-radio-button class="radio-button" [value]="difficulty"
+                        [disabled] = "(difficulty == 'Auto Adapt' && isPremium == false) ? true : false">
+                        <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;">
+                            {{difficulty}}
+                        </span>
+                        </mat-radio-button>
+                    </div>
+                }
+                <span *ngIf = "isPremium == false" class="material-symbols-outlined">
+                    lock
+                </span> 
+            </mat-radio-group>
+            <mat-grid-list class="mat-tile" cols="4" rowHeight="20vh" style="width: 60vw">
+                @for(tile of tiles; track tile){
+                    <mat-grid-tile
+                    id="{{tile.text}}"
+                    [colspan]="tile.cols"
+                    [rowspan]="tile.rows"
+                    [style.background]="tile.color"
+                    (click)="onTileSelect(tile.text)"
+                    (mouseenter)="onTileHover(tile.text)"
+                    (mouseleave)="onTileHoverEnd(tile.text)"
+                    style="transition: 330ms ease-in-out;">
+                    {{tile.text}}
+                    <img src="../../assets/icons/sql/{{tile.text}}.svg" 
+                    style="margin-left: 10px;" height="35px" width="35px"></mat-grid-tile>
+                }
+            </mat-grid-list>
+        </div>
+    </div>
+
+
+    <div *ngIf = "isMobileOrTablet">
+        <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2); height: 5%;">
+            <p class="welcome-header">Welcome {{username}}</p>
+            <span class="toolbar-spacer"></span>
+            <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 20%; height: 50%;">
+                <p class="logout-button-text" style="font-size: 22px;">Get <b>PREMIUM</b></p>
+            </div>
+            <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 20%; height: 50%;">
+                <p class="logout-button-text" style="font-size: 22px;">Back to Home</p>
+            </div>
+
+            <button mat-button [matMenuTriggerFor]="menu">
+                <span class="material-symbols-outlined" style="font-size: 50px;">
+                    account_circle
+                </span>
+            </button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item (click) = "goToProfile()">My Profile</button>
+            <button mat-menu-item (click) = "goToAbout()">About CodeNexusAI</button>
+            <button mat-menu-item (click) = "goToSupport()">Support</button>
+            <button mat-menu-item (click) = "logout()">Logout</button>
+            </mat-menu>
+        </mat-toolbar>  
+        <button style="margin-top: 10px;height: 60px;" (click)="goBack()" mat-raised-button color="primary">Go back</button>
+        <h2 class="mat-tile-header" style="font-size: 40px;font-weight: bold;color: white;">Choose a topic you want to practise on and the difficulty level.</h2>
+            <p style="margin-left: 33%;display: inline-block;"  matTooltip="{{premiumTooltip}}" [matTooltipDisabled]="isPremium">
+                <mat-slide-toggle [disabled]="!isPremium" [checked] = "checked" [(ngModel)]="timedMode" style="margin-top: 15%;">
+                    <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;font-size: 35px;">
+                        Timed mode
+                    </span>
+                    <span *ngIf = "!isPremium" class="material-symbols-outlined">
+                        lock
+                    </span>
+                </mat-slide-toggle>
+            </p>
+            <br />
+            <br/>
+            <label class="mat-tile-header-2" style="margin-top: 15%; margin-left: 30%;"><span style="font-size: 30px;">Choose your difficulty level:</span> </label><br/>
+            <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="diffLevel" style="margin-left: 20%;">
+                @for (difficulty of difficulties; track difficulty) {
+                    <div style="display: inline;" matTooltip="{{premiumTooltip}}"
+                    [matTooltipDisabled]="difficulty != 'Auto Adapt' && isPremium == false">
+                        <mat-radio-button class="radio-button" [value]="difficulty"
+                        [disabled] = "(difficulty == 'Auto Adapt' && isPremium == false) ? true : false">
+                        <span style="font-family: 'Open Sans', sans-serif; font-weight: bold;font-size: 20px;">
+                            {{difficulty}}
+                        </span>
+                        </mat-radio-button>
+                    </div>
+                }
+                <span *ngIf = "isPremium == false" class="material-symbols-outlined">
+                    lock
+                </span> 
+            </mat-radio-group>
+
+
+        <div style="margin-left: 18%; margin-right: 33%;">
+            <mat-grid-list class="mat-tile" cols="2" rowHeight="12vh" style="width: 60vw; margin-top: 15%;">
+                @for(tile of mobTiles; track tile){
+                    <mat-grid-tile
+                    id="{{tile.text}}"
+                    [colspan]="tile.cols"
+                    [rowspan]="tile.rows"
+                    [style.background]="tile.color"
+                    (click)="onTileSelect(tile.text)"
+                    (mouseenter)="onTileHover(tile.text)"
+                    (mouseleave)="onTileHoverEnd(tile.text)"
+                    style="transition: 330ms ease-in-out;">
+                    <span style="font-size: 30px;">
+                        {{tile.text}}
+                    </span>
+                    <img src="../../assets/icons/sql/{{tile.text}}.svg" 
+                    style="margin-left: 10px;" height="35px" width="35px"></mat-grid-tile>
+                }
+            </mat-grid-list>
+        </div>
     </div>
 </body>

@@ -10,6 +10,7 @@ import firebase from 'firebase/compat/app';
 import { UserContextService } from '../userContext/user-context.service';
 import { FirebaseServiceService } from '../services/firebase-service.service';
 import { premiumToolTip } from '../constants/app.constant';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 export interface Tile {
   color: string;
@@ -34,6 +35,15 @@ export class DSSelectionComponent implements OnInit {
     {text: 'Linked Lists', cols: 2, rows: 1, color: '#CA8787'},
   ];
 
+  mobTiles: Tile[] = [
+    {text: 'Strings', cols: 2, rows: 1, color: '#CA8787'},
+    {text: 'Arrays', cols: 1, rows: 1, color: '#E1ACAC'},
+    {text: 'Stacks', cols: 1, rows: 1, color: '#E1AFD1'},
+    {text: 'Queues', cols: 2, rows: 1, color: '#FFE6E6'},
+    {text: 'Hash Maps', cols: 2, rows: 1, color: '#E1ACAC'},
+    {text: 'Linked Lists', cols: 2, rows: 1, color: '#CA8787'},
+  ];
+
   difficulties= [
     "Easy",
     "Medium",
@@ -52,12 +62,14 @@ export class DSSelectionComponent implements OnInit {
   isPremium: boolean = false;
   userDetails: any;
   premiumTooltip : string = premiumToolTip
+  isMobileOrTablet : boolean = false;
+
 
 
   constructor(private router : Router, private dialog : MatDialog, 
     private afAuth: AngularFireAuth, private userContextService: UserContextService,
     private activatedRoute : ActivatedRoute, private authService: AuthServiceService,
-    private firebaseService: FirebaseServiceService
+    private firebaseService: FirebaseServiceService, private deviceService: DeviceDetectorService
   ) { 
     this.afAuth.onAuthStateChanged((user) =>{
       this.user = user;
@@ -68,6 +80,7 @@ export class DSSelectionComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isMobileOrTablet = this.deviceService.isMobile() || this.deviceService.isTablet();
     this.company = this.activatedRoute.snapshot.paramMap.get('company');
     if(this.user?.email != undefined && this.user.email != ""){
       this.firebaseService.getUserInfo(this.user?.email).then((user) => {

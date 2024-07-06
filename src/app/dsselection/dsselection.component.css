@@ -18,6 +18,7 @@
     "wdth" 100;
     text-align: center;
     font-size: 25px;
+    color: white;
 }
 
 .mat-tile-header-2{
@@ -28,14 +29,14 @@
     font-style: normal;
     font-variation-settings:
     "wdth" 100;
-    text-align: center;
-    font-size: 15;
+    font-size: 25px;
 }
 
 .radio-button{
     margin-left: 2%;
     font-family: "Open Sans", sans-serif;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .example-radio-group{
@@ -52,4 +53,16 @@ body{
     transform: scale(1.2);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     z-index: 1;
+}
+
+.mat-slide-toggle {
+    margin-top: 45px;
+    transform: scale(1.5);
+}
+
+.difficulty-text{
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: bold; 
+    font-size: 25px;
+    display: inline;
 }

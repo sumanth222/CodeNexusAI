@@ -3,19 +3,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11155656868">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-11155656868');
-</script>
 </head>
 <body [ngStyle]="{'height': response.length == 0 ? '100%' : '180%'}">
-    <div *ngIf = "response.length == 0 || showLoaderWheel == true" style="position: absolute; z-index: 1; margin-left: 47%; margin-top: 18%; margin-right: 33%;">
+    <div *ngIf = "response.length == 0 || showLoaderWheel == true" class="loading-anim" [ngStyle] = "{'margin-top' : (isMobileOrTablet == true) ? '80%' : '18%'}">
         <!-- <mat-spinner style="margin-left: 35%;" color="accent"></mat-spinner> -->
         <app-loading-sphere></app-loading-sphere>
         <div class="cs-text" *ngIf = "showLoaderWheel == false" style="margin-top: 20px;font-size: large;">Generating</div>
@@ -24,32 +14,36 @@
         <mat-toolbar style="background-image: linear-gradient(60deg, #F7F9F2, #F19ED2);">
             <p class="welcome-header">Welcome </p>
             <span class="toolbar-spacer"></span>
-            <div (click)="getPremium()" class="logout-button" style="margin-right: 10px;width: 8%;">
+            <div (click)="getPremium()" class="logout-button" [ngStyle] = "{'width' : (isMobileOrTablet == true) ? '20%' : '8%'}">
                 <p class="logout-button-text">Get <b>PREMIUM</b></p>
             </div>
-            <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;">
+            <div (click)="goToSectionScreen()" class="logout-button" style="margin-right: 10px;width: 15%;"
+             [ngStyle] = "{'width' : (isMobileOrTablet == true) ? '20%' : '8%'}">
                 <p class="logout-button-text">Back to Home</p>
             </div>
             
             <button mat-button [matMenuTriggerFor]="menu">
-                <span class="material-symbols-outlined" style="font-size: 30px;">
+                <span class="material-symbols-outlined" [ngStyle] = "{'font-size' : (isMobileOrTablet == true) ? '50px' : '30px'}">
                     account_circle
                 </span>
             </button>
             <mat-menu #menu="matMenu">
             <button mat-menu-item (click) = "goToProfile()">My Profile</button>
             <button mat-menu-item (click) = "goToAbout()">About CodeNexusAI</button>
-            <button mat-menu-item (click) = "goToSupport()">Support</button>
             <button mat-menu-item (click) = "logout()">Logout</button>
             </mat-menu>
         </mat-toolbar>  
-        <h2 class="sqlHeader">Read the question, and write your query in the editor at the  bottom</h2>
-        <h3 class="cs-text" style="text-align: center;font-size: 15px;">If the table name is not mentioned, you can use any name you like</h3>
+        <h2 class="sqlHeader" [ngStyle] = "{'height' : (isMobileOrTablet == true) ? '45px' : 'auto'}">Read the question, and write your query in the editor at the  bottom</h2>
+        <h3 class="cs-text" [ngStyle] = "{'height' : (isMobileOrTablet == true) ? '30px' : '15px'}" style="text-align: center; color: white; font-weight: bold;">If the table name is not mentioned, you can use any name you like</h3>
         <div>
-            <button (click)="goBack()" style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
+            <button (click)="goBack()" [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '25px' : 'auto', 'height' : (isMobileOrTablet == true) ? '60px' : '40px'}"
+             style="display: inline; float: left;" mat-raised-button color="primary">Go back to selection</button>
+
             <cd-timer class="bootstrap-timer" format="ms" [startTime]="endTime" [countdown] = 'true'
              [ngStyle] = "{'visibility': timedMode == 'false' ? 'hidden' : 'visible'}" (onComplete) = "timeOut()"></cd-timer>
-            <button (click)="skipQuestion()" style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
+
+            <button (click)="skipQuestion()" [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '25px' : 'auto', 'height' : (isMobileOrTablet == true) ? '60px' : '40px'}"
+             style="display: inline; float: right;" mat-raised-button color="primary">Skip question</button>
         </div>
         <h2 [ngStyle] = "{'display': timedMode == 'false' ? 'none' : 'block'}" class="timer-text">You have {{endTime / 60}} minutes!</h2>
         <div class="specifics-row" style="background-color: #F5DAD2; margin-top: 2%;">
@@ -57,7 +51,8 @@
                 <mat-card-header style="background-color: #EF9C66;">
                     <mat-card-title class="cs-text">Scenario</mat-card-title>
                 </mat-card-header>
-                <mat-card-content class="cs-text" style="padding-top: 20px;background-color: #102C57; color: white;">
+                <mat-card-content class="cs-text" style="padding-top: 20px;background-color: #102C57; color: white;"
+                [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '30px' : 'auto'}">
                     {{scenario}}
                 </mat-card-content>
             </mat-card>
@@ -68,7 +63,8 @@
                 <mat-card-header style="background-color: #EF9C66;">
                     <mat-card-title class="cs-text">Question</mat-card-title>
                 </mat-card-header>
-                <mat-card-content class="cs-text" style="padding-top: 20px; background-color: #102C57; color: white;">
+                <mat-card-content class="cs-text" 
+                style="padding-top: 20px; background-color: #102C57; color: white;" [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '30px' : 'auto'}">
                     {{question}}
                 </mat-card-content>
             </mat-card>
@@ -79,7 +75,8 @@
                 <mat-card-header style="background-color: #EF9C66;">
                     <mat-card-title class="cs-text">Points to consider</mat-card-title>
                 </mat-card-header>
-                <mat-card-content class="cs-text" style="padding-top: 20px; background-color: #102C57; color: white;">
+                <mat-card-content class="cs-text" style="padding-top: 20px; background-color: #102C57; color: white;"
+                [ngStyle] = "{'font-size' : isMobileOrTablet == true ? '30px' : 'auto'}">
                     {{ptc}}
                     <br />
                     <br />
@@ -90,7 +87,7 @@
             </mat-card>
         </div>
 
-        <div style="height: 200px; margin-top: 5%;">
+        <div [ngStyle] = "{'height' : (isMobileOrTablet == true) ? '400px' : '200px'}" style="margin-top: 5%;">
         <app-code-editor [showSubmitButton] = true [showSolutionButton] = true 
         [showHintButton] = false  [showOptimizeButton] = false  [codeTemplate] = "codeTemplate"
         [showNextQuestion] = "showNextQuestion" (finalCode)="submitCode($event)"></app-code-editor>

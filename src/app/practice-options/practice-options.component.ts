@@ -4,6 +4,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
 import { about } from '../constants/app.constant';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-practice-options',
@@ -12,9 +13,14 @@ import { about } from '../constants/app.constant';
 })
 export class PracticeOptionsComponent {
 
-  constructor(private router: Router, private authService : AuthServiceService, private dialog: MatDialog){
+  constructor(private router: Router, private authService : AuthServiceService, private dialog: MatDialog,
+    private deviceService: DeviceDetectorService
+  ){
 
   }
+
+  isMobileOrTablet : boolean = false;
+
 
   ngOnInit(){
     this.dialog.open(VerdictResponseDialogExampleComponent,{
@@ -23,6 +29,7 @@ export class PracticeOptionsComponent {
         status: 'JM'
       }
     })
+    this.isMobileOrTablet = this.deviceService.isMobile() || this.deviceService.isTablet();
   }
 
   navigateToProgramming(){

@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VerdictResponseDialogExampleComponent } from '../verdict-response-dialog-example/verdict-response-dialog-example.component';
 import { FirebaseServiceService } from '../services/firebase-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { DeviceDetectorService } from 'ngx-device-detector';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(geminiApiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro"});
@@ -25,7 +26,8 @@ export class SqlPracticeComponent {
   user: string | null | undefined;
 
   constructor(private authService: AuthServiceService, private router: Router, private dialog: MatDialog,
-    private route: ActivatedRoute, private firebaseService: FirebaseServiceService, private afAuth: AngularFireAuth
+    private route: ActivatedRoute, private firebaseService: FirebaseServiceService, private afAuth: AngularFireAuth,
+    private deviceService: DeviceDetectorService
   ){}
 
   headings : string[] = ['Question']
@@ -46,9 +48,13 @@ export class SqlPracticeComponent {
   endTime : number = 180;
   endTimes: number[] = [120, 240, 300, 520]
   endTimeIndex : number = 0;
-
+  isMobileOrTablet: boolean = false;
 
   ngOnInit(){
+    this.isMobileOrTablet = this.deviceService.isMobile() || this.deviceService.isTablet();
+    if(this.timedMode == 'false'){
+      this.endTime = 0;
+    }
     this.sqlTopic = this.route.snapshot.paramMap.get('title');
     this.diffLevel = this.route.snapshot.paramMap.get("diffLevel");
     this.timedMode = this.route.snapshot.paramMap.get("timedMode");

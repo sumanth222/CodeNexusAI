@@ -14,6 +14,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 import { UserContextService } from '../userContext/user-context.service';
 import { autoAdaptInfo } from '../constants/app.constant';
 import { FirebaseServiceService } from '../services/firebase-service.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 const autoAdapt = "Auto Adapt";
 
@@ -61,10 +62,11 @@ export class CompanySpecificQuestionsComponent implements OnInit {
   streak = 0;
   highestStreak = 0;
   timedMode : string | null = "";
+  isMobileOrTablet: boolean = false;
 
   constructor(public dialog: MatDialog, private route : ActivatedRoute, private router: Router,
     private afAuth : AngularFireAuth, private userContextService: UserContextService, private authService: AuthServiceService,
-  private firebaseService: FirebaseServiceService) {
+  private firebaseService: FirebaseServiceService, private deviceService: DeviceDetectorService) {
       this.afAuth.onAuthStateChanged((user) => {
         this.user = user?.email;
         console.log("Logged inuser is "+this.user)
@@ -77,6 +79,8 @@ export class CompanySpecificQuestionsComponent implements OnInit {
     this.company = this.route.snapshot.paramMap.get("company");
     this.username = this.userContextService.getUserDetails().username
     this.timedMode = this.route.snapshot.paramMap.get("timedMode");
+    this.isMobileOrTablet = this.deviceService.isMobile() || this.deviceService.isTablet();
+
     if(this.timedMode == 'false'){
       this.endTime = 0;
     }

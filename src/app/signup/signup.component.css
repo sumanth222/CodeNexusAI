@@ -22,16 +22,19 @@
 .main-tag{
     margin-top: 0%;
     padding-top: 20%;
-    margin-left: 16%;
-    font-family: "Open Sans", sans-serif;
-    font-weight: bold;
+    margin-left: 22%;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;    
+    color: #402d2d;
 }
 
 .ml5 {
     position: relative;
-    font-weight: 300;
     font-size: 2rem;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;    
     color: #402d2d;
   }
   
@@ -79,10 +82,4 @@
 
   .top-pane{
     background-color: #100d28;
-  }
-
-  .bottom-pane{
-  }
-
-  .bottom-pane-1{
   }
